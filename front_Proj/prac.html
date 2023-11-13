@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- swipe js CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <!-- bootstrap CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <!-- CSS link -->
+    <link rel="stylesheet" href="/front_Proj/prac.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-expand-lg bg-body-tertiary"
+        data-bs-theme="dark"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <i class="bi bi-airplane-engines"></i> Pocket Travel
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">뭐할까..</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  카테고리
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">국내</a></li>
+                  <li><a class="dropdown-item" href="#">해외</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div class="nav-item ms-auto p-2" style="color: bisque">
+              <a class="nav-link" href="#">로그인</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div title>
+      <p>우리의 여행</p>
+    </div>
+
+    <section class="layout">
+      <div class="sidebar1">
+        <!-- 유저 카드 만들기 -->
+        <div class="userCard-container">
+          <div class="userPhoto">
+            <div class="photoCircle1">
+              <div class="photoCircle2 user1"></div>
+            </div>
+          </div>
+          <div class="userText">
+            <div class="mainText">YongHeon Choi</div>
+            <div class="subText">developer 1</div>
+          </div>
+          <div class="socialIcon">
+            <a href="https://www.facebook.com/?locale=ko_KR" target="_blank"
+              ><img src="front_Proj_img/facebook_Icon.png" alt=""
+            /></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><img src="front_Proj_img/insta_Icon.jpg" alt=""
+            /></a>
+            <a
+              href="https://github.com/kimjaehyeon0527/SemicolonPJ"
+              target="_blank"
+              ><img src="front_Proj_img/github_Icon.png" alt=""
+            /></a>
+            <a href="https://velog.io/@dydgjs2016" target="_blank"
+              ><img src="front_Proj_img/velog_Icon.png" alt=""
+            /></a>
+          </div>
+          <div class="userCom">
+            <img src="front_Proj_img/heart_Icon.png" alt="" /> 20k
+            <img src="front_Proj_img/comment_Icon.png" alt="" /> 10k
+            <img src="front_Proj_img/share_Icon.png" alt="" /> 100k
+          </div>
+        </div>
+      </div>
+      <div class="userContent1">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide sd1" onclick="openModal()">
+              <!-- 여행사진카드 -->
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city1.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">1 days</div>
+                  <div class="travelDestination">BanKok</div>
+                  <div class="travelContent">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Alias praesentium earum totam minus consectetur laboriosam
+                    laudantium dicta itaque, inventore enim est facilis et harum
+                    voluptas voluptate voluptatum ab iste porro.
+                  </div>
+                </div>
+                <div class="travelStats"></div>
+              </div>
+            </div>
+            <div class="swiper-slide sd2">
+              <!-- 여행사진카드 -->
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city2.png" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">2 days</div>
+                  <div class="travelDestination">Seoul</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+                <div class="travelStats"></div>
+              </div>
+            </div>
+            <div class="swiper-slide sd3">...</div>
+            <div class="swiper-slide sd4">...</div>
+            <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar2">
+        <div class="userCard-container">
+          <div class="userPhoto">
+            <div class="photoCircle1">
+              <div class="photoCircle2 user2"></div>
+            </div>
+          </div>
+          <div class="userText">
+            <div class="mainText">죠르디</div>
+            <div class="subText">developer 2</div>
+          </div>
+          <div class="socialIcon">
+            <a href="https://www.facebook.com/?locale=ko_KR" target="_blank"
+              ><img src="front_Proj_img/facebook_Icon.png" alt=""
+            /></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><img src="front_Proj_img/insta_Icon.jpg" alt=""
+            /></a>
+            <a
+              href="https://github.com/kimjaehyeon0527/SemicolonPJ"
+              target="_blank"
+              ><img src="front_Proj_img/github_Icon.png" alt=""
+            /></a>
+            <a href="https://velog.io/@dydgjs2016" target="_blank"
+              ><img src="front_Proj_img/velog_Icon.png" alt=""
+            /></a>
+          </div>
+          <div class="userCom">
+            <img src="front_Proj_img/heart_Icon.png" alt="" /> 20k
+            <img src="front_Proj_img/comment_Icon.png" alt="" /> 10k
+            <img src="front_Proj_img/share_Icon.png" alt="" /> 100k
+          </div>
+        </div>
+      </div>
+      <div class="userContent2">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" onclick="openModal()">
+              <!-- 여행사진카드 -->
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city3.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">1 days</div>
+                  <div class="travelDestination">Japan</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+                <div class="travelStats"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div>
+            <!-- <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div> -->
+          </div>
+        </div>
+      </div>
+      <div class="sidebar3">
+        <div class="userCard-container">
+          <div class="userPhoto">
+            <div class="photoCircle1">
+              <div class="photoCircle2 user3"></div>
+            </div>
+          </div>
+          <div class="userText">
+            <div class="mainText">YongHeon Choi</div>
+            <div class="subText">developer 1</div>
+          </div>
+          <div class="socialIcon">
+            <a href="https://www.facebook.com/?locale=ko_KR" target="_blank"
+              ><img src="front_Proj_img/facebook_Icon.png" alt=""
+            /></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><img src="front_Proj_img/insta_Icon.jpg" alt=""
+            /></a>
+            <a
+              href="https://github.com/kimjaehyeon0527/SemicolonPJ"
+              target="_blank"
+              ><img src="front_Proj_img/github_Icon.png" alt=""
+            /></a>
+            <a href="https://velog.io/@dydgjs2016" target="_blank"
+              ><img src="front_Proj_img/velog_Icon.png" alt=""
+            /></a>
+          </div>
+          <div class="userCom">
+            <img src="front_Proj_img/heart_Icon.png" alt="" /> 20k
+            <img src="front_Proj_img/comment_Icon.png" alt="" /> 10k
+            <img src="front_Proj_img/share_Icon.png" alt="" /> 100k
+          </div>
+        </div>
+      </div>
+      <div class="userContent3">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" onclick="openModal()">
+              <!-- 여행사진카드 -->
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city4.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">1 days</div>
+                  <div class="travelDestination">USA</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+                <div class="travelStats"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div>
+            <div class="swiper-slide">...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 모달창 -->
+    <!-- sidebar보다 z-index가 커야 안가려짐 -->
+    <div id="myModal" class="modal" style="z-index: 100">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="posting">
+          <input type="file" accept="image/*" onchange="previewImage(event)" />
+          <input type="text" id="text" />
+          <div id="imagePreview"></div>
+          <button type="submit" onclick="setText()">제출하기</button>
+        </div>
+      </div>
+    </div>
+    <!-- 모달창에서 입력한 값을 밑에 출력 -->
+    <div id="postList"></div>
+
+    <!-- js connection -->
+    <script src="/front_Proj/prac.js"></script>
+  </body>
+</html>

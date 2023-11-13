@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>모달 창</title>
+    <link rel="stylesheet" href="/front_Proj/form2.css">
+  </head>
+  <body>
+    <button onclick="openModal()">모달 열기</button>
+
+    <!-- 모달창 -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="posting">
+          <input type="file" accept="image/*" onchange="previewImage(event)" />
+          <input type="text" id="text">
+          <div id="imagePreview"></div>
+          <button type="submit" onclick="setText()">제출하기</button>
+        </div>
+      </div>
+    </div>
+    <!-- 모달창에서 입력한 값을 밑에 출력 -->
+    <div id="postList">
+    </div>
+    <script src="form2.js"></script>
+</html>

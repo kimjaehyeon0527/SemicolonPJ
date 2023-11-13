@@ -1,0 +1,83 @@
+@font-face {
+  font-family: "MapoBackpacking";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoBackpackingA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+header {
+  font-family: "MapoBackpacking";
+}
+
+/* swipe 영역 설정 */
+
+.first-section {
+  background-color: blue;
+  height: 1000px;
+  background: url(/img/space1.jpg);
+  background-attachment: fixed;
+  z-index: 100;
+}
+
+.second-section {
+  background-color: #f3722c; /* 임의의 배경 색상 */
+}
+
+.swiper-wrapper {
+  border: 3px solid;
+}
+
+/* swiper js 슬라이더 */
+/* slider, container 둘 다 크기를 늘려줘야함 */
+.swiper-container {
+  overflow: visible;
+  width: 100%;
+  height: 100%;
+  height: 200px;
+}
+/* 박스 꾸미기  */
+.swiper-slide {
+  opacity: 0.4;
+  transition: opacity 0.3s;
+  width: 100px;
+  height: 100%;
+  border: 3px solid;
+  border-radius: 15px;
+}
+.swiper-slide-active,
+.swiper-slide-active + .swiper-slide,
+.swiper-slide-active + .swiper-slide + .swiper-slide,
+.swiper-slide-active + .swiper-slide + .swiper-slide + .swiper-slide {
+  opacity: 1;
+}
+
+/* 모달창을 위한 스타일 */
+.modal {
+  display: none; /* 초기에는 숨김 */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
