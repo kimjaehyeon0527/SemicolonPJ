@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS 불러오기 -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+    />
+    <!-- JS 불러오기 -->    
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous">
+    </script>
+    <!-- icon용 Cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Div2 생성하기</title>
+    <style>
+         /* 글꼴 */
+        @font-face {
+        font-family: 'MapoBackpacking';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoBackpackingA.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        }
+        /* 외부 + 버튼 */
+        .big-plus {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 100;
+        }
+        /* Flexbox 속성을 적용할 컨테이너 스타일 */
+        #big_container {
+            border: 1px solid black;
+            display: flex; /* Flexbox 적용 */
+            overflow-x: auto; /* 넘칠 경우 스크롤바 추가 */
+            max-height: 400px;
+        }
+        /* 내부 container 스타일 */
+        #container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+        /* 생성된 div 스타일 */
+        .generated-div {
+            width: 250px;
+            height: 250px;
+            background-color: white;
+            border: 1px solid black;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .custom-button {
+            position: absolute;
+            bottom: 20px;
+            left: 30%;
+            transform: translateX(-50%);
+        }
+        .custom-button:nth-child(2) {
+            bottom: 20px;
+            left: 65%;
+        }
+
+        /* 버튼 스타일 */
+        /* 내부 버튼 */
+        .button1 {
+            margin: 10px;
+            flex-shrink: 0; /* Flex 요소가 줄어들지 않도록 설정 */
+            height: 250px;
+        }
+        /* 외부 버튼 */
+        .button2 {
+            width: 64px; 
+            height: 64px; 
+            font-size: 32px; 
+            border-radius: 50%;
+        }
+        .days {
+            display: flex;
+            align-items: center;
+            border: 1px solid black;
+            flex-shrink: 0;
+        }
+
+    </style>
+</head>
+<body onload="createBigContainer()">
+    <!-- 새로운 루트 생성 -->
+    <!-- <div id="big_container">
+        <div class="days">1일차</div>
+        <button onclick="createDiv()" class="button1"> + </button>
+        <div id="container">
+        </div>
+    </div> -->
+    
+    <!-- 새로운 n일 차 생성 -->
+    <div class="big-plus">
+        <button onclick="createBigContainer()" class="button2"> + </button>
+    </div>
+    
+
+    <script>
+        let dayCount = 1;
+
+        function createBigContainer() {
+            let newDay = document.createElement("div");
+            let newBigContainer = document.createElement("div");
+            newBigContainer.id = "big_container";
+            
+            newBigContainer.innerHTML = `
+                <div class="days">${dayCount}일차</div>
+                <button onclick="createDiv(event)" class="button1" > + </button>
+                <div id="container">
+                </div>
+            `;
+    
+            document.body.appendChild(newBigContainer);
+            dayCount++;
+        }
+    
+        function createDiv(event) {
+            let button = event.target; // 클릭된 버튼 요소
+            let newDiv = document.createElement("div");
+            newDiv.className = "generated-div";
+            
+            // 새로운 버튼 생성
+            let newWriteButton = document.createElement("button");
+            newWriteButton.type = "button";
+            newWriteButton.className = "btn btn-outline-success custom-button";
+            newWriteButton.innerText = "작성하기";
+            newDiv.appendChild(newWriteButton); // 생성된 버튼을 .generated-div에 추가
+
+            let newFetchButton = document.createElement("button");
+            newFetchButton.type = "button";
+            newFetchButton.className = "btn btn-outline-info custom-button";
+            newFetchButton.innerText = "가져오기";
+            newDiv.appendChild(newFetchButton);
+
+            let container = button.parentNode.querySelector("#container");
+            container.appendChild(newDiv);
+        }
+    </script>
+</body>
+</html>
