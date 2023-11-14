@@ -83,7 +83,17 @@
       </nav>
     </header>
 
-    <div title>
+    <!-- 비디오 배경 -->
+    <div class="bg-video">
+      <video class="bg-video__content" autoplay muted loop>
+        <source
+          src="/front_Proj/front_Proj_img/video/mountains.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+
+    <div class="titlte">
       <p>우리의 여행</p>
     </div>
 
@@ -117,16 +127,19 @@
             /></a>
           </div>
           <div class="userCom">
-            <img src="front_Proj_img/heart_Icon.png" alt="" /> 20k
-            <img src="front_Proj_img/comment_Icon.png" alt="" /> 10k
-            <img src="front_Proj_img/share_Icon.png" alt="" /> 100k
+            <img src="front_Proj_img/heart_Icon.png" alt="" id="heart" />
+            <span>20k</span>
+            <img src="front_Proj_img/comment_Icon.png" alt="" id="comment" />
+            <span>10k</span>
+            <img src="front_Proj_img/share_Icon.png" alt="" id="share" />
+            <span>100k</span>
           </div>
         </div>
       </div>
       <div class="userContent1">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide sd1" onclick="openModal()">
+            <div class="swiper-slide sd1" onclick="openModal(event)">
               <!-- 여행사진카드 -->
               <div class="travelPhoto">
                 <div class="travelImage">
@@ -200,16 +213,19 @@
             /></a>
           </div>
           <div class="userCom">
-            <img src="front_Proj_img/heart_Icon.png" alt="" /> 20k
-            <img src="front_Proj_img/comment_Icon.png" alt="" /> 10k
-            <img src="front_Proj_img/share_Icon.png" alt="" /> 100k
+            <img src="front_Proj_img/heart_Icon.png" alt="" id="heart" />
+            <span>20k</span>
+            <img src="front_Proj_img/comment_Icon.png" alt="" id="comment" />
+            <span>10k</span>
+            <img src="front_Proj_img/share_Icon.png" alt="" id="share" />
+            <span>100k</span>
           </div>
         </div>
       </div>
       <div class="userContent2">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" onclick="openModal()">
+            <div class="swiper-slide" onclick="openModal(event)">
               <!-- 여행사진카드 -->
               <div class="travelPhoto">
                 <div class="travelImage">
@@ -245,8 +261,8 @@
             </div>
           </div>
           <div class="userText">
-            <div class="mainText">YongHeon Choi</div>
-            <div class="subText">developer 1</div>
+            <div class="mainText">어피치</div>
+            <div class="subText">developer 3</div>
           </div>
           <div class="socialIcon">
             <a href="https://www.facebook.com/?locale=ko_KR" target="_blank"
@@ -265,16 +281,20 @@
             /></a>
           </div>
           <div class="userCom">
-            <img src="front_Proj_img/heart_Icon.png" alt="" /> 20k
-            <img src="front_Proj_img/comment_Icon.png" alt="" /> 10k
-            <img src="front_Proj_img/share_Icon.png" alt="" /> 100k
+            <img src="front_Proj_img/heart_Icon.png" alt="" id="heart" />
+            <span>20k</span>
+            <img src="front_Proj_img/comment_Icon.png" alt="" id="comment" />
+            <span>1k</span>
+            <img src="front_Proj_img/share_Icon.png" alt="" id="share" />
+            <span>120k</span>
           </div>
         </div>
       </div>
+
       <div class="userContent3">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" onclick="openModal()">
+            <div class="swiper-slide" onclick="openModal(event)">
               <!-- 여행사진카드 -->
               <div class="travelPhoto">
                 <div class="travelImage">
@@ -309,12 +329,17 @@
     <div id="myModal" class="modal" style="z-index: 100">
       <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <div class="posting">
-          <input type="file" accept="image/*" onchange="previewImage(event)" />
-          <input type="text" id="text" />
-          <div id="imagePreview"></div>
-          <button type="submit" onclick="setText()">제출하기</button>
+        <div class="slide-content">
+          <ul class="slider">
+            <!-- 클릭된 나라의 사진을 li에 붙여서 저장 -->
+          </ul>
         </div>
+        <div class="direction">
+          <a href="" class="prev">이전</a>
+          <a href="" class="next">다음</a>
+        </div>
+        <div class="writing"></div>
+        <div class="clickHeart"></div>
       </div>
     </div>
     <!-- 모달창에서 입력한 값을 밑에 출력 -->

@@ -10,6 +10,24 @@
   font-family: "MapoBackpacking";
 }
 
+/* 비디오 */
+.bg-video {
+  /* fixed를 통한 화면 전체로 백그라운드 고정 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.bg-video__content {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -126,13 +144,72 @@ body {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  /* 모달창 크기 조절 */
+  width: 25%;
+  height: 60%;
+  max-width: 600px;
+  position: relative;
+  align-items: center;
 }
 .close {
+  position: absolute;
+  top: 10px; /* 상단 여백 10px */
+  right: 20px; /* 우측 여백 10px */
   color: #aaa;
-  float: right;
   font-size: 28px;
   font-weight: bold;
+}
+.slide-content,
+.clickHeart,
+.writing {
+  border: 2px solid;
+}
+
+.modal-content > .slide-content {
+  width: 80%;
+  height: 50%;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.modal-content > .writing {
+  width: 80%;
+  height: 50%;
+  background-color: yellow;
+}
+
+.modal-content > .clickHeart {
+  position: absolute; /* 절대 위치로 설정 */
+  bottom: 10px; /* 아래쪽 여백 10px */
+  right: 10px; /* 오른쪽 여백 10px */
+  border: 0;
+  background: url(front_Proj_img/heart_Icon.png) no-repeat;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+}
+
+/* 모달창 안 슬라이드 */
+.modal-content > .slide-content {
+  width: 80%;
+  height: 50%;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* overflow: hidden; */
+}
+
+.modal-content > .slide-content > ul {
+  list-style: none;
+}
+
+.modal-content > .slide-content > .slider > img {
+  width: 100%;
+  height: 50px;
+  object-fit: cover;
 }
 
 /* user 카드 스타일 */
@@ -149,6 +226,133 @@ body {
   justify-content: center;
   align-items: center;
   box-shadow: -3px -3px 7px #5c5c5c, 3px 3px 5px #5c5c5c;
+}
+/* 기존 코드 유지 */
+
+@media screen and (max-width: 480px) {
+  .layout {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar1,
+  .sidebar2,
+  .sidebar3 {
+    /* 다른 스타일들을 유지하며 여기서 추가적인 조정 */
+    order: 1;
+  }
+
+  .userContent1,
+  .userContent2,
+  .userContent3 {
+    /* 다른 스타일들을 유지하며 여기서 추가적인 조정 */
+    order: 2;
+  }
+
+  /* 아래는 480px 이하일 때 적용되는 스타일 */
+  @media screen and (max-width: 480px) {
+    .layout {
+      flex-direction: column; /* 세로 방향으로 정렬 */
+    }
+
+    /* 모바일 배치 */
+    .sidebar1,
+    .userContent1 {
+      order: 1;
+    }
+    .sidebar2,
+    .userContent2 {
+      order: 2;
+    }
+    .sidebar3,
+    .userContent3 {
+      order: 3;
+    }
+
+    .sidebar1,
+    .sidebar2,
+    .sidebar3 {
+      display: inline-block;
+    }
+
+    .userCard-container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      flex-direction: row;
+      justify-content: space-between;
+      box-shadow: -1px -1px 3px #5c5c5c, 1px 1px 3px #5c5c5c;
+    }
+    /* 확인용 border */
+    /* .userCard-container > * {
+      border: 2px solid;
+    } */
+    /* 소셜아이콘, 하단 아이콘 제거 */
+    .userCard-container > .socialIcon {
+      display: none;
+    }
+    .userCard-container .userCom > * {
+      display: none;
+    }
+    .userCard-container .userCom > #heart {
+      display: flex;
+    }
+
+    .userCard-container > .userText {
+      align-items: center;
+    }
+    .userCard-container > .userPhoto {
+      width: 20%;
+      height: 100%;
+    }
+    .userCard-container > .userCom {
+      width: 10%;
+      /* 하트 이미지 중앙으로 오게끔 */
+      height: 55%;
+    }
+    /* userCom 요소 글씨 모두 제거 */
+    .userCard-container > .userCom > span {
+      display: none;
+    }
+  }
+}
+/* 481 이상 900 미만 해상도 -> 소셜, 하트 아이콘 제외 삭제 */
+@media screen and (min-width: 481px) and (max-width: 900px) {
+  .userCard-container > .socialIcon {
+    display: none;
+  }
+  .userCard-container > .userPhoto {
+    width: 100px;
+    height: 100px;
+  }
+  .userCard-container > .userCom > #comment,
+  #share {
+    display: none;
+  }
+  .userCard-container > .userCom span {
+    display: none;
+  }
+}
+
+/* 240픽셀 이하 시, 하트 이미지도 삭제 */
+@media screen and (max-width: 240px) {
+  .userCard-container {
+    display: flex;
+    justify-content: space-around;
+    box-shadow: -1px -1px 3px #5c5c5c, 1px 1px 3px #5c5c5c;
+  }
+  .userCard-container > .userPhoto {
+    width: 50px;
+    height: 40px;
+  }
+
+  /* 하트 제거 */
+  .userCard-container > .userCom {
+    display: none;
+  }
 }
 
 .userPhoto {

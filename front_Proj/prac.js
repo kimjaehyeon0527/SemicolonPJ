@@ -15,24 +15,41 @@ document.addEventListener("DOMContentLoaded", function () {
       1280: {
         slidesPerView: 4,
         slidesPerGroup: 4,
+        spaceBetween: 75,
       },
       720: {
         slidesPerView: 3,
         slidesPerGroup: 3,
+        spaceBetween: 50,
       },
       360: {
         slidesPerView: 2,
         slidesPerGroup: 2,
+        spaceBetween: 25,
+      },
+      0: {
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+        spaceBetween: 25,
       },
     },
     // 박스 간격설정
-    spaceBetween: 100,
+    // spaceBetween: 100,
   });
 });
 
 // 모달창 설정
-function openModal() {
+function openModal(event) {
   document.getElementById("myModal").style.display = "block"; // 모달 열기
+
+  const slide = event.target.closest(".swiper-slide");
+  if (slide) {
+    let destination = slide.querySelector(".travelDestination");
+    if (destination) {
+      const destinationText = destination.innerText;
+      console.log(destinationText); // 클릭된 위치의 오브젝트 가져온다음 여행지 문자열만 꺼냄
+    }
+  }
 }
 
 function closeModal() {
@@ -41,25 +58,4 @@ function closeModal() {
 
 function setText() {
   let text = document.getElementById("text").value;
-  let postingDiv = document.getElementById("postList");
-  let p = document.createElement("p");
-  p.innerText = text;
-
-  postingDiv.append(p);
-}
-
-// 이미지 미리보기
-function previewImage(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      const img = document.createElement("img");
-      img.src = event.target.result;
-      const imagePreview = document.getElementById("imagePreview");
-      imagePreview.innerHTML = "";
-      imagePreview.appendChild(img);
-    };
-    reader.readAsDataURL(file);
-  }
 }
