@@ -22,14 +22,19 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
 
-    <!-- swiper.js -->
-    <!-- CSS -->
+    <!-- SWIPER 외부 라이브러리 연결-->
     <link
       rel="stylesheet"
-      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
     />
-    <!-- JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+    <!--google material icon 사용
+  class="material-icons"-->
+    <link
+      rel="stylesheet"
+      href="http://fonts.googleapis.com/icon?family=Material+Icons"
+    />
 
     <title>My page_card</title>
 
@@ -40,16 +45,66 @@
       }
 
       @font-face {
-        font-family: 'MapoBackpacking';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoBackpackingA.woff') format('woff');
+        font-family: "MapoBackpacking";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoBackpackingA.woff")
+          format("woff");
         font-weight: normal;
         font-style: normal;
+      }
 
       /* normalize */
       body {
         margin: 0px;
         padding: 0px;
+      }
+      body::-webkit-scrollbar {
+        display: none;
+      }
+      header {
+        width: 100vw;
+      }
+      /* 큰 화면 좌우 분할 */
+      .wrapper {
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
+        height: 100vh;
+        border: 1px solid white;
         display: flex;
+      }
+      .left {
+        width: 50vw;
+        height: 100vh;
+      }
+      .right {
+        width: 50vw;
+        height: 100vh;
+        margin: 0px;
+        padding: 0px;
+      }
+      /* 좌측 화면 위 아래 분할 */
+      .map {
+        width: 50vw;
+        height: 50vh;
+        border: 1px solid white;
+        overflow: scroll;
+      }
+      .map::-webkit-scrollbar {
+        display: none;
+      }
+      .times {
+        margin: 0px;
+        padding: 0px;
+        width: 50vw;
+        height: 50vh;
+        border: 1px solid white;
+        display: flex;
+      }
+      /* 우측 화면 분할 */
+      .cards {
+        margin: 0px;
+        padding: 0px;
+        border: 1px solid white;
       }
     </style>
   </head>
@@ -107,8 +162,44 @@
         </div>
       </nav>
     </header>
-
-    <div class="left"></div>
-    <div class="right"></div>
+    <!-- 화면 분할 컨테이너 -->
+    <div class="wrapper">
+      <div class="left">
+        <div class="map">
+          <!-- 지도 가져오기 -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3297.9826539466535!2d126.94966659598393!3d37.537926010218584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98a894098ead%3A0xadb47392e74c7178!2z7ISc7Jq47Yq567OE7IucIOuniO2PrOq1rCDrj4TtmZQy6ri4IDUz!5e0!3m2!1sko!2skr!4v1699928788563!5m2!1sko!2skr"
+            style="border: 0; width: 50vw; height: 50vh"
+            allowfullscreen="true"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <div class="times">
+          <!-- 시간별 일정 버튼 있고, pagination 있게 구현하기 -->
+          <div class="first day">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="second day">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="third day">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <!-- 슬라이더 버튼 없고, 스크롤 없이 구현하기 -->
+        <div class="cards"></div>
+        <div class="cards"></div>
+        <div class="cards"></div>
+      </div>
+    </div>
   </body>
 </html>
