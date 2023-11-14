@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Page_writing</title>
+    <style>
+      /* 컨테이너 추가 버튼 */
+      .big-plus {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 100;
+      }
+      .big-container {
+        height: fit-content;
+      }
+      .container {
+        width: fit-content;
+        height: 200px;
+        border: 1px solid black;
+        margin-bottom: 20px;
+      }
+      .wrap-container {
+        display: flex;
+        align-items: center;
+      }
+      .container {
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+        padding: 0 20px;
+        justify-content: space-around;
+      }
+      .route {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        margin: 0 10px;
+      }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  </head>
+  <body>
+    <!-- 전체를 감싸는 컨테이너 -->
+    <div class="big-container">
+      <!-- 날짜와 컨테이너를 감싸는 컨테이너 -->
+      <div class="wrap-container">
+        <div>1일차</div>
+        <!-- 루트를 추가할 수 있는 컨테이너 -->
+        <div class="container">
+          <!-- 각각의 루트를 추가하는 플러스 버튼 -->
+          <button class="small-plus">+</button>
+          <!-- 각각의 루트  -->
+        </div>
+      </div>
+      <!-- 루트 컨테이너 추가 플러스 버튼 -->
+      <div class="big-plus">
+        <button
+          style="width: 64px; height: 64px; font-size: 32px; border-radius: 50%"
+        >
+          +
+        </button>
+      </div>
+    </div>
+    <script>
+      // 컨테이너 추가
+      let bigPlus = document.querySelector(".big-plus");
+      let bigContainer = document.querySelector(".big-container");
+      let wrapContainer = document.querySelector(".wrap-container");
+
+      cnt = 1;
+
+      //containerList를 전역변수로 설정하고, bigPlus 버튼을 누를 때 querySelectorAll을 통해 계속 초기화되도록 한다.
+      //근데 문제는 함수 내에서는 console.log가 잘 동작되는데 함수 바깥에서 호출하면 안 된다는거..
+      //함수 안에서 바꾼 값이 전역변수에도 반영이 되면 좋겠음
+      //왜냐하면 addRoute함수에서 containerList에 접근할 수 있어야 route가 제대로 추가될 수 있기 때문
+
+      //  let containerList;
+      let addDay;
+
+      function addContainer() {
+        cnt++;
+
+        // 새로운 컨테이너
+        let newContainer = document.createElement("div");
+        // 새로운 wrap 컨테이너
+        let newWrapContainer = document.createElement("div");
+        // 새로운 루트 추가 버튼
+        let newButton = document.createElement("button");
+        let newDay = document.createElement("div");
+
+        //새로 생성된 container를 배열에 넣었음
+        //containerList = document.querySelectorAll(".container");
+        // console.log(containerList);
+
+        newContainer.className = "container";
+        newWrapContainer.className = "wrap-container";
+
+        newButton.className = "small-plus";
+        newButton.classList.add(`day${cnt}`);
+        newButton.innerHTML = "+";
+
+        newWrapContainer.innerHTML = cnt + "일차";
+
+        newContainer.appendChild(newButton);
+        newWrapContainer.appendChild(newContainer);
+        newWrapContainer.appendChild(newDay);
+        bigContainer.appendChild(newWrapContainer);
+
+        newButton.addEventListener("click", function (e) {
+          addRoute(e);
+        });
+      }
+
+      //console.log(containerList);
+
+      bigPlus.addEventListener("click", addContainer);
+
+      //smallPlus에 smallPlus객체들을 배열로 저장
+      //container에 container객체들을 배열로 저장
+
+      let smallPlus = document.querySelector(".small-plus");
+      let container = document.querySelector(".container");
+
+      smallPlus.addEventListener("click", addRoute);
+
+      //   첫번째 줄 루트 추가  함수
+      function addRoute(e) {
+        console.log(e.target.className);
+        let buttonParent = e.target.parentElement;
+        let newRoute = document.createElement("div");
+        let newArrow = document.createElement("div");
+
+        newRoute.className = "route";
+        newArrow.innerHTML = "→";
+        // 밑에꺼를 새로 추가된 플러스 버튼의 부모에 appendCHild하면 될 것 같은데..
+        // small plus와 container 모두 querySelectorALl에 넣거나..
+        // small plus와 container 클릭한거 기준으로 처리해보자.
+        buttonParent.appendChild(newRoute);
+        buttonParent.appendChild(newArrow);
+      }
+
+      
+    </script>
+  </body>
+</html>
