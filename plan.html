@@ -18,8 +18,7 @@
     </script>
     <!-- icon용 Cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-    <title>글 작성하기</title>
+    <title>Div2 생성하기</title>
     <style>
          /* 글꼴 */
         @font-face {
@@ -27,77 +26,203 @@
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoBackpackingA.woff') format('woff');
         font-weight: normal;
         font-style: normal;
-    }
-        /* css 꾸미기 */
-        header {
+        }
+        body {
             font-family: 'MapoBackpacking';
         }
-        .container-fluid {
-            position: relative;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: start;
-            align-items: center;
+        /* 상단바 */
+        header {
+        font-family: 'MapoBackpacking';
+        }   
+        .custom-bg {
+            background-color: #97D2EC; /* 여기에 색상 코드를 넣어주세요 */
+            /* c2e7fc */
+        }
+        /* 외부 "+"" 버튼 */
+        .big-plus {
+        width: 70px;
+        height: 70px;
+        /* background-color: rgb(247, 133, 133); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 100;
+        }
+        /* Flexbox 속성을 적용할 컨테이너 스타일 */
+        #big_container {
             border: 1px solid black;
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 50vh;
+            display: flex; /* Flexbox 적용 */
+            overflow-x: auto; /* 넘칠 경우 스크롤바 추가 */
+            max-height: 400px;
         }
-        #plus_btn {
-            position: absolute;
+        /* 내부 container 스타일 */
+        #container {
             display: flex;
-            top: 25vh;
-            left: 30px;
-        }
-        .addDiv {
-            position: absolute;
-            display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: center;
-            align-items: center;
-            border: 1px solid black;
+        }
+        /* 생성된 div 스타일 */
+        .generated-div {
             width: 250px;
             height: 250px;
-            left: 8vw;
-            top: 8vh;
-            text-align: center;
+            background-color: white;
+            border: 1px solid black;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
+        .custom-button {
+            position: absolute;
+            bottom: 20px;
+            left: 30%;
+            transform: translateX(-50%);
+        }
+        .custom-button:nth-child(2) {
+            bottom: 20px;
+            left: 65%;
+        }
+
+        /* 버튼 스타일 */
+        /* 내부 버튼 */
+        .button1 {
+            margin: 10px;
+            flex-shrink: 0; /* Flex 요소가 줄어들지 않도록 설정 */
+            width: 50px;
+            height: 250px;
+            font-size: 25px;
+            background-color: rgb(189, 250, 230);
+        }
+        /* 외부 버튼 */
+        .button2 {
+            width: 50px; 
+            height: 50px; 
+            font-size: 25px; 
+            border-radius: 50%;
+            border: 1px solid black;
+            background-color: #DCBFFF;
+        }
+        .days {
+            display: flex;
+            align-items: center;
+            border-color: black;
+            border-width: 0px 1px 0px 0px;
+            border-style: solid;
+            flex-shrink: 0;
+            padding: 0px 5px;
+        }
+
     </style>
 </head>
-<body>
-    
-    <div class="container-fluid" id="big_container">
-        <button type="button" class="btn btn-primary" id="plus_btn" onclick="addRoute()"> + </button>
+<!-- [가로 줄] 자동 1회 생성 로드 -->
+<body onload="createBigContainer()">
+    <!-- 상단 바 -->
+    <header>
+        <nav  class="navbar navbar-expand-lg custom-bg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" style="color: black;"><i class="bi bi-airplane-engines"></i> Pocket Travel</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                    <a class="nav-link active" style="color: black;" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="#">뭐할까..</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="color: black;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        카테고리
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">국내</a></li>
+                        <li><a class="dropdown-item" href="#">해외</a></li>
+                    </ul>
+                    </li>
+                </ul> 
+                <!-- 로그인 -->
+                    <div class="nav-item ms-auto p-2" style="color: #F3F0CA; text-shadow: -0.8px -0.8px 1px #000;">
+                            <a class="nav-link" href="#">로그인</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-        <div class="addDiv">
-            <button type="button" class="btn btn-outline-success" id="write_btn">작성하기</button>
-            <button type="button" class="btn btn-outline-info" id="load_btn">가져오기</button>
-        </div>
+    <!-- 새로운 n일 차 생성 버튼 -->
+    <div class="big-plus">
+        <button onclick="createBigContainer()" class="button2 "> + </button>
     </div>
 
     <script>
-        function addRoute() {
-            let newDiv = document.createElement("div");
-            newDiv.className = "addDiv";
-            console.log(newDiv);
+        let dayCount = 1;
 
-            let container = document.getElementById("big_container");
+        // [가로 줄] n 일차 생성 하기 함수
+        function createBigContainer() {
+            let newDay = document.createElement("div");
+            let newBigContainer = document.createElement("div");
+            newBigContainer.id = "big_container";
+            
+            newBigContainer.innerHTML = `
+                <div class="days">${dayCount}일차</div>
+                <button onclick="createDiv(event)" class="button1" > + </button>
+                <div id="container">
+                </div>
+            `;
+    
+            document.body.appendChild(newBigContainer);
+            dayCount++;
+        }
+        
+        // [내부 div] 루트 추가 함수
+        function createDiv(event) {
+            let button = event.target; // 클릭된 버튼 요소
+            let newDiv = document.createElement("div");
+            newDiv.className = "generated-div";
+            
+            // [내부 div의 내부] 새로운 버튼 2개 생성
+            // 작성하기 버튼 생성
+            let newWriteButton = document.createElement("button");
+            newWriteButton.type = "button";
+            newWriteButton.className = "btn btn-outline-success custom-button";
+            newWriteButton.innerText = "작성하기";
+
+
+
+
+            newWriteButton.addEventListener('click', function() {
+            // Create an input field
+            let inputField = document.createElement("input");
+            inputField.type = "text";
+            newDiv.innerHTML = ''; // Clear the content of newDiv
+            newDiv.appendChild(inputField);
+        });
+
+
+        
+            newDiv.appendChild(newWriteButton); // 생성된 버튼을 .generated-div에 추가
+
+            // 가져오기 버튼 생성
+            let newFetchButton = document.createElement("button");
+            newFetchButton.type = "button";
+            newFetchButton.className = "btn btn-outline-info custom-button";
+            newFetchButton.innerText = "가져오기";
+
+            newFetchButton.addEventListener('click', function() {
+            // Implement functionality for "가져오기" button if needed
+        });
+
+            newDiv.appendChild(newFetchButton);
+
+            let container = button.parentNode.querySelector("#container");
             container.appendChild(newDiv);
         }
     </script>
-    
-    <!-- <script>
-        function addRoute() {
-            var newDiv = document.createElement("div");
-            newDiv.className = "addDiv";
-
-            var container = document.getElementById("big_container");
-            container.appendChild(newDiv);
-        }
-           // 생성된 div를 container에 추가
-        //    var container = document.getElementById("container");
-        //     container.appendChild(newDiv);
-    </script> -->
 </body>
 </html>
