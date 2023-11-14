@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 가로가 184 세로 300 */
+        /* 여행 카드 스타일 */
+        .travelPhoto {
+            width: 184px;
+        }
+        .travelImage > img {
+            width: 184px;
+            height: 150px;
+            /* border: 2px solid yellow; */
+        }
+
+        .travelPhoto > .travelText {
+            width: 184px;
+            height: 150px;
+            /* border: 2px solid yellow; */
+            text-align: center;
+        }
+
+        .travelPhoto > .travelText > .travelDays {
+            color: #00a9ff;
+            font-weight: 500;
+        }
+        .travelPhoto > .travelText > .travelDestination {
+            font-weight: 800;
+            font-size: 25px;
+        }
+        .travelPhoto > .travelText > .travelContent {
+            height: 100%;
+            overflow: auto;
+        }
+        /* 스크롤 바 숨기기 */
+        .travelPhoto > .travelText > .travelContent::-webkit-scrollbar {
+            display: none;          
+        }
+    </style>
+</head>
+<body>
+    <!-- 여행사진카드 -->
+    <div class="travelPhoto">
+        <div class="travelImage">
+            <img src="/메인화면 사진/사진16.png" alt="" />
+        </div>
+        <div class="travelText">
+            <div class="travelDays">1 days</div>
+            <div class="travelDestination">Japan</div>
+            <div class="travelContent">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Perferendis doloremque eius corrupti nisi molestias eum
+            quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+            temporibus id? Assumenda laudantium corporis veritatis!
+            </div>
+        </div>
+        <div class="travelStats"></div>
+    </div>
+</body>
+</html>

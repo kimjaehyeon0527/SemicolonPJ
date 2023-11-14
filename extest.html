@@ -38,19 +38,7 @@
             background-color: #97D2EC; /* 여기에 색상 코드를 넣어주세요 */
             /* c2e7fc */
         }
-        /* 외부 "+"" 버튼 */
-        .big-plus {
-        width: 70px;
-        height: 70px;
-        /* background-color: rgb(247, 133, 133); */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        z-index: 100;
-        }
+        
         /* Flexbox 속성을 적용할 컨테이너 스타일 */
         #big_container {
             border: 1px solid black;
@@ -88,7 +76,7 @@
         }
 
         /* 버튼 스타일 */
-        /* 내부 버튼 */
+        /* 내부 "+" 버튼 */
         .button1 {
             margin: 10px;
             flex-shrink: 0; /* Flex 요소가 줄어들지 않도록 설정 */
@@ -97,7 +85,7 @@
             font-size: 25px;
             background-color: rgb(189, 250, 230);
         }
-        /* 외부 버튼 */
+        /* 외부 "+" 버튼 */
         .button2 {
             width: 50px; 
             height: 50px; 
@@ -106,6 +94,19 @@
             border: 1px solid black;
             background-color: #DCBFFF;
         }
+        /* 외부 "+" 버튼 감싸는 div */
+        .big-plus {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 100;
+        }
+        /* n일 차 */
         .days {
             display: flex;
             align-items: center;
@@ -214,9 +215,9 @@
             newFetchButton.className = "btn btn-outline-info custom-button";
             newFetchButton.innerText = "가져오기";
 
-            newFetchButton.addEventListener('click', function() {
-            // Implement functionality for "가져오기" button if needed
-        });
+        //     newFetchButton.addEventListener('click', function() {
+        //     // Implement functionality for "가져오기" button if needed
+        // });
 
             newDiv.appendChild(newFetchButton);
 

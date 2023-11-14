@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            border: 2px solid black;
+        }
+        .travelPhoto {
+            position: relative;
+            /* display: flex; */
+            /* flex-wrap: wrap; */
+            margin: 0;
+            padding: 0;
+            width: 400px;
+            height: 550px;
+            /* border: 4px solid red; */
+        }
+        .travelImage {
+            position: absolute;
+            display: inline-block;
+            width: 100%;
+            height: 50%;
+            /* border: 4px solid blue; */
+        }
+        .travelText {
+            position: absolute;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 50%;
+            top: 50%;
+            /* border: 4px solid rgb(38, 146, 240); */
+        }
+        .travelTitle {
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            height: 20%;
+            border: 2px solid green;
+        }
+        .travelContent {
+            position: absolute;
+            width: 100%;
+            height: 80%;
+            top: 20%;
+            border: 2px solid purple;
+        }
+        img {
+            position: absolute;
+            /* 왜 top / left가 기본값이 들어가 있지? 0 을 해줘야지 딱 붙는다. */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- 전체 카드 모양 -->
+    <div class="travelPhoto">
+        <!-- 이미지 칸 -->
+        <div class="travelImage">
+            <img src="/메인화면 사진/사진19.png" alt="">
+        </div>
+
+        <!-- 글 칸 -->
+        <div class="travelText">
+            <!-- 제목 -->
+            <div class="travelTitle">
+                <input type="text">
+            </div>
+            <!-- 글 내용 -->
+            <div class="travelContent">
+                내용
+            </div>
+        </div>
+    </div>
+</body>
+</html>
