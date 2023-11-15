@@ -66,8 +66,8 @@
         }
         /* 생성된 div 스타일 */
         .generated-div {
-            width: 250px;
-            height: 250px;
+            width: 300px;
+            height: 300px;
             background-color: white;
             border: 1px solid black;
             margin: 10px;
@@ -93,7 +93,7 @@
             margin: 10px;
             flex-shrink: 0; /* Flex 요소가 줄어들지 않도록 설정 */
             width: 50px;
-            height: 250px;
+            height: 300px;
             font-size: 25px;
             background-color: rgb(189, 250, 230);
         }
@@ -193,19 +193,6 @@
             newWriteButton.className = "btn btn-outline-success custom-button";
             newWriteButton.innerText = "작성하기";
 
-
-
-
-            newWriteButton.addEventListener('click', function() {
-            // Create an input field
-            let inputField = document.createElement("input");
-            inputField.type = "text";
-            newDiv.innerHTML = ''; // Clear the content of newDiv
-            newDiv.appendChild(inputField);
-        });
-
-
-        
             newDiv.appendChild(newWriteButton); // 생성된 버튼을 .generated-div에 추가
 
             // 가져오기 버튼 생성
@@ -213,10 +200,6 @@
             newFetchButton.type = "button";
             newFetchButton.className = "btn btn-outline-info custom-button";
             newFetchButton.innerText = "가져오기";
-
-            newFetchButton.addEventListener('click', function() {
-            // Implement functionality for "가져오기" button if needed
-        });
 
             newDiv.appendChild(newFetchButton);
 
