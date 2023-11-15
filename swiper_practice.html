@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- in HEAD -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <style>
+        .swiper{
+            width: 50vw;
+            height: 50vh;
+        }
+        .day{
+            min-width: 50vw;
+            display: flex;
+            justify-content: space-between;
+        }
+        .am{
+            width: 15vw;
+            height: 50vh;
+            background-color: beige;
+        }
+        .pm{
+            width: 15vw;
+            height: 50vh;
+            background-color: beige;
+        }
+        .evening{
+            width: 15vw;
+            height: 50vh;
+            background-color: beige;
+        }
+        .
+
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Slider container -->
+    <div class="swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">
+          <div class="first day">
+            <div class="am"></div>
+            <div class="pm"></div>
+            <div class="evening"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="second day">
+            <div class="am"></div>
+            <div class="pm"></div>
+            <div class="evening"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="third day">
+            <div class="am"></div>
+            <div class="pm"></div>
+            <div class="evening"></div>
+          </div>
+        </div>
+        ...
+      </div>
+
+      <!-- 페이징 필요시 추가 -->
+      <div class="swiper-pagination"></div>
+      <!-- 이전, 다음 버튼 필요시 추가 -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+    <script>
+      new Swiper(".swiper", {
+        // 다양한 옵션 설정,
+        // 아래에서 설명하는 옵션들은 해당 위치에 들어갑니다!!
+        slidesPerView: 1,
+        spaceBetween: 10,
+        navigation: {
+          prevEl: ".swiper-button-prev",
+          nextEl: ".swiper-button-next",
+        },
+      });
+    </script>
+  </body>
+</html>
