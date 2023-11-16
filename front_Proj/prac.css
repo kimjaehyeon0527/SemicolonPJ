@@ -1,13 +1,13 @@
 @font-face {
-  font-family: "MapoBackpacking";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoBackpackingA.woff")
+  font-family: "TmonMonsori";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff")
     format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 * {
-  font-family: "MapoBackpacking";
+  font-family: "TmonMonsori";
 }
 
 /* 비디오 */
@@ -32,6 +32,11 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  height: 100vh;
+  margin: 0;
+  background: url("front_Proj_img/background_sky2.jpg") no-repeat center center
+    fixed;
+  background-size: cover;
 }
 
 .layout {
@@ -46,6 +51,7 @@ body {
     / 20% 80%;
   gap: 8px;
   /* overflow-x: hidden; */
+  margin-top: 20px;
 }
 
 .sidebar1,
@@ -54,22 +60,24 @@ body {
   /* border: 1px solid black; */
   /* 스와이프 목록을 안보이게 하기 위함 */
   z-index: 100;
-  /* background-color: #fefefe; */
 
   /* 유저 카드 가운데 정렬 */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 .sidebar1,
 .sidebar2,
 .sidebar3 {
   content: "";
   border-radius: 1em;
-  padding: 0.5em, 2em;
+  padding: 2em, 2em;
   margin-bottom: 5px;
+  margin-left: 10px;
   border: 1px solid #c2c2c273;
+  background-color: rgba(246, 244, 244, 0.8);
+  width: 90%;
 }
 
 /* 각 swipe 간의 위,아래 간격 */
@@ -145,72 +153,137 @@ body {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.2);
 }
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  /* 모달창 크기 조절 */
-  width: 40%;
-  height: 60%;
-  max-width: 600px;
+.modal-header {
+  /* background-color: #9e9e9e; */
+  width: 100%;
+  height: 5vh;
   position: relative;
-  align-items: center;
 }
+/* .modal-header > .modal-profile {
+  border: 2px solid;
+  width: 10px;
+  height: 10px;
+} */
+.modal-header > .modal-profile > .modal-profile-circle1 {
+  width: 30px;
+  height: 30px;
+  border: 2px solid;
+  position: absolute;
+  border-radius: 100%;
+  top: 3px;
+  left: 3px;
+}
+.modal-header > .modal-profile > .modal-profile-circle2 {
+  width: 26px;
+  height: 26px;
+  border: 2px solid;
+  position: absolute;
+  border-radius: 100%;
+  top: 5px;
+  left: 5px;
+  background: url(front_Proj_img/profile1.jpg) center/cover;
+}
+.modal-header > .modal-profile > .modal-profile-name {
+  position: absolute;
+  top: 5px;
+  left: 45px;
+}
+
 .close {
   position: absolute;
-  top: 10px; /* 상단 여백 10px */
-  right: 20px; /* 우측 여백 10px */
+  right: 3px;
   color: black;
   font-size: 28px;
   font-weight: bold;
   z-index: 101;
 }
-.maps,
-.clickHeart,
-.Photo_text {
-  border: 2px solid;
-}
-
-.modal-content > .maps {
-  width: 100%;
-  height: 100%;
-  background-color: aqua;
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 400px;
+  position: relative;
+  width: 30%;
+  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
 }
-.modal-content > .Photo_text {
+.slick-container > .Photo_text {
   margin-top: 5px;
-  width: 80%;
-  height: 35%;
-  background-color: yellow;
+  width: 100%;
+  height: 25vh;
+  background-color: #f4fafb;
+  border: 10px #e8e8e8 solid;
+  border-radius: 15px;
   text-align: center;
   font-weight: 600;
 }
-
-.modal-content > .clickHeart {
-  position: absolute; /* 절대 위치로 설정 */
-  bottom: 10px; /* 아래쪽 여백 10px */
-  right: 10px; /* 오른쪽 여백 10px */
-  border: 0;
-  background: url(front_Proj_img/heart_Icon.png) no-repeat;
-  background-size: cover;
-  width: 30px;
-  height: 30px;
+.slick-content > .Photo_text > .slickText > p {
+  text-align: center;
 }
 
-/*  */
-.modal-content {
-  position: relative;
+/* follow 버튼 스타일링 및 클릭 */
+.modal-followBtn {
+  background-color: #f8f8f8;
+  color: #888;
+  border: 1px solid #e8e8e8;
+  font-size: 1.125em;
+  letter-spacing: 0px;
+  padding: 10px 60px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 3px 10px;
+  position: absolute;
+  bottom: 10px; /* 하단 여백 조절 */
+  left: 50%; /* 가운데 정렬을 위해 왼쪽 50%로 설정 */
+  transform: translateX(-55%); /* 왼쪽 여백의 반만큼 왼쪽으로 이동 */
+  margin: 3px 10px;
+}
+.modal-followBtn {
+  background-color: #f8f8f8;
+  color: #888;
+  border: 1px solid #e8e8e8;
+  font-size: 1.125em;
+  letter-spacing: 0px;
+  padding: 10px 60px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 3px 10px;
+  transition: all 0.5s;
+}
+.modal-followBtn:hover {
+  background: rgba(96, 96, 0, 0.5);
+  color: white;
+  transition: all 0.5s;
 }
 
+/* 호버 시 모달 스타일 */
+.Hover-modal {
+  display: none;
+  position: fixed;
+  z-index: 101;
+  border: 1px solid #888;
+  background-color: #fefefe;
+  text-align: center;
+  padding: 20px;
+}
+
+.Hover-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  text-align: center;
+}
+
+/* ------------------- */
 /* user 카드 스타일 */
 .userCard-container {
   /* 유져 카드 넓이 조절하기 */
-  width: 80%;
-  height: 100%;
+  width: 75%;
+  height: 90%;
   /* border: 2px solid; */
   border-radius: 10%;
   background-color: #cdf5fd;
@@ -381,10 +454,10 @@ body {
   background: url(front_Proj_img/profile1.jpg) center/cover;
 }
 .photoCircle2.user2 {
-  background: url(front_Proj_img/profile2.png) center/cover;
+  background: url(front_Proj_img/profile2.jpg) center/cover;
 }
 .photoCircle2.user3 {
-  background: url(front_Proj_img/profile3.png) center/cover;
+  background: url(front_Proj_img/profile3.jpg) center/cover;
 }
 
 .userText {
