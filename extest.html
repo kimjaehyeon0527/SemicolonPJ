@@ -51,10 +51,11 @@
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
+            align-items: center;
         }
         /* 생성된 div 스타일 */
         .generated-div {
-            width: 250px;
+            width: 230px;
             height: 250px;
             background-color: white;
             border: 1px solid black;
@@ -116,7 +117,129 @@
             flex-shrink: 0;
             padding: 0px 5px;
         }
+        /* ------------------------------------ 구 분 선 ----------------------------------- */
+        /* 가져오기 카드 양식 */
+        /* 카드 전체 폼 */
+        .travelPhoto {
+            position: relative;
+            border-radius: 15px;
+            /* display: flex; */
+            /* flex-wrap: wrap; */
+            margin: 5px;
+            padding: 0;
+            width: 230px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid rgb(0, 0, 0);
+        }
 
+        /* 이미지 구간 */
+        .travelImage {
+            position: relative;
+            border-radius: 15px 15px 0px 0px;
+            display: inline-block;
+            width: 100%;
+            height: 50%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* 이미지 */
+        img {
+            position: absolute;
+            /* 왜 top / left가 기본값이 들어가 있지? 0 을 해줘야지 딱 붙는다. */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* 이미지 업로드 */
+        .fileLabel {
+            position: absolute; /* 절대적인 위치 설정 */
+            background-color: #5ab25a;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            width: 50%;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 50;
+            bottom: 0; /* 하단에 배치 */
+            left: 50%; /* 가운데 정렬 */
+            transform: translateX(-50%);
+            margin-bottom: 25px;
+        }
+        .imgFile {
+            display: none;
+        }
+
+        /* 글 구간 */
+        .travelText {
+            position: absolute;
+            display: inline-block;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 50%;
+            top: 50%;
+            border-radius: 0 0 15px 15px;
+            border-color: black;
+            border-style: solid;
+            border-width: 1px 0 0 0;
+        }
+        /* 제목 칸 */
+        .travelTitle {
+            /* text-align : center; */
+            position: absolute;
+            width: 100%;
+            height: 20%;
+            display: flex;
+            justify-content: center;
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0; 
+            /* align-items: center; */
+        }
+        #input_text {
+            padding: 0;
+            border: none;
+            font-size: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        /* 내용 칸 */
+        .travelContent {
+            position: absolute;
+            width: 100%;
+            height: 80%;
+            top: 20%;
+            border-radius: 0 0 15px 15px;
+            border-color: black;
+            border-style: solid;
+            border-width: 1px 0 0 0 ;
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0;     
+        }
+        /* textarea 부분 */
+        #textarea_content {
+            box-sizing: border-box;
+            padding: 3px;
+            border: none;                   /* 테두리 없애기 */
+            resize: none;                   /* 크기 조절 없애기 */
+            border-radius: 0 0 15px 15px;
+            width: 100%;
+            height: 100%;
+            font-size: 18px;
+        }
+        /* ------------------------------------ 구 분 선 ----------------------------------- */
     </style>
 </head>
 <!-- [가로 줄] 자동 1회 생성 로드 -->
@@ -194,7 +317,6 @@
             newWriteButton.className = "btn btn-outline-success custom-button";
             newWriteButton.innerText = "작성하기";
 
-        
             newDiv.appendChild(newWriteButton); // 생성된 버튼을 .generated-div에 추가
 
             // 가져오기 버튼 생성
@@ -203,11 +325,115 @@
             newFetchButton.className = "btn btn-outline-info custom-button";
             newFetchButton.innerText = "가져오기";
 
+            // ------------------------------------ 구 분 선 -------------------------------------- //
+            newWriteButton.addEventListener("click", function () {
+            // Create the travelPhoto div
+            let travelPhotoDiv = document.createElement("div");
+            travelPhotoDiv.className = "travelPhoto";
 
+            // Create the travelImage div
+            let travelImageDiv = document.createElement("div");
+            travelImageDiv.className = "travelImage";
+            travelPhotoDiv.appendChild(travelImageDiv);
+
+            // Create the label for file upload
+            let label = document.createElement("label");
+            label.htmlFor = "imgFile";
+            label.className = "fileLabel";
+            label.innerText = "이미지 업로드";
+            travelImageDiv.appendChild(label);
+
+            // Create the input element for file upload
+            let input = document.createElement("input");
+            input.type = "file";
+            input.className = "imgFile";
+            input.id = "imgFile";
+            input.addEventListener("change", function () {
+                handleFiles(this.files);
+            });
+            travelImageDiv.appendChild(input);
+
+            // Create the image element
+            let img = document.createElement("img");
+            img.alt = "";
+            img.id = "uploadedImage";
+            travelImageDiv.appendChild(img);
+
+            // Create the travelText div
+            let travelTextDiv = document.createElement("div");
+            travelTextDiv.className = "travelText";
+            travelPhotoDiv.appendChild(travelTextDiv);
+
+            // Create the travelTitle div
+            let travelTitleDiv = document.createElement("div");
+            travelTitleDiv.className = "travelTitle";
+            travelTextDiv.appendChild(travelTitleDiv);
+
+            // Create the input element for the title
+            let titleInput = document.createElement("input");
+            titleInput.type = "text";
+            titleInput.id = "input_text";
+            titleInput.placeholder = "Place";
+            travelTitleDiv.appendChild(titleInput);
+
+            // Create the travelContent div
+            let travelContentDiv = document.createElement("div");
+            travelContentDiv.className = "travelContent";
+            travelTextDiv.appendChild(travelContentDiv);
+
+            // Create the textarea element for content
+            let contentTextarea = document.createElement("textarea");
+            contentTextarea.name = "";
+            contentTextarea.id = "textarea_content";
+            contentTextarea.cols = "30";
+            contentTextarea.rows = "10";
+            contentTextarea.placeholder = "Memo";
+            travelContentDiv.appendChild(contentTextarea);
+
+            // Append the travelPhoto div to the document
+            container.appendChild(travelPhotoDiv);
+
+            // Remove the newDiv
+            newDiv.parentNode.removeChild(newDiv);
+        });
+        ///
             newDiv.appendChild(newFetchButton);
 
             let container = button.parentNode.querySelector("#container");
             container.appendChild(newDiv);
+        }
+    </script>
+    <!-- ------------------------------------ 구 분 선 -------------------------------------- -->
+    <script>
+        //  파일 업로드 미리보기
+        function handleFiles(files) {
+            const file = files[0];
+            console.log(file)
+
+            if (file) {
+                const reader = new FileReader();
+                // 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 읽을 파일을 가리키는 File혹은 Blob객체를 이용해 
+                // 파일의 내용을(혹은 raw data버퍼로) 읽고 사용자의 컴퓨터에 저장하는 것을 가능
+
+                reader.onload = function (e) {
+                    // 파일 선택 시 이미지를 미리보기하는 부분
+                    const imageContainer = document.getElementById("imageContainer");
+                    const uploadedImage = document.getElementById("uploadedImage");
+
+                    console.log(e.target);
+                    // 이미지 컨테이너의 배경 이미지 설정
+                    imageContainer.style.backgroundImage = `url(${e.target.result})`;
+                    uploadedImage.src = e.target.result;
+
+                    // 파일 업로드 라벨 숨기기
+                    const fileLabel = document.querySelector('.fileLabel');
+                    if (fileLabel) {
+                        fileLabel.style.display = 'none';
+                    }
+                };
+
+                reader.readAsDataURL(file);
+            }
         }
     </script>
 </body>
