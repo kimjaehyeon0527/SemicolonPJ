@@ -38,7 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// readGoogleMaps에서 활용하기 위해 전역변수 처리
+function closeModal() {
+  document.getElementById("myModal").style.display = "none"; // 모달 닫기
+}
+
 let destinationText;
 
 function openModal(event) {
@@ -53,32 +56,34 @@ function openModal(event) {
       console.log(destinationText); // 클릭된 위치의 오브젝트 가져온다음 여행지 문자열만 꺼냄
     }
   }
+  // 슬라이더가 초기화되었는지 확인
+  const slickContent = $(".slick-content");
+  if (slickContent.hasClass("slick-initialized")) {
+    // 초기화되었다면 제거
+    slickContent.slick("unslick");
+  }
+  initSlickSlider(); //모달 창이 열릴 때 슬라이더 초기화
 
-  readGoogleMaps();
+  updateSlickSlider(destinationText); //이미지를 슬라이더에 넣는 함수
 }
 
-function readGoogleMaps() {
-  let mapCode = {
-    Bankok:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.4788000523135!2d100.49146026804355!3d13.749974951213549!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2994e316c363f%3A0x2a6c77dd93ef4c41!2z67Cp7L2VIOyZleq2gQ!5e0!3m2!1sko!2skr!4v1700015952787!5m2!1sko!2skr",
-    Japan:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2569432.632352232!2d138.1128306612084!3d35.354534596360594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34674e0fd77f192f%3A0xf54275d47c665244!2z7J2867O4!5e0!3m2!1sko!2skr!4v1700013581057!5m2!1sko!2skr",
-    USA: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d392569.79304998065!2d-105.47897255090844!3d39.76319714170874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876b80aa231f17cf%3A0x118ef4f8278a36d6!2z66-46rWtIOy9nOuhnOudvOuPhCDrjbTrsoQ!5e0!3m2!1sko!2skr!4v1700013717502!5m2!1sko!2skr",
-    Seoul:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120388.28591018873!2d126.9028593362394!3d37.54175168884004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2012d5c39cf%3A0x7e11eca1405bf29b!2z7ISc7Jq47Yq567OE7Iuc!5e0!3m2!1sko!2skr!4v1700015733566!5m2!1sko!2skr",
-  };
-
-  let iframe = document.querySelector("#maps iframe");
-  let country = document.querySelector(".country");
-  iframe.setAttribute("src", mapCode[destinationText]);
-  country.innerText = destinationText;
+// Slick 슬라이더 초기화 함수
+function initSlickSlider() {
+  $(".slick-content").slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    arrows: true,
+    dots: true,
+  });
 }
 
-function closeModal() {
-  document.getElementById("myModal").style.display = "none"; // 모달 닫기
-}
+function updateSlickSlider(destinationText) {
+  let slickContainer = $(".slick-container");
 
-// 추 후 수정예정
-function setText() {
-  let text = document.getElementById("text").value;
+  for (let i = 1; i < 4; i++) {
+    let imgSrc = `/front_Proj/front_Proj_img/${destinationText}/${destinationText}${i}.png`;
+    slickContainer.find(`.slick-img${i} img`).attr("src", imgSrc);
+  }
 }
