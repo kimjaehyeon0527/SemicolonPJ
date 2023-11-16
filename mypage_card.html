@@ -34,6 +34,38 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
+    <style>
+      /* 태블릿 (해상도 768px ~ 1199px) */
+      @media screen and (min-width: 768px) and (max-width: 1199px) {
+        .wrapper{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+        }
+        .swiper{
+          min-width: 600px;
+        }
+        .left{
+          min-width: 600px;
+          position: absolute;
+        }
+
+        
+        .right{
+          min-width: 600px;
+          position: absolute;
+          top: 106vh;
+        }
+        
+      }
+      /* 모바일 (해상도 360px ~ 767px) */
+      @media screen and (min-width: 360px) and (max-width: 767px) {
+        
+        
+      }
+    </style>
+
     <title>My page_card</title>
 
     <style>
@@ -65,8 +97,6 @@
       .wrapper {
         margin: 0px;
         padding: 0px;
-        width: 100vw;
-        height: 100vh;
         border: 1px solid white;
         display: flex;
       }
@@ -114,26 +144,26 @@
       .am {
         border-radius: 20px;
         margin: 10px;
-        width: 15vw;
+        min-width: 15vw;
         height: 30vh;
         background-color: beige;
       }
       .pm {
         border-radius: 20px;
         margin: 10px;
-        width: 15vw;
+        min-width: 15vw;
         height: 30vh;
         background-color: beige;
       }
       .evening {
         border-radius: 20px;
         margin: 10px;
-        width: 15vw;
+        min-width: 15vw;
         height: 30vh;
         background-color: beige;
       }
       input[type="text"]{
-        width: 150px;
+        width: 120px;
         background-color: transparent;
         border: transparent;
       }
@@ -168,6 +198,7 @@
         display: inline-block;
         min-width: 200px;
         margin: 10px;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -230,9 +261,9 @@
       <div class="left">
         <div class="map">
           <!-- 지도 가져오기 -->
-          <iframe
+          <iframe class="map-image"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3297.9826539466535!2d126.94966659598393!3d37.537926010218584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98a894098ead%3A0xadb47392e74c7178!2z7ISc7Jq47Yq567OE7IucIOuniO2PrOq1rCDrj4TtmZQy6ri4IDUz!5e0!3m2!1sko!2skr!4v1699928788563!5m2!1sko!2skr"
-            style="border: 0; width: 50vw; height: 50vh"
+            style="border: 0; min-width: 50vw; height: 50vh"
             allowfullscreen="true"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -467,7 +498,7 @@
         <!-- 스크롤 없이 구현하기 -->
         <div class="day-text">1일차</div>
         <div class="cards">
-          <div class="card">
+          <div class="card one">
             <img
               src="https://i1.wp.com/www.agoda.com/wp-content/uploads/2019/05/Gyeongbokgung-palace-Seoul-Gwanghwamun-Gate.jpg"
               class="card-img-top"
@@ -480,10 +511,9 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card two">
             <img
               src="https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjNfMTY0/MDAxNjY2NDk3NzczNzg0.SKEmOEDbDpEWvYVPujNYowAyuGiesoI5SliYdS8uo60g.RzhgCh_tJzuybopOsMUGGb5eJOS0TWmb4ul6eZ4hwjEg.JPEG.wella5442/SE-270ec754-3303-4aed-a58f-9d0cb925724a.jpg?type=w800"
               class="card-img-top"
@@ -496,10 +526,9 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card three">
             <img
               src="https://cdn.imweb.me/thumbnail/20230414/02f7eb5a9661e.jpg"
               class="card-img-top"
@@ -512,10 +541,9 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card four">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/4/41/Gwangjangmarket_mainentrance.jpg"
               class="card-img-top"
@@ -528,13 +556,12 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
         </div>
         <div class="day-text">2일차</div>
         <div class="cards">
-          <div class="card">
+          <div class="card five">
             <img
               src="https://previews.123rf.com/images/kikujungboy/kikujungboy1712/kikujungboy171200121/91927198-%EC%84%9C%EC%9A%B8-%ED%95%9C%EA%B5%AD-2011-%EB%85%84-11-%EC%9B%94-13-%EC%9D%BC-%EB%8F%99%EB%8C%80%EB%AC%B8-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%94%8C%EB%9D%BC%EC%9E%90-ddp-%EB%8A%94-%EC%84%9C%EC%9A%B8%EC%9D%98-%EC%A3%BC%EC%9A%94-%EB%8F%84%EC%8B%9C-%EA%B0%9C%EB%B0%9C-%EB%9E%9C%EB%93%9C.jpg"
               class="card-img-top"
@@ -547,10 +574,9 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card six">
             <img
               src="https://parks.seoul.go.kr/images/egovframework/com/template/nam02.jpg"
               class="card-img-top"
@@ -563,10 +589,9 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card seven">
             <img
               src="https://i.namu.wiki/i/DK-BcaE6wDCM-N9UJbeQTn0SD9eWgsX9YKWK827rqjbrzDz0-CxW-JFOCiAsUL3CBZ4zE0UDR-p4sLaYPiUjww.webp"
               class="card-img-top"
@@ -579,10 +604,9 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card eight">
             <img
               src="https://img.hankyung.com/photo/202104/AA.26160636.1.jpg"
               class="card-img-top"
@@ -595,13 +619,12 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
         </div>
         <div class="day-text">3일차</div>
         <div class="cards">
-          <div class="card">
+          <div class="card nine">
             <img
               src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=10761600-62d8-46c9-a6d3-7cccf82e37f5"
               class="card-img-top"
@@ -614,10 +637,9 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card ten">
             <img
               src="https://mediahub.seoul.go.kr/wp-content/uploads/2017/08/9095ab62e55719fd96547abd6f6545d3.jpg"
               class="card-img-top"
@@ -630,10 +652,9 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card eleven">
             <img
               src="https://i.namu.wiki/i/yZeKOQ6x8chba-r0OwsmZtUZEsGFGm-WGPAZyDd2b4mrdYypGDuIsavmRomoEo9XRsv0B3NuG8oP_GalDsfmpw.webp"
               class="card-img-top"
@@ -646,10 +667,9 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card twelve">
             <img
               src="https://www.agoda.com/wp-content/uploads/2019/01/Myeongdong-Seoul-shopping-district.jpg"
               class="card-img-top"
@@ -662,7 +682,6 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#" class="btn btn-outline-primary">자세히</a>
             </div>
           </div>
         </div>
@@ -681,6 +700,38 @@
           nextEl: ".swiper-button-next",
         },
       });
+    </script>
+
+    <!-- 클릭하면 지도 보이게끔 -->
+    <script>
+      let mapImage = document.querySelector('.map-image')
+      let one = document.querySelector('.one');
+      let two = document.querySelector('.two');
+      let three = document.querySelector('.three');
+      let four = document.querySelector('.four');
+      let five = document.querySelector('.five');
+      let six = document.querySelector('.six');
+      let seven = document.querySelector('.seven');
+      let eight = document.querySelector('.eight');
+      let nine = document.querySelector('.nine');
+      let ten = document.querySelector('.ten');
+      let eleven = document.querySelector('.eleven');
+      let twelve = document.querySelector('.twelve')
+      
+      one.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50591.32098707118!2d126.9070031582031!3d37.57961700000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2c74aeddea1%3A0x8b3046532cc715f6!2z6rK967O16raB!5e0!3m2!1sko!2skr!4v1700094363017!5m2!1sko!2skr")});
+      two.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.278460460883!2d126.98336137558297!3d37.5720601238119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2e80ef04ca1%3A0x4dbdf00ad06265a4!2z7ISc7Jq47Yq567OE7IucIOyiheuhnOq1rCDsnbjsgqzrj5k!5e0!3m2!1sko!2skr!4v1700094761803!5m2!1sko!2skr")});
+      three.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12646.0846369824!2d126.9710609571967!3d37.5898918056171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2ce9abb5437%3A0x8b17708d66a8059a!2z7ISc7Jq47Yq567OE7IucIOyiheuhnOq1rCDsgrzssq3rj5k!5e0!3m2!1sko!2skr!4v1700095061999!5m2!1sko!2skr")});
+      four.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.3640637855765!2d126.99702867558294!3d37.570044023927316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2ed7e74759b%3A0xd656a34831089f44!2z6rSR7J6l7Iuc7J6l!5e0!3m2!1sko!2skr!4v1700095150259!5m2!1sko!2skr")});
+      five.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1581.2567231019555!2d127.00703491744383!3d37.56652560000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b456faf5814f3%3A0x5c22a91dab450bdc!2zRERQIOuPmeuMgOusuOuUlOyekOyduO2UjOudvOyekA!5e0!3m2!1sko!2skr!4v1700097023959!5m2!1sko!2skr")});
+      six.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.023779825101!2d126.9804757255823!3d37.55450352481844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca25796d1f83f%3A0x7b481b602ca1fe6!2z64Ko7IKwIOy8gOydtOu4lOy5tA!5e0!3m2!1sko!2skr!4v1700097157107!5m2!1sko!2skr")});
+      seven.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.165108484123!2d126.98565167558205!3d37.55117362500934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca257a88e6aa9%3A0x5cf8577c2e7982a5!2zTuyEnOyauO2DgOybjA!5e0!3m2!1sko!2skr!4v1700097253486!5m2!1sko!2skr")});
+      eight.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50626.081566526234!2d126.86304025820309!3d37.5284304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9f3b03c4b7ef%3A0xa4d8869ebf8d452c!2z7Jes7J2Y64-E7ZWc6rCV6rO17JuQ!5e0!3m2!1sko!2skr!4v1700097417060!5m2!1sko!2skr")
+      });
+      nine.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.8535193352236!2d127.05701817558021!3d37.51137282728982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b45aa0b5d1521%3A0xb0e7e28ed89a66d3!2z7Iqk7YOA7ZWE65OcIOy9lOyXkeyKpOuqsA!5e0!3m2!1sko!2skr!4v1700097597897!5m2!1sko!2skr")});
+      ten.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50648.051813273494!2d127.02519855572694!3d37.49604744552635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca4235fb589fb%3A0xb331971bc570bb6a!2z7ISc7Jq47Yq567OE7IucIOqwleuCqOq1rA!5e0!3m2!1sko!2skr!4v1700097670262!5m2!1sko!2skr")});
+      eleven.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50606.327156522646!2d126.85442905820312!3d37.55752700000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98e9d953dfe1%3A0x4a37de44aed1af18!2z7ZmN64yA7J6F6rWs7Jet!5e0!3m2!1sko!2skr!4v1700097749102!5m2!1sko!2skr")});
+      twelve.addEventListener('click', function(){mapImage.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12650.895628003158!2d126.97177990717604!3d37.56156811220297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f11b3f14ab%3A0x3b436be085e38e0c!2z7ISc7Jq47Yq567OE7IucIOykkeq1rCDrqoXrj5k!5e0!3m2!1sko!2skr!4v1700097805159!5m2!1sko!2skr")});
+
     </script>
   </body>
 </html>
