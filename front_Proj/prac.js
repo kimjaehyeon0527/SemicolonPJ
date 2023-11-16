@@ -73,17 +73,25 @@ function initSlickSlider() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000, //자동재생시간 5초
     arrows: true,
     dots: true,
   });
 }
 
+let photoText = {
+  Bankok: ["hello Bankok", "This is Bankok", "Bye Bye"],
+  Japan: ["hello Japan", "This is Japan", "Bye Bye"],
+  Seoul: ["hello Seoul", "This is Seoul", "Bye Bye"],
+  USA: ["hello USA", "This is USA", "Bye Bye"],
+};
 function updateSlickSlider(destinationText) {
   let slickContainer = $(".slick-container");
 
   for (let i = 1; i < 4; i++) {
     let imgSrc = `/front_Proj/front_Proj_img/${destinationText}/${destinationText}${i}.png`;
+    let text = document.querySelector(`.Photo_text #tx${i}`);
+    text.innerText = photoText[destinationText][i - 1];
     slickContainer.find(`.slick-img${i} img`).attr("src", imgSrc);
   }
 }

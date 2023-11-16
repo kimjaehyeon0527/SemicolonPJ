@@ -168,7 +168,7 @@ body {
 }
 .maps,
 .clickHeart,
-.country {
+.Photo_text {
   border: 2px solid;
 }
 
@@ -181,10 +181,10 @@ body {
   align-items: center;
   overflow: hidden;
 }
-.modal-content > .country {
+.modal-content > .Photo_text {
   margin-top: 5px;
   width: 80%;
-  height: 10%;
+  height: 35%;
   background-color: yellow;
   text-align: center;
   font-weight: 600;
