@@ -34,7 +34,7 @@
             font-family: 'TmonMonsori';
             height: 100vh;
             margin: 0;
-            background: url('/메인화면 사진/메인1.png') no-repeat center center fixed;
+            background: url('/메인화면 사진/메인1.png') no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
         }
@@ -101,8 +101,7 @@
         #middle {
             display: flex;
         }
-        /* 유저 로고 */
-		#userInfo{
+        #userInfo{
             position: absolute;
             top: 14px;
             right: 90px;
@@ -118,7 +117,7 @@
 <body>
     <!-- 상단 바 -->
     <header>
-		<div id="userInfo"></div>
+        <div id="userInfo"></div>
         <nav  class="navbar  navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#" style="color: black;"><i class="bi bi-airplane-engines"></i> Pocket Travel</a>
@@ -145,7 +144,7 @@
                 </ul> 
                 <!-- 로그인 -->
                     <div class="nav-item ms-auto p-2" style="color: #F3F0CA; text-shadow: -0.8px -0.8px 1px #000;">
-                            <a class="nav-link" href="login.html" id = "loginOut">로그인</a>
+                            <a class="nav-link" href="#">로그인</a>
                     </div>
                 </div>
             </div>
@@ -153,12 +152,12 @@
     </header>
     <!-- ----------------------------------------------------------------------------- -->
     <!-- 배경화면 -->
-    <!-- ——————————————————————————————————————- ————————————————————————————————————- -->
+    <!-- ----------------------------------------------------------------------------- -->
     <div class="innerContent">
         <h1>POCKET TRAVEL</h1>
         <h5 style="text-shadow: -0.8px -0.8px 1px #000;">당신만의 여행 계획을 만들어 보세요!</h5>
         
-        <!-- ———————————————————————————————————— 검색 창 ———————————————————————————————————— -->
+        <!-- 검색 창 -->
         <div id="middle" class="d-flex align-items-center justify-content-center">
             <form class="d-flex ml-2" role="search" id="sh">
                 <input class="form-control me-2" type="search" placeholder="여행지 검색" aria-label="Search" style="width: 400px;">
@@ -167,34 +166,35 @@
         </div>
         <h5 id="contact_us">Contact us <i class="bi bi-git"></i> https://github.com/kimjaehyeon0527/SemicolonPJ</h5>
     </div>
-	<script>
+
+    <script>
         // 상단바 로그인 성공시시
-        const appendMypageButton = (mypageButton) => {
-            mypageButton = document.createElement('p')
-            mypageButton.innerHTML = `<a class="nav-link active" style="color: black;" href="#">Mypage</a>`
-            document.querySelector("#userInfo").append(mypageButton);
-        }
-
-        const appendUserNameDisplay = (userNameDisplay, name) => {
-            userNameDisplay = document.createElement('p')
-            userNameDisplay.innerHTML = `<a class="nav-link active" style="color: black;" href="#">${name}님</a>`
-            document.querySelector("#userInfo").append(userNameDisplay);
-        }
-
-        const setLoginOutButton = (button) => {
-            button.textContent = '로그아웃';
-            button.setAttribute("href", "index.html");
-            button.setAttribute("onclick", "localStorage.removeItem('loggedIn')");
-        }
-
-        let name = localStorage.getItem('loggedIn');
-        if (name){
-			let mypageButton;
-            let userNameDisplay;
-            setLoginOutButton(document.querySelector("#loginOut"));
-            appendUserNameDisplay(userNameDisplay, name);
-            appendMypageButton(mypageButton);
-        }
+            const appendMypageButton = (mypageButton) => {
+                mypageButton = document.createElement('p')
+                mypageButton.innerHTML = `<a class="nav-link active" style="color: black;" href="#">Mypage</a>`
+                document.querySelector("#userInfo").append(mypageButton);
+            }
+    
+            const appendUserNameDisplay = (userNameDisplay, name) => {
+                userNameDisplay = document.createElement('p')
+                userNameDisplay.innerHTML = `<a class="nav-link active" style="color: black;" href="#">${name}님</a>`
+                document.querySelector("#userInfo").append(userNameDisplay);
+            }
+    
+            const setLoginOutButton = (button) => {
+                button.textContent = '로그아웃';
+                button.setAttribute("href", "index.html");
+                button.setAttribute("onclick", "localStorage.removeItem('loggedIn')");
+            }
+    
+            let name = localStorage.getItem('loggedIn');
+            if (name){
+                let mypageButton;
+                let userNameDisplay;
+                setLoginOutButton(document.querySelector("#loginOut"));
+                appendUserNameDisplay(userNameDisplay, name);
+                appendMypageButton(mypageButton);
+            }
     </script>
 </body>
 </html>
