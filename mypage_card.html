@@ -37,6 +37,16 @@
     <style>
       /* 태블릿 (해상도 768px ~ 1199px) */
       @media screen and (min-width: 768px) and (max-width: 1199px) {
+
+        .map{
+          left: 4vw;
+          position: absolute;
+          top: 10px;
+        }
+        .timeline{
+          position: absolute;
+          top: 400px;
+        }
         .wrapper{
           display: flex;
           flex-direction: column;
@@ -44,16 +54,20 @@
           position: relative;
         }
         .swiper{
-          min-width: 600px;
+          min-width: 750px;
+          position: absolute;
+          margin-left: -10vw;
+          top: 400px;
         }
         .left{
           min-width: 600px;
           position: absolute;
         }
 
-        
         .right{
-          min-width: 600px;
+          min-width: 100vw;
+          max-width: 100vw;
+          min-height: fit-content;
           position: absolute;
           top: 106vh;
         }
@@ -61,8 +75,35 @@
       }
       /* 모바일 (해상도 360px ~ 767px) */
       @media screen and (min-width: 360px) and (max-width: 767px) {
+        .wrapper{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+        }
+
+        .left{
+          width: 100vw;
+          height: 100vw;
+        }
+
+        .right{
+          min-width: 53vw;
+          max-width: 53vw;
+          min-height: fit-content;
+        }
         
-        
+        .timeline{
+          position: absolute;
+          left: 15vw;
+        }
+
+        .swiper{
+          position: absolute;
+          top: 7vh;
+        }
+
+
       }
     </style>
 
@@ -74,24 +115,31 @@
         font-family: "MapoBackpacking";
       }
 
+
       @font-face {
-        font-family: "MapoBackpacking";
-        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoBackpackingA.woff")
-          format("woff");
-        font-weight: normal;
-        font-style: normal;
-      }
+            font-family: 'TmonMonsori';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
 
       /* normalize */
       body {
         margin: 0px;
         padding: 0px;
       }
+      body {
+            font-family: 'TmonMonsori';
+            margin: 0;
+            background: url('/구름사진.png') no-repeat center center fixed;
+            background-size: cover;
+        }
       body::-webkit-scrollbar {
         display: none;
       }
       header {
         width: 100vw;
+        font-family: 'TmonMonsori';
       }
       /* 큰 화면 좌우 분할 */
       .wrapper {
@@ -116,6 +164,20 @@
       .right::-webkit-scrollbar {
         display: none;
       }
+      .swiper-button-prev,
+      .swiper-button-next {
+       background-color: grey;
+       opacity: 0.5;
+       padding: 15px 5px;
+       border-radius: 20px;
+       color: white !important;
+      }
+
+     .swiper-button-prev:after,
+     .swiper-button-next:after {
+     font-size: 1.1rem !important;
+     font-weight: 600 !important;
+     }
 
       /* 좌측 화면 위 아래 분할 */
       .map {
@@ -142,25 +204,25 @@
         align-items: center;
       }
       .am {
-        border-radius: 20px;
-        margin: 10px;
-        min-width: 15vw;
-        height: 30vh;
-        background-color: beige;
+        border-radius: 20px 0px;
+        margin: 0 3px 0 0;
+        min-width: 230px;
+        height: 35vh;
+        background-color: white;
       }
       .pm {
-        border-radius: 20px;
-        margin: 10px;
-        min-width: 15vw;
-        height: 30vh;
-        background-color: beige;
+        border-radius: 20px 0px;
+        margin: 0 3px 0 0;
+        min-width: 230px;
+        height: 35vh;
+        background-color: white;
       }
       .evening {
-        border-radius: 20px;
-        margin: 10px;
-        min-width: 15vw;
-        height: 30vh;
-        background-color: beige;
+        border-radius: 20px 0px;
+        margin: 0 3px 0 0;
+        min-width: 230px;
+        height: 35vh;
+        background-color: white;
       }
       input[type="text"]{
         width: 120px;
@@ -172,7 +234,7 @@
       .day-text {
         font-weight: bold;
         font-size: 20px;
-        margin: 10px 0;
+        margin: 20px 0;
       }
       .cards {
         justify-content: first baseline;
@@ -212,57 +274,39 @@
   <body>
     <!-- 상단바 -->
     <header>
-      <nav
-        class="navbar navbar-expand-lg bg-body-tertiary"
-        data-bs-theme="dark"
-      >
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"
-            ><i class="bi bi-airplane-engines"></i> Pocket Travel</a
-          >
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">뭐할까..</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <!-- 카테고리 -->
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">국내</a></li>
-                  <li><a class="dropdown-item" href="#">해외</a></li>
-                </ul>
-              </li>
-            </ul>
-            <!-- 로그인 -->
-            <div class="nav-item ms-auto p-2" style="color: bisque">
-              <a class="nav-link" href="#">로그인</a>
-            </div>
+      <div id="userInfo"></div>
+      <nav  class="navbar navbar-expand-lg">
+          <div class="container-fluid" style="position: relative;">
+              <a class="navbar-brand" href="#" style="color: black;"><i class="bi bi-airplane-engines"></i> Pocket Travel</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"    aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                  <a class="nav-link active" style="color: black;" aria-current="page" href="#" >Home</a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" style="color: black;" href="#">뭐할까..</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" style="color: black;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      카테고리
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">국내</a></li>
+                      <li><a class="dropdown-item" href="#">해외</a></li>
+                  </ul>
+                  </li>
+              </ul> 
+              <!— 로그인 —>
+                  <div class="nav-item ms-auto p-2" style="color: #F3F0CA; text-shadow: -0.8px -0.8px 1px #000;">
+                          <a class="nav-link" href="logIn.html" id = "loginOut">로그인</a>
+                  </div>
+              </div>
           </div>
-        </div>
       </nav>
-    </header>
+  </header>
     <!-- 화면 분할 컨테이너 -->
     <div class="wrapper">
       <div class="left">
@@ -277,21 +321,20 @@
           ></iframe>
         </div>
         <hr style="border: 2px dashed lightgrey" />
-        <span
-          style="background-color: skyblue; font-weight: bold; font-size: 30px"
-          >timeline</span
+        <span class="timeline"
+          style="font-weight: bold; font-size: 30px; margin-left: 20vw; color: white; "
+          >TIMELINE</span
         >
         <!-- Slider container -->
-        <div class="swiper">
+        <div class="swiper" style="position: relative;">
           <!-- Additional required wrapper -->
           <div class="swiper-wrapper">
             <!-- Slides -->
-            <div class="swiper-slide"></br>
-              <div style="font-size: 20px;">1일차</div>
+            <div class="swiper-slide" ></br>
               <div class="first day">
                 <div class="am">
                   <ul style="margin-top: 20px; list-style: none">
-                    <p style="font-weight: bold">오전</p>
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오전</p>
                     <li>
                       <input type="checkbox" />
                       <input type="text">
@@ -312,7 +355,7 @@
                 </div>
                 <div class="pm">
                   <ul style="margin-top: 20px; list-style: none">
-                    <p style="font-weight: bold">오후</p>
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오후</p>
                     <li>
                       <input type="checkbox" />
                       <input type="text">
@@ -333,7 +376,7 @@
                 </div>
                 <div class="evening">
                   <ul style="margin-top: 20px; list-style: none">
-                    <p style="font-weight: bold">저녁</p>
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">저녁</p>
                     <li>
                       <input type="checkbox" />
                       <input type="text">
@@ -356,11 +399,10 @@
             </div>
             <div class="swiper-slide">
             </br>
-            <div style="font-size: 20px;">2일차</div>
               <div class="second day">
                 <div class="am">
                   <ul style="margin-top: 20px; list-style: none">
-                    <p style="font-weight: bold">오전</p>
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오전</p>
                     <li>
                       <input type="checkbox" />
                       <input type="text">
@@ -381,7 +423,7 @@
                 </div>
                 <div class="pm">
                   <ul style="margin-top: 20px; list-style: none">
-                    <p style="font-weight: bold">오후</p>
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오후</p>
                     <li>
                       <input type="checkbox" />
                       <input type="text">
@@ -402,7 +444,7 @@
                 </div>
                 <div class="evening">
                   <ul style="margin-top: 20px; list-style: none">
-                    <p style="font-weight: bold">저녁</p>
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">저녁</p>
                     <li>
                       <input type="checkbox" />
                       <input type="text">
@@ -424,11 +466,10 @@
               </div>
             </div>
             <div class="swiper-slide"></br>
-              <div style="font-size: 20px;">3일차</div>
               <div class="third day">
                 <div class="am">
                   <ul style="margin-top: 20px; list-style: none">
-                    <p style="font-weight: bold">오전</p>
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오전</p>
                     <li>
                       <input type="checkbox" />
                       <input type="text">
@@ -449,7 +490,7 @@
                 </div>
                 <div class="pm">
                   <ul style="margin-top: 20px; list-style: none">
-                    <p style="font-weight: bold">오후</p>
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오후</p>
                     <li>
                       <input type="checkbox" />
                       <input type="text">
@@ -470,7 +511,7 @@
                 </div>
                 <div class="evening">
                   <ul style="margin-top: 20px; list-style: none">
-                    <p style="font-weight: bold">저녁</p>
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">저녁</p>
                     <li>
                       <input type="checkbox" />
                       <input type="text">
@@ -493,7 +534,6 @@
             </div>
             ...
           </div>
-
           <!-- 페이징 필요시 추가 -->
           <div class="swiper-pagination"></div>
           <!-- 이전, 다음 버튼 필요시 추가 -->
@@ -517,8 +557,7 @@
             <div class="card-body">
               <h5 class="card-title">경복궁</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                야간개장 요금 3000원, 1인당 4장까지 예매 가능, 한복착용자는 무료 입장, 현장 발권시 신분증 필요함
               </p>
             </div>
           </div>
@@ -532,8 +571,7 @@
             <div class="card-body">
               <h5 class="card-title">인사동</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                주변 관광 명소 : 쌈지길, 낙원악기상가, 청계천 / 가까운 지하철역: 안국역, 종로3가역, 종각역
               </p>
             </div>
           </div>
@@ -547,8 +585,7 @@
             <div class="card-body">
               <h5 class="card-title">삼청동</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                북촌 한옥마을, 국립현대미술관 서울관(입장료 5000원)
               </p>
             </div>
           </div>
@@ -562,8 +599,7 @@
             <div class="card-body">
               <h5 class="card-title">광장시장</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                영업시간: 오전 9시부터 오후 6시까지 / 또간집 광장시장편 - 모녀김밥, 원조누드김밥, 순희네빈대떡, 찹쌀꽈배기 , 3시 50분 순대 등등..
               </p>
             </div>
           </div>
@@ -582,8 +618,7 @@
             <div class="card-body">
               <h5 class="card-title">DDP</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                11월 17일 (금) 16:00 DDP 디자인랩 3층 디자인홀 "Beautiful Numbers"
               </p>
             </div>
           </div>
@@ -597,8 +632,7 @@
             <div class="card-body">
               <h5 class="card-title">남산 케이블카</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                연중무휴 1년 365일 정상운행, 대인왕복 15000원, 대인편도 12000원, 소인왕복 11500원, 소인편도 9000원
               </p>
             </div>
           </div>
@@ -612,8 +646,7 @@
             <div class="card-body">
               <h5 class="card-title">N 서울 타워</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                전망대 입장료 만 13세 이상의 대인은 16000원, 소인 11000원, 와그에서 할인받으면 대인 12500원에 구매 가능 
               </p>
             </div>
           </div>
@@ -627,8 +660,7 @@
             <div class="card-body">
               <h5 class="card-title">한강공원</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                배달존1 원효자전거대여소 부근, 배달존2 미니스톱, 배달존3 빛의카페
               </p>
             </div>
           </div>
@@ -647,8 +679,7 @@
             <div class="card-body">
               <h5 class="card-title">코엑스몰</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                코엑스 아쿠아리움 365일 연중무휴, 관람소요시간 보통 1시간 30분에서 2시간 정도 소요, 마지막 입장 가능 시간은 오후 7시, 재입장 불가능
               </p>
             </div>
           </div>
@@ -662,8 +693,7 @@
             <div class="card-body">
               <h5 class="card-title">강남</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                신사동 가로수길, 압구정 로데오거리
               </p>
             </div>
           </div>
@@ -677,8 +707,7 @@
             <div class="card-body">
               <h5 class="card-title">홍대 거리</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                홍대앞 예술시장 플리마켓, KT&G 상상마당 아트갤러리, 경의선 숲길 공원, 홍대입구역 9번 출구 -> 진입 가능
               </p>
             </div>
           </div>
@@ -692,8 +721,7 @@
             <div class="card-body">
               <h5 class="card-title">명동</h5>
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                지하철 4호선 명동역 6분 출구 도보 3분 거리, 2호선 을지로입구역 6번 출구 도보 7분 거리 -> 안으로 진입 가능
               </p>
             </div>
           </div>
@@ -844,14 +872,47 @@
       secondRoute.addEventListener('click', function(){
         map.innerHTML='';
         let mapDiv = document.createElement('iframe');
-        mapDiv.setAttribute
+        mapDiv.setAttribute('src', "https://www.google.com/maps/d/embed?mid=1fyC9f83cFFhY9jQpIh_cCXoPXfpME9Y&ehbc=2E312F");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
       })
 
       thirdRoute.addEventListener('click', function(){
         map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute('src', "https://www.google.com/maps/d/embed?mid=1XvSObNXrT8NCg9WUMhvsy9y9AmIYm9k&ehbc=2E312F");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
       })
-
-
     </script>
+    <script>
+      // 상단바 로그인 성공시시
+      const appendMypageButton = (mypageButton) => {
+          mypageButton = document.createElement('p')
+          mypageButton.innerHTML = `<a class="nav-link active" style="color: black;" href="#">Mypage</a>`
+          document.querySelector("#userInfo").append(mypageButton);
+      }
+
+      const appendUserNameDisplay = (userNameDisplay, name) => {
+          userNameDisplay = document.createElement('p')
+          userNameDisplay.innerHTML = `<a class="nav-link active" style="color: black;" href="#">${name}님</a>`
+          document.querySelector("#userInfo").append(userNameDisplay);
+      }
+
+      const setLoginOutButton = (button) => {
+          button.textContent = '로그아웃';
+          button.setAttribute("href", "index.html");
+          button.setAttribute("onclick", "localStorage.removeItem('loggedIn')");
+      }
+
+      let name = localStorage.getItem('loggedIn');
+      if (name){
+          let mypageButton;
+          let userNameDisplay;
+          setLoginOutButton(document.querySelector("#loginOut"));
+          appendUserNameDisplay(userNameDisplay, name);
+          appendMypageButton(mypageButton);
+      }
+  </script>
   </body>
 </html>
