@@ -13,7 +13,7 @@
 /* 여행지 순서 구분선 */
 .line:nth-child(1) {
   position: absolute;
-  border: 6px solid #383636;
+  border: 6px solid grey;
   width: 100%;
   top: 210px;
   left: 100px;
@@ -21,7 +21,7 @@
 }
 .line:nth-child(2) {
   position: absolute;
-  border: 6px solid #383636;
+  border: 6px solid gray;
   width: 900px;
   top: 530px;
   left: 100px;
@@ -29,7 +29,7 @@
 }
 .line:nth-child(3) {
   position: absolute;
-  border: 6px solid #383636;
+  border: 6px solid grey;
   width: 100%;
   top: 850px;
   left: 100px;
@@ -300,6 +300,7 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
   }
 
   .sidebar1,
@@ -391,8 +392,41 @@ body {
   }
 }
 
-/* 481 이상 1024 미만 해상도 -> 소셜, 하트 아이콘 제외 삭제 */
-@media screen and (min-width: 481px) and (max-width: 1024px) {
+/* 768 이상 1024 미만 해상도 -> 소셜, 하트 아이콘 제외 삭제 */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .layout {
+    overflow-x: hidden;
+  }
+  .backboard {
+    position: absolute;
+    width: 800px;
+    height: 1300px;
+    background-color: rgba(246, 244, 244, 0.5);
+    border-radius: 13px;
+  }
+  .line:nth-child(1) {
+    width: 667px;
+  }
+  .line:nth-child(2) {
+    position: absolute;
+    border: 6px solid gray;
+    width: 667px;
+    top: 600px;
+    left: 100px;
+    z-index: 1;
+  }
+  .line:nth-child(3) {
+    position: absolute;
+    border: 6px solid grey;
+    width: 667px;
+    top: 990px;
+    left: 100px;
+    z-index: 1;
+  }
+  .swiper-slide {
+    margin-top: 30px;
+    height: 300px;
+  }
   .userCard-container > .socialIcon {
     display: none;
   }
@@ -414,6 +448,29 @@ body {
   .modal-content > .modal-followBtn {
     bottom: 30px;
     padding: 10px 30px;
+  }
+}
+
+/* 데스크톱 미디어 쿼리 */
+@media only screen and (min-width: 1024px) and (max-width: 1441px) {
+  /* 데스크톱 화면에 대한 스타일 */
+  .backboard {
+    position: absolute;
+    width: 100%;
+    height: 1129px;
+    background-color: rgba(246, 244, 244, 0.5);
+    border-radius: 13px;
+  }
+  .line:nth-child(1),
+  .line:nth-child(2),
+  .line:nth-child(3) {
+    width: 924px;
+  }
+  .line:nth-child(1) {
+    top: 245px;
+  }
+  .line:nth-child(2) {
+    top: 625px;
   }
 }
 

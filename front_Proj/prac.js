@@ -38,6 +38,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// 이 함수는 사용자의 첫번째 글 목록의 텍스트를 가져와서 웹상에 보여줍니다.
+window.onload = function () {
+  let travelDest = document.querySelectorAll(".travelDestination");
+  let travelContent = document.querySelectorAll(".travelContent");
+  for (let i = 0; i < travelDest.length; i++) {
+    let str = photoText[travelDest[i].innerText][0];
+    travelContent[i].innerText = str;
+  }
+};
+
 function closeModal() {
   document.getElementById("myModal").style.display = "none"; // 모달 닫기
 }
@@ -91,13 +101,22 @@ function initSlickSlider() {
   });
 }
 
+// 각 여행지 사진에 맞는 텍스트 설정
 let photoText = {
-  BanKok: ["hello Bankok", "This is Bankok", "Bye Bye"],
-  Japan: ["hello Japan", "This is Japan", "Bye Bye"],
-  Seoul: ["hello Seoul", "This is Seoul", "Bye Bye"],
-  USA: ["hello USA", "This is USA", "Bye Bye"],
-  China: ["hello China", "This is China", "Bye Bye"],
+  BanKok: ["방콕 2박 3일", "This is Bankok", "왓 아룬 탐방"],
+  Japan: ["일본여행 1 - hello Japan", "This is Japan", "Bye Bye"],
+  Seoul: ["서울 여행", "한옥 마을 들렀다!", "Bye Bye"],
+  USA: ["미국 하와이 해변 간 날", "미국여행 2일차", "Bye Bye"],
+  China: ["만리장성은 길다", "This is China", "Bye Bye"],
   Sweden: ["hello Sweden", "This is Sweden", "Bye Bye"],
+  Hokkaido: ["일본여행 3 - Hokkaido", "This is Hokkaido", "Bye Bye"],
+  Fukuoka: ["일본여행 2 - hello Fukuoka", "This is Fukuoka", "Bye Bye"],
+  Germany: ["hello Germany", "This is Germany", "Bye Bye"],
+  Swiss: ["hello Swiss", "This is Swiss", "Bye Bye"],
+  Canada: ["캐나다 배낭여행 1일차", "캐나다 배낭여행 2일차", "Bye Bye"],
+  Brazil: ["hello Brazil", "This is Brazil", "Bye Bye"],
+  Mexico: ["멕시코 시티 탐방기", "This is Mexico", "Bye Bye"],
+  Czech: ["hello Czech", "This is Czech", "Bye Bye"],
 };
 
 // 각 여행지마다 다른 이미지를 모달창에 삽입
