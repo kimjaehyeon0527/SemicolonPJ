@@ -346,7 +346,7 @@
             // travelImage div 생성
             let travelImageDiv = document.createElement("div");
             travelImageDiv.id = "imageContainer";
-            travelImageDiv.className = "travelImage";
+            travelImageDiv.className = "travelImage"; 
             travelPhotoDiv.appendChild(travelImageDiv);
 
             // 이미지 업로드 label 생성
@@ -428,21 +428,22 @@
 
                 reader.onload = function (e) {
                     // 파일 선택 시 이미지를 미리보기하는 부분
-                    const imageContainer = document.getElementById("imageContainer");
-                    const uploadedImage = document.getElementById("uploadedImage");
+                    const newImageContainer = document.querySelector(".travelPhoto:last-child .travelImage");
+                    const uploadedImage = document.createElement("img");
 
-                    // console.log(e.target);
-                    // 이미지 컨테이너의 배경 이미지 설정
-                    imageContainer.style.backgroundImage = `url(${e.target.result})`;
+                    // 이미지 컨테이너에 새로운 이미지 추가
                     uploadedImage.src = e.target.result;
+                    newImageContainer.innerHTML = ""; // 이미지 컨테이너 초기화
+                    newImageContainer.appendChild(uploadedImage);
 
                     // 파일 업로드 라벨 숨기기
-                    const fileLabel = document.querySelector('.fileLabel');
+                    const fileLabel = document.querySelector('.travelPhoto:last-child .fileLabel');
                     if (fileLabel) {
                         fileLabel.style.display = 'none';
                     }
                 };
 
+                // 선택된 파일을 Data URL로 읽어옵니다.
                 reader.readAsDataURL(file);
             }
         }
