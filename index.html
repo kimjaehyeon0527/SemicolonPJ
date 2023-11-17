@@ -20,473 +20,95 @@
     <!-- icon용 Cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- aos (애니메이션 바 참조) -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <style>
-         /* 글꼴 */
+    <style>       
         @font-face {
-        font-family: 'MapoBackpacking';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoBackpackingA.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-        /* css 꾸미기 */
-        
-        /* 상단바 */
-        header {
-        font-family: 'MapoBackpacking';
-        }   
-        body {
-            height: 100vh;
-            overflow: hidden; /* 나머지 내용을 숨김 */
+            font-family: 'TmonMonsori';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
         }
-        .custom-bg {
-            background-color: #97D2EC; /* 여기에 색상 코드를 넣어주세요 */
-            /* c2e7fc */
+
+        /* css 꾸미기 */
+        /* 배경화면 설정 css */
+        body {
+            font-family: 'TmonMonsori';
+            height: 100vh;
+            margin: 0;
+            background: url('/메인화면 사진/메인1.png') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+        }
+        /* 왼쪽 반투명 레이아웃 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* 반투명 레이어의 색상 및 투명도 조절 */
+            z-index: -1; /* 배경 이미지 위에 나타나도록 하기 위해 z-index를 음수로 설정 */
+        }
+        /* 오른쪽 반투명 레이아웃 */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 65%; /* Adjust the width as needed */
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
         }
 
         /* 중앙 메인 글 */
+        .innerContent {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            width: 35%;
+            height: 100%;
+            /* border: 1px solid black; */
+            justify-content: center;
+        }
         h1 {
-            font-family: 'MapoBackpacking';
-            /* position: static; */
-            text-align: center;
-            margin-top: 330px;
+            font-family: 'TmonMonsori';
+            position: absolute;
+            /* text-align: center; */
             /* line-height: 500px; */
-            font-size: 60px;
+            font-size: 45px;
+            color: white;
+            top: 20%;
         }
         h5 {
-            font-family: 'MapoBackpacking';
-            text-align: center;
-            margin-top: 40px;
+            position: absolute;
+            font-size: 20px;
+            /* text-align: center; */
+            color: beige;
+            top: 35%;
+        }
+        #contact_us {
+            font-size: 12px;
+            color: black;
+            top: 58%;
         }
 
         /* 검색창 */
         #sh {
-            position: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100vw;
-            z-index: 100;
+            width: 90%;
+            
         }
         #middle {
             display: flex;
         }
 
-        /* 비디오 */
-        .bg-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        .bg-video__content {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        /* 이미지 넣기 */
-        .img_big{
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 30%;
-            /* border: 1px solid black; */
-            overflow: hidden;
-        }
-        .img_big img{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* opacity: 0.9; */
-        }
-
-        #img1{
-            left: 9%;
-            top: 60%;
-            
-            animation-name: moving1;
-            animation-duration: 60s;
-            animation-timing-function: linear;
-            animation-delay: 4s;
-        }
-        @keyframes moving1 {
-            12.5% {
-                left: 19%;
-                top: 23%;
-            }
-            25% {
-                left: 43%;
-                top: 10%;
-            }
-            37.5% {
-                left: 67%;
-                top: 23%;
-            }
-            50% {
-                left: 78%;
-                top: 60%;
-                opacity: 1;
-            }
-            62.5% {
-                left: 67%;
-                top: 97%;
-                opacity: 0;
-            }
-            75% {
-                left: 43%;
-                top: 110%;
-            }
-            87.5% {
-                left: 19%;
-                top: 97%;
-            }
-            100% {
-                left: 9%;
-                top: 60%;
-                opacity: 1;
-            }
-        }
-        #img2{
-            left: 19%;
-            top: 23%;
-            
-            animation-name: moving2;
-            animation-duration: 60s;
-            animation-timing-function: linear;
-            animation-delay: 4s;
-        }
-        @keyframes moving2 {
-            12.5% {
-                left: 43%;
-                top: 10%;
-            }
-            25% {
-                left: 67%;
-                top: 23%;
-            }
-            37.5% {
-                left: 78%;
-                top: 60%;
-                opacity: 1;
-            }
-            50% {
-                left: 67%;
-                top: 97%;
-                opacity: 0;
-            }
-            62.5% {
-                left: 43%;
-                top: 110%;
-            }
-            75% {
-                left: 19%;
-                top: 97%;
-            }
-            87.5% {
-                left: 9%;
-                top: 60%;
-                opacity: 1;
-            }
-            100% {
-                left: 19%;
-                top: 23%;
-            }
-        }
-        
-        #img3{
-            left: 43%;
-            top: 10%;
-
-            animation-name: moving3;
-            animation-duration: 60s;
-            animation-timing-function: linear;
-            animation-delay: 4s;
-        }
-        @keyframes moving3 {
-            12.5% {
-                left: 67%;
-                top: 23%;
-            }
-            25% {
-                left: 78%;
-                top: 60%;
-                opacity: 1;
-            }
-            37.5% {
-                left: 67%;
-                top: 97%;
-                opacity: 0;
-            }
-            50% {
-                left: 43%;
-                top: 110%;
-            }
-            62.5% {
-                left: 19%;
-                top: 97%;
-            }
-            75% {
-                left: 9%;
-                top: 60%;
-                opacity: 1;
-            }
-            87.5% {
-                left: 19%;
-                top: 23%;
-            }
-            100% {
-                left: 43%;
-                top: 10%;
-            }
-        }
-        #img4{
-            left: 67%;
-            top: 23%;
-
-            animation-name: moving4;
-            animation-duration: 60s;
-            animation-timing-function: linear;
-            animation-delay: 4s;
-        }
-        @keyframes moving4 {
-            12.5% {
-                left: 78%;
-                top: 60%;
-                opacity: 1;
-            }
-            25% {
-                left: 67%;
-                top: 97%;
-                opacity: 0;
-            }
-            37.5% {
-                left: 43%;
-                top: 110%;
-            }
-            50% {
-                left: 19%;
-                top: 97%;
-            }
-            62.5% {
-                left: 9%;
-                top: 60%;
-                opacity: 1;
-            }
-            75% {
-                left: 19%;
-                top: 23%;
-            }
-            87.5% {
-                left: 43%;
-                top: 10%;
-            }
-            100% {
-                left: 67%;
-                top: 23%;
-            }
-        }
-        #img5{
-            left: 78%;
-            top: 60%;
-
-            animation-name: moving5;
-            animation-duration: 60s;
-            animation-timing-function: linear;
-            animation-delay: 4s;
-        }
-        @keyframes moving5 {
-            12.5% {
-                left: 67%;
-                top: 97%;
-                opacity: 0;
-            }
-            25% {
-                left: 43%;
-                top: 110%;
-            }
-            37.5% {
-                left: 19%;
-                top: 97%;
-            }
-            50% {
-                left: 9%;
-                top: 60%;
-                opacity: 1;
-            }
-            62.5% {
-                left: 19%;
-                top: 23%;
-            }
-            75% {
-                left: 43%;
-                top: 10%;
-            }
-            87.5% {
-                left: 67%;
-                top: 23%;
-            }
-            100% {
-                left: 78%;
-                top: 60%;
-            }
-        }
-        #img6{
-            left: 67%;
-            top: 97%;
-            opacity: 0;
-
-            animation-name: moving6;
-            animation-duration: 60s;
-            animation-timing-function: linear;
-            animation-delay: 4s;
-        }
-        @keyframes moving6 {
-            12.5% {
-                left: 43%;
-                top: 110%;
-            }
-            25% {
-                left: 19%;
-                top: 97%;
-            }
-            37.5% {
-                left: 9%;
-                top: 60%;
-                opacity: 1;
-            }
-            50% {
-                left: 19%;
-                top: 23%;
-            }
-            62.5% {
-                left: 43%;
-                top: 10%;
-            }
-            75% {
-                left: 67%;
-                top: 23%;
-            }
-            87.5% {
-                left: 78%;
-                top: 60%;
-                opacity: 1;
-            }
-            100% {
-                left: 67%;
-                top: 97%;
-                opacity: 0;
-            }
-        }
-        #img7{
-            left: 43%;
-            top: 110%;
-            opacity: 0;
-
-            animation-name: moving7;
-            animation-duration: 60s;
-            animation-timing-function: linear;
-            animation-delay: 4s;
-        }
-        @keyframes moving7 {
-            12.5% {
-                left: 19%;
-                top: 97%;
-            }
-            25% {
-                left: 9%;
-                top: 60%;
-                opacity: 1;
-            }
-            37.5% {
-                left: 19%;
-                top: 23%;
-            }
-            50% {
-                left: 43%;
-                top: 10%;
-            }
-            62.5% {
-                left: 67%;
-                top: 23%;
-            }
-            75% {
-                left: 78%;
-                top: 60%;
-                opacity: 1;
-            }
-            87.5% {
-                left: 67%;
-                top: 97%;
-                opacity: 0;
-            }
-            100% {
-                left: 43%;
-                top: 110%;
-            }
-        }
-        #img8{
-            left: 19%;
-            top: 97%;
-            opacity: 0;
-
-            animation-name: moving8;
-            animation-duration: 60s;
-            animation-timing-function: linear;
-            animation-delay: 4s;
-        }
-        @keyframes moving8 {
-            12.5% {
-                left: 9%;
-                top: 60%;
-                opacity: 1;
-            }
-            25% {
-                left: 19%;
-                top: 23%;
-            }
-            37.5% {
-                left: 43%;
-                top: 10%;
-            }
-            50% {
-                left: 67%;
-                top: 23%;
-            }
-            62.5% {
-                left: 78%;
-                top: 60%;
-                opacity: 1;
-            }
-            75% {
-                left: 67%;
-                top: 97%;
-                opacity: 0;
-            }
-            87.5% {
-                left: 43%;
-                top: 110%;
-            }
-            100% {
-                left: 19%;
-                top: 97%;
-            }
-        }
     </style>
     <title>메인 홈</title>
 </head>
 <body>
     <!-- 상단 바 -->
     <header>
-        <nav  class="navbar navbar-expand-lg">
+        <nav  class="navbar  navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#" style="color: black;"><i class="bi bi-airplane-engines"></i> Pocket Travel</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"    aria-expanded="false" aria-label="Toggle navigation">
@@ -498,11 +120,11 @@
                     <a class="nav-link active" style="color: black;" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" style="color: black;" href="#">뭐할까..</a>
+                    <a class="nav-link" style="color: black; opacity: 0;" href="#">공백용</a>
                     </li>
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="color: black;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        카테고리
+                        CATEGORY
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">국내</a></li>
@@ -519,60 +141,20 @@
         </nav>
     </header>
     <!-- ----------------------------------------------------------------------------- -->
-    <!-- 비디오 배경 -->
-    <div class="bg-video">
-        <video class="bg-video__content" autoplay muted loop>
-            <source src="/video/ mountains.mp4" type="video/mp4" />
-        </video>
-    </div>
+    <!-- 배경화면 -->
     <!-- ----------------------------------------------------------------------------- -->
-    <h1>Pocket Travel</h1>
-    <h5>당신만의 여행 계획을 만들어 보세요!</h5>
-
-    <!-- 검색 창 -->
-    <div id="middle">
-        <div>
-            <form class="d-flex mt-5" role="search" id="sh">
+    <div class="innerContent">
+        <h1>POCKET TRAVEL</h1>
+        <h5 style="text-shadow: -0.8px -0.8px 1px #000;">당신만의 여행 계획을 만들어 보세요!</h5>
+        
+        <!-- 검색 창 -->
+        <div id="middle" class="d-flex align-items-center justify-content-center">
+            <form class="d-flex ml-2" role="search" id="sh">
                 <input class="form-control me-2" type="search" placeholder="여행지 검색" aria-label="Search" style="width: 400px;">
-                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
             </form>
         </div>
-    
-    <!-- 이미지 & AOS 애니메이션 -->
-        <div data-aos="fade-up-right" data-aos-duration="800" class="img_big" id="img1">
-            <img src="/메인화면 사진/미국 - 마운트 러스모어 내셔널 메모리얼.jpeg" alt="">
-        </div>
-        <div data-aos="fade-down-right" data-aos-duration="800" data-aos-delay="400" class="img_big" id="img2">
-            <img src="/메인화면 사진/일본 - 오사카성.jpeg" alt="">
-        </div>
-        <div data-aos="fade-down" data-aos-duration="800" data-aos-delay="800" class="img_big" id="img3">
-            <img src="/메인화면 사진/사진8.png" alt="">
-        </div> 
-        <div data-aos="fade-down-left" data-aos-duration="800" data-aos-delay="1200" class="img_big" id="img4">
-            <img src="/메인화면 사진/사진4.png" alt="">
-        </div>
-        <div data-aos="fade-up-left" data-aos-duration="800" data-aos-delay="1600" class="img_big" id="img5">
-            <img src="/메인화면 사진/사진5.png" alt="">
-        </div>
-        <div data-aos="" data-aos-duration="800" data-aos-delay="0" class="img_big" id="img6">
-            <img src="/메인화면 사진/사진19.png" alt="">
-        </div><div data-aos="" data-aos-duration="800" data-aos-delay="0" class="img_big" id="img7">
-            <img src="/메인화면 사진/사진7.png" alt="">
-        </div>
-        </div><div data-aos="" data-aos-duration="800" data-aos-delay="0" class="img_big" id="img8">
-            <img src="/메인화면 사진/사진18.png" alt="">
-        </div>
+        <h5 id="contact_us">Contact us <i class="bi bi-git"></i> https://github.com/kimjaehyeon0527/SemicolonPJ</h5>
     </div>
-    
-    <!-- data-aos-delay: 숫자 - 애니메이션 재생 대기시간 설정 -->
-    <!-- data-aos-duration : 애니메이션의 재생시간 설정(default: 400)-->
-    <!-- data-aos-once  : 스크롤 할때마다 애니매이션이 재생될지를 설정 (default: true) 이 값을 false로 하게되면, 스크롤을 위로 올렷다 다시 내릴때 애니메이션이 다시 재생되도록 할 수 있다. -->
-    <!-- data-aos-easing  : 애니메이션 시간흐름에 따른 속도설정 옵션-->
-
-    <!-- AOS 애니메이션 바 참조 -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
 </body>
 </html>
