@@ -96,6 +96,8 @@ let photoText = {
   Japan: ["hello Japan", "This is Japan", "Bye Bye"],
   Seoul: ["hello Seoul", "This is Seoul", "Bye Bye"],
   USA: ["hello USA", "This is USA", "Bye Bye"],
+  China: ["hello China", "This is China", "Bye Bye"],
+  Sweden: ["hello Sweden", "This is Sweden", "Bye Bye"],
 };
 
 // 각 여행지마다 다른 이미지를 모달창에 삽입
@@ -118,6 +120,7 @@ $(".slick-content").on("afterChange", function (event, slick, currentSlide) {
   text.innerText = photoText[destinationText][currentSlide];
 });
 
+// follow 버튼 체인지
 function changefollowBtn() {
   let button = document.querySelector(".modal-followBtn");
   let text = button.innerText;
@@ -144,23 +147,104 @@ function changeModalProfile(userContentString) {
   modalProfileName.innerText = profileName.innerText; //이름 변경
 }
 
-// 호버 시 모달창
-function openHoverModal(content, event) {
-  // 모달 창 열기
+// 호버 시 차트 띄우는 함수
+let chart; // 차트 인스턴스 저장 변수
+let chartOpened = false; // 차트가 열려 있는지 여부를 나타내는 변수
+
+function openHoverModal(event) {
+  // 차트가 이미 열려 있다면 중복 열림을 방지
+  if (chartOpened) {
+    return;
+  }
+
   const modal = document.getElementById("Hover-myModal");
-  modal.style.display = "block";
-
-  // 클릭된 사이드바의 내용을 모달에 표시
-  document.getElementById("modalContent").innerText = content;
-
-  // 마우스 위치에서 우측으로 20px 떨어진 위치에 모달 표시
   const modalLeft = event.clientX + 20;
   const modalTop = event.clientY;
   modal.style.left = `${modalLeft}px`;
   modal.style.top = `${modalTop}px`;
+  modal.style.display = "block";
+
+  // 여기서 sidebar의 클래스를 통해 다른 차트를 생성하도록 로직을 추가합니다.
+  const sidebarClass = event.currentTarget.className;
+  createChart(sidebarClass);
+
+  chartOpened = true; // 차트가 열려 있는 상태로 변경
+}
+
+function createChart(sidebarClass) {
+  const ctx = document.getElementById("line-chart").getContext("2d");
+
+  // sidebarClass에 따라 다른 차트 데이터를 생성
+  let chartData;
+  if (sidebarClass.includes("sidebar1")) {
+    chartData = {
+      labels: ["100k", "200k", "300k", "400k", "500k"],
+      datasets: [
+        {
+          label: "구독자 수 추이",
+          data: [125, 315, 578, 415, 475],
+          borderColor: "#FF5733",
+          fill: false,
+        },
+      ],
+    };
+  } else if (sidebarClass.includes("sidebar2")) {
+    chartData = {
+      labels: ["10k", "20k", "30k", "40k", "50k"],
+      datasets: [
+        {
+          label: "구독자 수 추이",
+          data: [10, 20, 5, 40, 50],
+          borderColor: "#33FF57",
+          fill: false,
+        },
+      ],
+    };
+  } else if (sidebarClass.includes("sidebar3")) {
+    chartData = {
+      labels: ["100k", "200k", "300k", "400k", "500k"],
+      datasets: [
+        {
+          label: "구독자 수 추이",
+          data: [450, 345, 200, 150, 350],
+          borderColor: "#5733FF",
+          fill: false,
+        },
+      ],
+    };
+  }
+
+  chart = new Chart(ctx, {
+    type: "line",
+    data: chartData,
+    options: {
+      title: {
+        display: true,
+        text: `구독자 변경 차트`,
+      },
+    },
+  });
 }
 
 function closeHoverModal() {
-  // 모달 창 닫기
-  document.getElementById("Hover-myModal").style.display = "none";
+  const modal = document.getElementById("Hover-myModal");
+  modal.style.display = "none";
+
+  // 차트 인스턴스 파기
+  if (chart) {
+    chart.destroy();
+  }
+
+  chartOpened = false; // 차트가 닫혔으므로 상태 변경
 }
+
+// 호버 영역을 벗어날 때 차트 닫기
+document
+  .getElementById("Hover-myModal")
+  .addEventListener("mouseleave", closeHoverModal);
+
+// 각 sidebar에 이벤트 리스너 추가
+const sidebars = document.querySelectorAll(".sidebar1, .sidebar2, .sidebar3");
+sidebars.forEach((sidebar) => {
+  sidebar.addEventListener("mouseover", openHoverModal);
+});

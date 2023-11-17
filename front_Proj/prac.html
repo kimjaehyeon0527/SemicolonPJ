@@ -52,9 +52,9 @@
       <div id="userInfo"></div>
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid" style="position: relative">
-          <a class="navbar-brand" href="#" style="color: black"
-            ><i class="bi bi-airplane-engines"></i> Pocket Travel</a
-          >
+          <a class="navbar-brand" href="#" style="color: black">
+            <i class="bi bi-airplane-engines"></i> Pocket Travel
+          </a>
           <button
             class="navbar-toggler"
             type="button"
@@ -97,33 +97,43 @@
                 </ul>
               </li>
             </ul>
-            <!— 로그인 —>
-            <div
-              class="nav-item ms-auto p-2"
-              style="color: #f3f0ca; text-shadow: -0.8px -0.8px 1px #000"
-            >
-              <a class="nav-link" href="logIn.html" id="loginOut">로그인</a>
+            <div class="ms-auto d-flex">
+              <div
+                class="nav-item p-2"
+                style="color: #f3f0ca; text-shadow: -0.8px -0.8px 1px #000"
+              >
+                <button class="cardBasket" onclick="openBasket()">
+                  장바구니
+                </button>
+              </div>
+              <div
+                class="nav-item p-2"
+                style="color: #f3f0ca; text-shadow: -0.8px -0.8px 1px #000"
+              >
+                <a class="nav-link" href="logIn.html" id="loginOut">로그인</a>
+              </div>
             </div>
           </div>
         </div>
       </nav>
     </header>
 
-    <!-- 비디오 배경 -->
-    <!-- <div class="bg-video">
-      <video class="bg-video__content" autoplay muted loop>
-        <source
-          src="/front_Proj/front_Proj_img/video/mountains.mp4"
-          type="video/mp4"
-        />
-      </video>
-    </div> -->
+    <div class="divide-line">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <div class="backboard">
+      <div class="layout-backboard"></div>
+      <div class="layout-backboard"></div>
+      <div class="layout-backboard"></div>
+    </div>
 
     <section class="layout">
       <div
         class="sidebar1"
-        onmouseover="openHoverModal('Sidebar 1', event)"
-        onmouseout="closeHoverModal()"
+        onmouseover="openHoverModal(event)"
+        onmouseleave="closeHoverModal()"
       >
         <!-- 유저 카드 만들기 -->
         <div class="userCard-container">
@@ -133,7 +143,7 @@
             </div>
           </div>
           <div class="userText">
-            <div class="mainText">YongHeon Choi</div>
+            <div class="mainText">라이언</div>
             <div class="subText">developer 1</div>
           </div>
           <div class="socialIcon">
@@ -181,14 +191,13 @@
                     voluptas voluptate voluptatum ab iste porro.
                   </div>
                 </div>
-                <div class="travelStats"></div>
               </div>
             </div>
             <div class="swiper-slide sd2" onclick="openModal(event)">
               <!-- 여행사진카드 -->
               <div class="travelPhoto">
                 <div class="travelImage">
-                  <img src="front_Proj_img/city2.png" alt="" />
+                  <img src="front_Proj_img/city2.jpg" alt="" />
                 </div>
                 <div class="travelText">
                   <div class="travelDays">2 days</div>
@@ -200,18 +209,53 @@
                     temporibus id? Assumenda laudantium corporis veritatis!
                   </div>
                 </div>
-                <div class="travelStats"></div>
               </div>
             </div>
-            <div class="swiper-slide sd3">...</div>
-            <div class="swiper-slide sd4">...</div>
-            <div class="swiper-slide sd5">...</div>
-            <div class="swiper-slide sd6">...</div>
-            <div class="swiper-slide sd7">...</div>
+            <div class="swiper-slide sd3" onclick="openModal(event)">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city5.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">3 days</div>
+                  <div class="travelDestination">China</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide sd4" onclick="openModal(event)">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city6.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">4 days</div>
+                  <div class="travelDestination">Sweden</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide sd5" onclick="openModal(event)"></div>
+            <div class="swiper-slide sd6" onclick="openModal(event)"></div>
+            <div class="swiper-slide sd7" onclick="openModal(event)"></div>
           </div>
         </div>
       </div>
-      <div class="sidebar2">
+      <div
+        class="sidebar2"
+        onmouseover="openHoverModal(event)"
+        onmouseleave="closeHoverModal()"
+      >
         <div class="userCard-container">
           <div class="userPhoto">
             <div class="photoCircle1">
@@ -272,14 +316,14 @@
             </div>
             <div class="swiper-slide">...</div>
             <div class="swiper-slide">...</div>
-            <!-- <div class="swiper-slide">...</div>
-            <div class="swiper-slide">...</div>
-            <div class="swiper-slide">...</div>
-            <div class="swiper-slide">...</div> -->
           </div>
         </div>
       </div>
-      <div class="sidebar3">
+      <div
+        class="sidebar3"
+        onmouseover="openHoverModal(event)"
+        onmouseleave="closeHoverModal()"
+      >
         <div class="userCard-container">
           <div class="userPhoto">
             <div class="photoCircle1">
@@ -387,20 +431,20 @@
     </div>
 
     <!-- 프로필 호버 시 디자인 -->
-    <div class="hover-container">
-      <canvas id="line-chart" width="300" height="250"></canvas>
-    </div>
     <!-- 프로필 호버 시 모달창 -->
-    <div id="Hover-myModal" class="Hover-modal">
-      <div class="Hover-modal-content">
-        <span onclick="closeHoverModal()" style="cursor: pointer">&times;</span>
-        <div id="modalContent"></div>
+    <div
+      id="Hover-myModal"
+      class="Hover-modal"
+      onmouseover="openHoverModal(event)"
+    >
+      <span onclick="closeHoverModal()" style="cursor: pointer">&times;</span>
+      <div id="modalContent">
+        <canvas id="line-chart" width="300" height="250"></canvas>
       </div>
     </div>
 
     <!-- js connection -->
     <script src="/front_Proj/prac.js"></script>
-    <!-- <script src="/front_Proj/Chart.js"></script> -->
 
     <!-- 모달창 slick 슬라이더 스크립트 -->
     <script>
@@ -428,7 +472,6 @@
 
     <!-- 로그인 스크립트 -->
     <script>
-      AOS.init();
       // 상단바 로그인 성공시시
       const appendMypageButton = (mypageButton) => {
         mypageButton = document.createElement("p");
