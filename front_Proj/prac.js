@@ -267,3 +267,42 @@ const sidebars = document.querySelectorAll(".sidebar1, .sidebar2, .sidebar3");
 sidebars.forEach((sidebar) => {
   sidebar.addEventListener("mouseover", openHoverModal);
 });
+
+// 상단바 로그인 성공시
+const appendMypageButton = (mypageButton, node) => {
+  mypageButton = document.createElement('li');
+  mypageButton.setAttribute("class", 'nav-item');
+  mypageButton.innerHTML = `<a class="nav-link active" style="color: black;" href="../mypage_card.html">Mypage</a>`
+  node.after(mypageButton);
+}
+const appendWriteButton = (writeButton, node) => {
+  writeButton = document.createElement('li');
+  writeButton.setAttribute("class", 'nav-item');
+  writeButton.innerHTML = `<a class="nav-link active" style="color: black;" href="../planning.html">글작성하기</a>`
+  node.after(writeButton);
+}
+
+const appendUserNameDisplay = (userNameDisplay, name) => {
+  userNameDisplay = document.createElement('p')
+  userNameDisplay.innerHTML = `<p class="nav-link active" style="color: black;" >${name}님</p>`
+  document.querySelector("#userInfo").append(userNameDisplay);
+}
+
+const setLoginOutButton = (button) => {
+  button.textContent = '로그아웃';
+  button.removeAttribute("data-toggle");
+  button.removeAttribute("data-target");
+  button.setAttribute("onclick", "localStorage.removeItem('loggedIn'); location.href = '../index.html'");
+}
+
+let name = localStorage.getItem('loggedIn');
+if (name){
+let node = document.querySelector("#pointNode");
+  let mypageButton;
+  let writeButton;
+  let userNameDisplay;
+  setLoginOutButton(document.querySelector("#loginOut"));
+  appendUserNameDisplay(userNameDisplay, name);
+  appendMypageButton(mypageButton, node);
+  appendWriteButton(writeButton, node);
+}
