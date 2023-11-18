@@ -22,10 +22,11 @@
 
     <style>       
         @font-face {
-            font-family: 'TmonMonsori';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
+        font-family: "MICEGothic Bold";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2")
+            format("woff2");
+        font-weight: 700;
+        font-style: normal;
         }
          /* Custom navbar */
         .navbar {
@@ -54,7 +55,7 @@
         /* css 꾸미기 */
         /* 배경화면 설정 css */
         body {
-            font-family: 'TmonMonsori';
+            font-family: 'MICEGothic Bold';
             height: 100vh;
             margin: 0;
             background: url('/메인화면 사진/메인1.png') no-repeat center center fixed;
@@ -95,20 +96,22 @@
             justify-content: center;
         }
         h1 {
-            font-family: 'TmonMonsori';
+            font-family: 'MICEGothic Bold';
             position: absolute;
             /* text-align: center; */
             /* line-height: 500px; */
-            font-size: 45px;
+            font-size: 55px;
+            font-weight: bold;
+            letter-spacing: -3.8px;
             color: white;
-            top: 20%;
+            top: 13%;
         }
         h5 {
             position: absolute;
             font-size: 20px;
             /* text-align: center; */
             color: beige;
-            top: 35%;
+            top: 32%;
         }
         #contact_us {
             font-size: 12px;
@@ -154,7 +157,7 @@
                     <a class="nav-link active home-underline" style="color: black;" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" style="color: black; opacity: 0;" href="#">공백용</a>
+                    <a class="nav-link" style="color: black;" href="#">공백용</a>
                     </li>
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="color: black;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -191,7 +194,7 @@
         <h5 id="contact_us">Contact us <i class="bi bi-git"></i> https://github.com/kimjaehyeon0527/SemicolonPJ</h5>
     </div>
 	<script>
-        // 상단바 로그인 성공시시
+        // 상단바 로그인 성공시
         const appendMypageButton = (mypageButton) => {
             mypageButton = document.createElement('p')
             mypageButton.innerHTML = `<a class="nav-link active" style="color: black;" href="#">Mypage</a>`
