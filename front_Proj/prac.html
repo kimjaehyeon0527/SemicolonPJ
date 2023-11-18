@@ -109,11 +109,7 @@
               <div
                 class="nav-item p-2"
                 style="color: #f3f0ca; text-shadow: -0.8px -0.8px 1px #000"
-              >
-                <button class="cardBasket" onclick="openBasket()">
-                  장바구니
-                </button>
-              </div>
+              ></div>
               <div
                 class="nav-item p-2"
                 style="color: #f3f0ca; text-shadow: -0.8px -0.8px 1px #000"
@@ -127,16 +123,6 @@
     </header>
 
     <!-- 뒷 배경을 위한 div태그 -->
-    <div class="divide-line">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-    </div>
-    <div class="backboard">
-      <div class="layout-backboard"></div>
-      <div class="layout-backboard"></div>
-      <div class="layout-backboard"></div>
-    </div>
 
     <section class="layout">
       <div
@@ -182,6 +168,16 @@
         </div>
       </div>
       <div class="userContent1">
+        <!-- <div class="divide-line">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+        <div class="backboard">
+          <div class="layout-backboard"></div>
+          <div class="layout-backboard"></div>
+          <div class="layout-backboard"></div>
+        </div> -->
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide sd1" onclick="openModal(event)">
@@ -571,7 +567,7 @@
           </div>
         </div>
         <button class="modal-followBtn" onclick="changefollowBtn()">
-          follow
+          Follow!
         </button>
       </div>
     </div>
@@ -583,7 +579,7 @@
       class="Hover-modal"
       onmouseover="openHoverModal(event)"
     >
-      <span onclick="closeHoverModal()" style="cursor: pointer">&times;</span>
+      <!-- <span onclick="closeHoverModal()" style="cursor: pointer">&times;</span> -->
       <div id="modalContent">
         <canvas id="line-chart" width="300" height="250"></canvas>
       </div>

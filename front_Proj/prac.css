@@ -1,13 +1,29 @@
-@font-face {
+/* @font-face {
   font-family: "TmonMonsori";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff")
     format("woff");
   font-weight: normal;
   font-style: normal;
+} */
+
+/* @font-face {
+  font-family: "KIMM_Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+} */
+
+@font-face {
+  font-family: "MICEGothic Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
 }
 
 * {
-  font-family: "TmonMonsori";
+  font-family: "MICEGothic Bold";
 }
 
 /* 여행지 순서 구분선 */
@@ -15,30 +31,32 @@
   position: absolute;
   border: 6px solid grey;
   width: 100%;
-  top: 210px;
-  left: 100px;
+  top: 30%;
+  left: 10%;
   z-index: 1;
 }
 .line:nth-child(2) {
   position: absolute;
   border: 6px solid gray;
-  width: 900px;
-  top: 530px;
-  left: 100px;
+  width: 60%;
+  top: 70%;
+  left: 10%;
   z-index: 1;
 }
 .line:nth-child(3) {
   position: absolute;
   border: 6px solid grey;
   width: 100%;
-  top: 850px;
-  left: 100px;
+  top: 113%;
+  left: 10%;
   z-index: 1;
 }
 .backboard {
   position: absolute;
   width: 100%;
-  height: 950px;
+  height: 100%;
+  top: 5%;
+  left: 0;
   background-color: rgba(246, 244, 244, 0.5);
   border-radius: 13px;
 }
@@ -130,6 +148,7 @@ body {
   box-shadow: -3px -3px 7px #5c5c5c, 3px 3px 5px #5c5c5c;
   border-radius: 15px;
   overflow: hidden;
+  border: 5px solid #ffffff;
 }
 .swiper-slide-active,
 .swiper-slide-active + .swiper-slide,
@@ -211,7 +230,7 @@ body {
   width: 100%;
   height: 25vh;
   background-color: #f4fafb;
-  border: 10px #e8e8e8 solid;
+  border: 10px #bdbdbd solid;
   border-radius: 15px;
   text-align: center;
   font-weight: 600;
@@ -225,6 +244,7 @@ body {
   background-color: #f8f8f8;
   color: #888;
   border: 1px solid #e8e8e8;
+  border-radius: 10px;
   font-size: 1.125em;
   letter-spacing: 0px;
   padding: 10px 60px;
@@ -239,7 +259,7 @@ body {
 }
 .modal-followBtn {
   background-color: #f8f8f8;
-  color: #888;
+  color: #2bb8ff;
   border: 1px solid #e8e8e8;
   font-size: 1.125em;
   letter-spacing: 0px;
@@ -250,7 +270,7 @@ body {
   transition: all 0.5s;
 }
 .modal-followBtn:hover {
-  background: rgba(96, 96, 0, 0.5);
+  background: #00a9ff;
   color: white;
   transition: all 0.5s;
 }
@@ -283,7 +303,7 @@ body {
   height: 90%;
   /* border: 2px solid; */
   border-radius: 10%;
-  background-color: #cdf5fd;
+  background-color: #ffffff;
 
   display: flex;
   flex-direction: column;
@@ -344,7 +364,7 @@ body {
     display: flex;
     width: 100%;
     height: 100%;
-    border-radius: 0;
+    border-radius: 4px;
     flex-direction: row;
     justify-content: space-between;
     box-shadow: -1px -1px 3px #5c5c5c, 1px 1px 3px #5c5c5c;
@@ -380,7 +400,7 @@ body {
   /* 모달 content 줄이기 */
   .modal-content {
     min-width: 200px;
-    min-height: 430px;
+    height: 500px;
   }
   .modal-content > .modal-followBtn {
     bottom: 40px;
@@ -391,6 +411,18 @@ body {
     display: none;
   }
 }
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  .userCard-container > .socialIcon {
+    display: none;
+  }
+  .userCard-container > .userCom {
+    display: none;
+  }
+  .userPhoto > .photoCircle1 {
+    width: 80%;
+    height: 50%;
+  }
+}
 
 /* 768 이상 1024 미만 해상도 -> 소셜, 하트 아이콘 제외 삭제 */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -399,8 +431,8 @@ body {
   }
   .backboard {
     position: absolute;
-    width: 800px;
-    height: 1300px;
+    width: 100%;
+    height: 100vh;
     background-color: rgba(246, 244, 244, 0.5);
     border-radius: 13px;
   }
@@ -452,7 +484,7 @@ body {
 }
 
 /* 데스크톱 미디어 쿼리 */
-@media only screen and (min-width: 1024px) and (max-width: 1441px) {
+@media only screen and (min-width: 1024px) {
   /* 데스크톱 화면에 대한 스타일 */
   .backboard {
     position: absolute;
@@ -462,15 +494,11 @@ body {
     border-radius: 13px;
   }
   .line:nth-child(1),
-  .line:nth-child(2),
   .line:nth-child(3) {
-    width: 924px;
-  }
-  .line:nth-child(1) {
-    top: 245px;
+    width: 100%;
   }
   .line:nth-child(2) {
-    top: 625px;
+    width: 60%;
   }
 }
 

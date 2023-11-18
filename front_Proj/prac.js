@@ -95,7 +95,7 @@ function initSlickSlider() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000, //자동재생시간 3초
+    autoplaySpeed: 10000, //자동재생시간 10초
     arrows: true,
     dots: true,
   });
