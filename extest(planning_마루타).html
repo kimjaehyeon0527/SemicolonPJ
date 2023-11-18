@@ -29,23 +29,34 @@
         }
         body {
             font-family: 'TmonMonsori';
-            height: 100vh;
             margin: 0;
-            background-size: cover;
-            background-color: rgba(255, 255, 255, 0.1);
+            /* background-color: rgba(0, 0, 0, 0.1);   배경 투명도 인데 변화가 없음;; */
             background-image: url('/메인화면 사진/구름2.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: fixed;
             background-size: cover;
+            margin-bottom: 40px;
         }
+        /* 하단 바 css */
+        .fixed-bottom {
+            height: 40px;
+            position: fixed;
+            bottom: 0;
+            left: 0; 
+            right: 0; 
+            z-index: 100; /* 다른 요소 위에 표시되도록 z-index 설정 */
+            background-color: rgba(20, 20, 20, 0.1);
+        }
+        
         
         /* Flexbox 속성을 적용할 컨테이너 스타일 */
         #big_container {
-            border: 1px solid black;
+            border-width: 5px 0 5px 0;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.6);
             display: flex;
             overflow-x: auto; /* 넘칠 경우 스크롤바 추가 */
-            max-height: 400px;
         }
         /* 내부 container 스타일 */
         #container {
@@ -67,13 +78,16 @@
             align-items: center;
             position: relative;
         }
+        /* 작성하기 / 가져오기 버튼 2개 */
         .custom-button {
             position: absolute;
             width: 85px;
         }
+        /* 작성하기 버튼 위치 */
         .custom-button:nth-child(1) {
             transform: translateY(-30px); 
         }
+        /* 가져오기 버튼 위치 */
         .custom-button:nth-child(2) {
             transform: translateY(30px);
         }
@@ -87,27 +101,6 @@
             height: 250px;
             font-size: 25px;
             background-color: rgb(189, 250, 230);
-        }
-        /* 외부 "+" 버튼 */
-        .button2 {
-            width: 50px; 
-            height: 50px; 
-            font-size: 25px; 
-            border-radius: 50%;
-            border: 1px solid black;
-            background-color: #DCBFFF;
-        }
-        /* 외부 "+" 버튼 감싸는 div */
-        .big-plus {
-        width: 70px;
-        height: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        z-index: 100;
         }
         /* n일 차 */
         .days {
@@ -148,6 +141,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            text-align: center;
         }
         /* 이미지 */
         img {
@@ -162,18 +157,18 @@
         /* 이미지 업로드 */
         .fileLabel {
             position: absolute;
-            background-color: #5ab25a;
-            color: #fff;
+            /* background-color: #5ab25a; */
+            /* color: black; */
             text-align: center;
             padding: 10px 0;
             width: 50%;
             border-radius: 6px;
             cursor: pointer;
             z-index: 50;
-            bottom: 0; /* 하단에 배치 */
+            bottom: 30%; /* 하단에 배치 */
             left: 50%; /* 가운데 정렬 */
             transform: translateX(-50%);
-            margin-bottom: 25px;
+            
         }
         .imgFile {
             display: none;
@@ -241,6 +236,7 @@
             height: 100%;
             font-size: 18px;
         }
+        
         /* ------------------------------------ 구 분 선 ----------------------------------- */
     </style>
 </head>
@@ -282,10 +278,17 @@
     </header>
 
     <!-- 새로운 n일 차 생성 버튼 -->
-    <div class="big-plus">
-        <button onclick="createBigContainer()" class="button2 "> + </button>
-    </div>
 
+    <!-- 하단 바 -->
+    <footer>
+        <nav class="navbar bg-body-tertiary fixed-bottom">
+            <form class="container-fluid justify-content-start">
+                <button class="btn btn-outline-primary me-2 button2" type="button" onclick="createBigContainer()">1일 추가</button>
+                <button class="btn btn-outline-dark me-2 ms-auto" type="button">작성 완료</button>
+            </form>
+        </nav>
+    </footer>
+    <!-- -------------------------------------- 구 분 선 ------------------------------------- -->
     <script>
         // 전역 변수
         let dayCount = 1;
@@ -294,8 +297,8 @@
         function createBigContainer() {
             let newDay = document.createElement("div");
             let newBigContainer = document.createElement("div");
-            newBigContainer.id = "big_container";
-            
+            newBigContainer.id = "big_container"
+
             newBigContainer.innerHTML = `
                 <div class="days">${dayCount}일차</div>
                 <button onclick="createDiv(event)" class="button1" > + </button>
@@ -352,7 +355,7 @@
             // 이미지 업로드 label 생성
             let label = document.createElement("label");
             label.htmlFor = "imgFile";
-            label.className = "fileLabel";
+            label.className = "btn btn-outline-primary fileLabel";
             label.innerText = "이미지 업로드";
             travelImageDiv.appendChild(label);
 
