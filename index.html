@@ -26,11 +26,10 @@
 
     <style>       
         @font-face {
-        font-family: "MICEGothic Bold";
-        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2")
-            format("woff2");
-        font-weight: 700;
-        font-style: normal;
+            font-family: 'TmonMonsori';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
         }
          /* Custom navbar */
         .navbar {
@@ -59,7 +58,7 @@
         /* css 꾸미기 */
         /* 배경화면 설정 css */
         body {
-            font-family: 'MICEGothic Bold';
+            font-family: 'TmonMonsori';
             height: 100vh;
             margin: 0;
             background: url('/메인화면 사진/메인1.png') no-repeat center center fixed;
@@ -100,22 +99,20 @@
             justify-content: center;
         }
         h1 {
-            font-family: 'MICEGothic Bold';
+            font-family: 'TmonMonsori';
             position: absolute;
             /* text-align: center; */
             /* line-height: 500px; */
-            font-size: 55px;
-            font-weight: bold;
-            letter-spacing: -3.8px;
+            font-size: 45px;
             color: white;
-            top: 13%;
+            top: 20%;
         }
         h5 {
             position: absolute;
             font-size: 20px;
             /* text-align: center; */
             color: beige;
-            top: 32%;
+            top: 35%;
         }
         #contact_us {
             font-size: 12px;
@@ -134,8 +131,8 @@
         /* 유저 로고 */
 		#userInfo{
             position: absolute;
-            top: 22px;
-            right: 105px;
+            top: 20px;
+            right: 80px;
             z-index: 1;
             display: flex;
         }
@@ -252,8 +249,10 @@
             display: flex;
             font-size: 12px;
         }
-        #userInfo > p{
-            margin-left: 13px;
+    }
+        @media screen and (width >= 991px) {
+        #userInfo{
+            right: 20px;
         }
 		}
     </style>
@@ -275,26 +274,19 @@
                     <li class="nav-item">
                     <a class="nav-link active home-underline" style="color: black;" aria-current="page" href="#">Home</a>
                     </li>
+                    <li class="nav-item" id = "pointNode">
+                    <a class="nav-link" style="color: black;" href="front_Proj/prac.html" >여행지추천</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="front_Proj/prac.html">Mypage</a>
+                    </li>
                     <li class="nav-item">
-
-                        <a class="nav-link" style="color: black;" href="front_Proj/prac.html">여행지추천</a>
+                    <a class="nav-link" style="color: black;" href="front_Proj/prac.html">글작성하기</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: black;" data-toggle="modal" data-target="#exampleModal" id = "loginOut">로그인</a>
                     </li>
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" style="color: black;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        CATEGORY
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">국내</a></li>
-                        <li><a class="dropdown-item" href="#">해외</a></li>
-                    </ul>
-                    </li>
-                </ul> 
-                <!-- 로그인 -->
-                    <div class="nav-item ms-auto p-2" style="color: #F3F0CA; text-shadow: -0.8px -0.8px 1px #000;">
-                        <button type="button" class="btn btn-transparant" data-toggle="modal" data-target="#exampleModal" id = "loginOut" style="color: black;">
-                        로그인
-                        </button>
-                    </div>
+                </ul>
                 </div>
             </div>
         </nav>
@@ -389,7 +381,6 @@
         </div>
         <h5 id="contact_us">Contact us <i class="bi bi-git"></i> https://github.com/kimjaehyeon0527/SemicolonPJ</h5>
     </div>
-
 	<!--로그인 및 회원가입용 script  -->
     <script>
 		let idValid = 0;
@@ -511,10 +502,23 @@
     </script>
     <script>
         // 상단바 로그인 성공시
-        const appendMypageButton = (mypageButton) => {
-            mypageButton = document.createElement('p')
+        // <li class="nav-item">
+        //     <a class="nav-link" style="color: black;" href="front_Proj/prac.html">Mypage</a>
+        // </li>
+        // <li class="nav-item">
+        //     <a class="nav-link" style="color: black;" href="front_Proj/prac.html">글작성하기</a>
+        // </li>   
+        const appendMypageButton = (mypageButton, node) => {
+            mypageButton = document.createElement('li');
+            mypageButton.setAttribute("class", 'nav-item');
             mypageButton.innerHTML = `<a class="nav-link active" style="color: black;" href="mypage_card.html">Mypage</a>`
-            document.querySelector("#userInfo").append(mypageButton);
+            node.after(mypageButton);
+        }
+        const appendWriteButton = (writeButton, node) => {
+            writeButton = document.createElement('li');
+            writeButton.setAttribute("class", 'nav-item');
+            writeButton.innerHTML = `<a class="nav-link active" style="color: black;" href="planning.html">글작성하기</a>`
+            node.after(writeButton);
         }
 
         const appendUserNameDisplay = (userNameDisplay, name) => {
@@ -532,11 +536,14 @@
 
         let name = localStorage.getItem('loggedIn');
         if (name){
-			let mypageButton;
+			let node = document.querySelector("#pointNode");
+            let mypageButton;
+            let writeButton;
             let userNameDisplay;
             setLoginOutButton(document.querySelector("#loginOut"));
             appendUserNameDisplay(userNameDisplay, name);
-            appendMypageButton(mypageButton);
+            appendMypageButton(mypageButton, node);
+            appendWriteButton(writeButton, node);
         }
     </script>
 </body>
