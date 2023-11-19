@@ -44,32 +44,63 @@
     />
     <!-- slick js -->
     <script src="/front_Proj/slick-1.8.1/slick/slick.min.js"></script>
+
+    <!-- sweeet alert CDN -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </head>
 
   <body>
     <!-- 상단 바 -->
     <header>
       <div id="userInfo"></div>
-      <nav  class="navbar navbar-expand-lg">
-          <div class="container-fluid">
-              <a class="navbar-brand" href="../index.html" style="color: black;"><i class="bi bi-airplane-engines"></i> Pocket Travel</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"    aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav">
-                  <li class="nav-item">
-                  <a class="nav-link active home-underline" style="color: black;" aria-current="page" href="../index.html">Home</a>
-                  </li>
-                  <li class="nav-item" id = "pointNode">
-                  <a class="nav-link list-underline" style="color: #ffeb3b;" href="front_Proj/prac.html" >여행지추천</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" style="color: black;" data-toggle="modal" data-target="#exampleModal" id = "loginOut">로그인</a>
-                  </li>
-              </ul>
-              </div>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html" style="color: black"
+            ><i class="bi bi-airplane-engines"></i> Pocket Travel</a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a
+                  class="nav-link active home-underline"
+                  style="color: black"
+                  aria-current="page"
+                  href="../index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item" id="pointNode">
+                <a
+                  class="nav-link list-underline"
+                  style="color: #ffeb3b"
+                  href="front_Proj/prac.html"
+                  >여행지추천</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  style="color: black"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  id="loginOut"
+                  >로그인</a
+                >
+              </li>
+            </ul>
           </div>
+        </div>
       </nav>
     </header>
 
@@ -518,7 +549,7 @@
           </div>
         </div>
         <button class="modal-followBtn" onclick="changefollowBtn()">
-          Follow!
+          Follow
         </button>
       </div>
     </div>
@@ -530,11 +561,18 @@
       class="Hover-modal"
       onmouseover="openHoverModal(event)"
     >
-      <!-- <span onclick="closeHoverModal()" style="cursor: pointer">&times;</span> -->
       <div id="modalContent">
         <canvas id="line-chart" width="300" height="250"></canvas>
       </div>
     </div>
+
+    <!-- 장바구니 버튼 (fixed로 하단 고정) -->
+    <button class="basketButton" onclick="clickBasket()">
+      <div class="baksetItemNumber">
+        <span>0</span>
+      </div>
+      <img src="/front_Proj/front_Proj_img/basketIcon.png" alt="" />
+    </button>
 
     <!-- js connection -->
     <script src="/front_Proj/prac.js"></script>
