@@ -258,9 +258,6 @@
         .navbar {
             border: none; /* 테두리 제거 */
         }
-        .navbar-nav .nav-link {
-            /* color: white !important;  글자 색깔 변경 */
-        }
         
         .navbar-nav .nav-item.dropdown:hover .nav-link,
         .navbar-nav .nav-item:hover .nav-link {
@@ -268,11 +265,7 @@
         }
 
         .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
-            background-color: #ffffff; /* 드롭다운 배경색 변경 */
-        }
-
-        .navbar-nav .nav-item.dropdown .dropdown-item {
-            /* color: #ffffff; 드롭다운 텍스트 색 */
+            background-color: #af8d8d; /* 드롭다운 배경색 변경 */
         }
         .navbar-nav .nav-link.write-underline {
             border-bottom: 2px solid #ffeb3b; /* Underline style */
@@ -473,8 +466,14 @@
                 // newDiv 제거
                 newDiv.parentNode.removeChild(newDiv);
             });
-        }
         // ------------------------------------ 구 분 선 -------------------------------------- //
+            // 가져오기 버튼 클릭 시 이벤트!
+            newFetchButton.addEventListener("click", function () {
+
+            });
+        }
+        
+
     </script>
     <!-- ------------------------------------ 구 분 선 -------------------------------------- -->
     <script>
