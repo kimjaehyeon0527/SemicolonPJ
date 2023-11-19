@@ -57,6 +57,7 @@
 			background: url('/메인화면 사진/메인1.png') no-repeat center center fixed;
 			background-size: cover;
 			overflow: hidden;
+			min-width: 375px;
 		}
 
 		/* 왼쪽 반투명 레이아웃 */
@@ -102,19 +103,65 @@
 			position: absolute;
 			/* text-align: center; */
 			/* line-height: 500px; */
-			font-size: 60px;
+			font-size: 80px;
 			color: white;
-			letter-spacing: -5px;
-			top: 13%;
+			top: 20%;
 		}
-
+		
 		h5 {
 			position: absolute;
 			font-size: 20px;
 			/* text-align: center; */
 			color: beige;
-			top: 33%;
+			top: 35%;
 		}
+		@media screen and (width <= 1802px) {
+			h1 {
+				font-size: 60px;
+			}
+		}
+		@media screen and (width <= 1352px) {
+			body::after {
+			width: 50%;
+		}
+			.innerContent {
+			width: 50%;
+		}
+		}
+		@media screen and (width <= 970px) {
+			h1 {
+				font-size: 60px;
+			}
+			body::after {
+			width: 30%;
+		}
+			.innerContent {
+			width: 70%;
+		}
+		}
+		@media screen and (width <= 700px) {
+			h1 {
+				font-size: 60px;
+			}
+			body::after {
+			width: 0%;
+		}
+			.innerContent {
+			width: 100%;
+		}
+		}
+		@media screen and (width <= 480px) {
+			h1 {
+				font-size: 45px;
+			}
+			#middle input{
+				width : 100px;
+			}
+			h5 {
+				font-size: 18px;
+			}
+		}
+
 
 		#contact_us {
 			font-size: 12px;
@@ -126,6 +173,11 @@
 		#sh {
 			width: 90%;
 
+		}
+		@media screen and (width <= 480px) {
+			#sh {
+			width: 70%;
+		}
 		}
 
 		#middle {
@@ -143,6 +195,11 @@
 
 		#userInfo>p {
 			margin-left: 20px;
+		}
+		@media screen and (width <= 700px) {
+			#userInfo {
+			color: black;
+		}
 		}
 
 		/* 로그인 모달 css */
@@ -281,6 +338,7 @@
 				z-index: 1;
 				display: flex;
 				font-size: 12px;
+				color : black;
 			}
 		}
 
@@ -552,7 +610,7 @@
 
 		const appendUserNameDisplay = (userNameDisplay, name) => {
 			userNameDisplay = document.createElement('p')
-			userNameDisplay.innerHTML = `<p class="nav-link active" style="color: black;" >${name}님</p>`
+			userNameDisplay.innerHTML = `<p class="nav-link active" style="color: white;" >${name}님</p>`
 			document.querySelector("#userInfo").append(userNameDisplay);
 		}
 
