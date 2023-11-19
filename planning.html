@@ -138,7 +138,7 @@
         }
 
         /* 이미지 구간 */
-        .travelImage {
+        .travelImage, .travelImage_side{
             position: relative;
             border-radius: 15px 15px 0px 0px;
             display: inline-block;
@@ -258,9 +258,6 @@
         .navbar {
             border: none; /* 테두리 제거 */
         }
-        .navbar-nav .nav-link {
-            /* color: white !important;  글자 색깔 변경 */
-        }
         
         .navbar-nav .nav-item.dropdown:hover .nav-link,
         .navbar-nav .nav-item:hover .nav-link {
@@ -270,13 +267,40 @@
         .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
             background-color: #ffffff; /* 드롭다운 배경색 변경 */
         }
-
-        .navbar-nav .nav-item.dropdown .dropdown-item {
-            /* color: #ffffff; 드롭다운 텍스트 색 */
-        }
         .navbar-nav .nav-link.write-underline {
             border-bottom: 2px solid #ffeb3b; /* Underline style */
         }
+        /* ------------------------------------ 구 분 선 ----------------------------------- */
+        /* 사이드바 */
+        #sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #ffffff;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+        #sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            left: 25px;
+            font-size: 36px;
+            margin-right: 50px;
+        }
+        #checked_Photo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        /* ------------------------------------ 구 분 선 ----------------------------------- */
         /* 유저 로고 */
 		#userInfo{
             position: absolute;
@@ -288,26 +312,59 @@
         #userInfo > p{
             margin-left: 20px;
         }
+        /* ------------------------------------ 구 분 선 ----------------------------------- */
+        /* 반응형 */
         @media screen and (width <= 480px) {
-        #userInfo{
-            position: absolute;
-            top: 18px;
-            right: 80px;
-            z-index: 1;
-            display: flex;
-            font-size: 12px;
+            #userInfo{
+                position: absolute;
+                top: 18px;
+                right: 80px;
+                z-index: 1;
+                display: flex;
+                font-size: 12px;
+            }
+
         }
-    }
         @media screen and (width >= 991px) {
         #userInfo{
             right: 20px;
         }
 		}
+        @media only screen and (min-width: 1480px) {
+            .generated-div {
+            width: 285px;
+            height: 300px;
+            }
+
+            .button1 {
+            width: 50px;
+            height: 300px;
+            }
+            .travelPhoto {
+            width: 285px;
+            height: 300px;
+            }
+            #sidebar {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                right: 0;
+                background-color: #ffffff;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+            }
+        }
+        
+        
+
     </style>
 </head>
 <!-- [가로 줄] 자동 1회 생성 로드 -->
 
-<body onload="createBigContainer()">
+<body onload="createBigContainer()" id="main">
     <!-- 상단 바 -->
     <header>
 		<div id="userInfo"></div>
@@ -333,15 +390,38 @@
                 </div>
             </div>
         </nav>
-
     </header>
+    <!-- 사이드 바 -->
+    <div id="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()"><i class="bi bi-x-square"></i></a>
 
-    <!-- 새로운 n일 차 생성 버튼 -->
+        <!-- 전체 카드 모양 -->
+        <div class="travelPhoto" id="checked_Photo" onclick="moveImageToNewDiv()">
+            <!-- 이미지 칸 -->
+            <div class="travelImage_side">
+                <img src="/front_Proj/front_Proj_img/Bankok/Bankok2.png" alt="">
+            </div>
+
+            <!-- 글 칸 -->
+            <div class="travelText">
+                <!-- 제목 -->
+                <div class="travelTitle">
+                    <label for="">아유타야</label>
+                </div>
+                <!-- 글 내용 -->
+                <div class="travelContent">
+                    <label for="">"본 이미지는 참고 예시 사진입니다."</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     <!-- 하단 바 -->
     <footer>
         <nav class="navbar bg-body-tertiary fixed-bottom">
             <form class="container-fluid justify-content-start">
+                <!-- 새로운 n일 차 생성 버튼 -->
                 <button class="btn btn-outline-primary me-2 button2" type="button" onclick="createBigContainer()">
                     1일 추가
                 </button>
@@ -473,7 +553,31 @@
                 // newDiv 제거
                 newDiv.parentNode.removeChild(newDiv);
             });
-        }
+            // ------------------------------------ 구 분 선 -------------------------------------- //
+            // 가져오기 버튼 클릭 시 이벤트!
+            newFetchButton.addEventListener("click", function () {
+            // 사이드바를 열기
+                openSidebar();
+
+                // newDiv 제거
+                newDiv.parentNode.removeChild(newDiv);
+            });
+            }
+            // 사이드바를 나타내는 함수
+            function openSidebar() {
+                // 여기에 사이드바를 나타내는 코드 추가
+                document.getElementById("sidebar").style.width = "300px";
+                document.getElementById("main").style.marginRight = "300px";
+            }
+
+            // 사이드바를 닫는 함수
+            function closeSidebar() {
+                // 여기에 사이드바를 닫는 코드 추가
+                document.getElementById("sidebar").style.width = "0";
+                document.getElementById("main").style.marginRight = "0";
+            }
+        
+    
         // ------------------------------------ 구 분 선 -------------------------------------- //
     </script>
     <!-- ------------------------------------ 구 분 선 -------------------------------------- -->
@@ -513,6 +617,35 @@
                 reader.readAsDataURL(file);
             }
         }
+        // ------------------------------------ 구 분 선 --------------------------------------
+        // 사이드바 내용 복제하기.
+        function moveImageToNewDiv() {
+            // checked_Photo div 가져오기
+            const sourceTravelPhoto = document.querySelector("#checked_Photo");
+            if (!sourceTravelPhoto) return;
+
+            // 새로운 travelPhoto div 생성
+            const newTravelPhotoDiv = sourceTravelPhoto.cloneNode(true);
+            newTravelPhotoDiv.id = ""; // 새로운 ID 부여 (선택 사항)
+
+            // 이미지 업로드 라벨 초기화
+            const fileLabel = newTravelPhotoDiv.querySelector(".fileLabel");
+            if (fileLabel) {
+                fileLabel.style.display = "block";
+            }
+             // 이미지 업로드 input 초기화
+            const imgFileInput = newTravelPhotoDiv.querySelector(".imgFile");
+            if (imgFileInput) {
+                imgFileInput.value = "";
+            }
+            // 새로운 travelPhoto div를 container 또는 원하는 곳에 추가
+            const container = document.querySelector("#container");
+            container.appendChild(newTravelPhotoDiv);
+
+            // 사이드바를 닫기
+            closeSidebar();
+        }
+        // ------------------------------------ 구 분 선 --------------------------------------
         // 상단바 로그인 성공시
         const appendMypageButton = (mypageButton, node) => {
             mypageButton = document.createElement('li');
@@ -553,5 +686,4 @@
         }
     </script>
 </body>
-
 </html>
