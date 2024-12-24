@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- CSS 불러오기 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+	<!-- JS 불러오기 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+		</script>
+	<!-- 모달용 cdn -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<!-- icon용 Cdn -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+	<style>
+		@font-face {
+			font-family: "MICEGothic Bold";
+			src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2") format("woff2");
+			font-weight: 700;
+			font-style: normal;
+		}
+
+		/* Custom navbar */
+		.navbar {
+			border: none;
+			/* 테두리 제거 */
+		}
+
+		.navbar-nav .nav-item.dropdown:hover .nav-link,
+		.navbar-nav .nav-item:hover .nav-link {
+			color: #ffeb3b !important;
+			/* 마우스 호버 드롭다운 색깔 변경 */
+		}
+
+		.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+			background-color: #ffffff;
+			/* 드롭다운 배경색 변경 */
+		}
+		.navbar-nav .nav-link.home-underline {
+			border-bottom: 2px solid #ffeb3b;
+			/* Underline style */
+		}
+
+		/* css 꾸미기 */
+		/* 배경화면 설정 css */
+		body {
+			font-family: 'MICEGothic Bold';
+			height: 100vh;
+			margin: 0;
+			background: url('/메인화면 사진/메인1.png') no-repeat center center fixed;
+			background-size: cover;
+			overflow: hidden;
+			min-width: 375px;
+		}
+
+		/* 왼쪽 반투명 레이아웃 */
+		body::before {
+			content: "";
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.3);
+			/* 반투명 레이어의 색상 및 투명도 조절 */
+			z-index: -1;
+			/* 배경 이미지 위에 나타나도록 하기 위해 z-index를 음수로 설정 */
+		}
+
+		/* 오른쪽 반투명 레이아웃 */
+		body::after {
+			content: "";
+			position: fixed;
+			top: 0;
+			right: 0;
+			width: 65%;
+			/* Adjust the width as needed */
+			height: 100%;
+			background: rgba(0, 0, 0, 0.3);
+			z-index: -1;
+		}
+
+		/* 중앙 메인 글 */
+		.innerContent {
+			position: relative;
+			display: flex;
+			flex-wrap: wrap;
+			width: 35%;
+			height: 100%;
+			/* border: 1px solid black; */
+			justify-content: center;
+		}
+
+		h1 {
+			font-family: 'MICEGothic Bold';
+			position: absolute;
+			/* text-align: center; */
+			/* line-height: 500px; */
+			font-size: 80px;
+			letter-spacing: -5px;
+			color: white;
+			top: 13%;
+		}
+		
+		h5 {
+			position: absolute;
+			font-size: 20px;
+			/* text-align: center; */
+			color: beige;
+			top: 33%;
+		}
+		@media screen and (width <= 1802px) {
+			h1 {
+				font-size: 60px;
+			}
+		}
+		@media screen and (width <= 1352px) {
+			body::after {
+			width: 50%;
+		}
+			.innerContent {
+			width: 50%;
+		}
+		}
+		@media screen and (width <= 970px) {
+			h1 {
+				font-size: 60px;
+			}
+			body::after {
+			width: 30%;
+		}
+			.innerContent {
+			width: 70%;
+		}
+		}
+		@media screen and (width <= 700px) {
+			h1 {
+				font-size: 60px;
+			}
+			body::after {
+			width: 0%;
+		}
+			.innerContent {
+			width: 100%;
+		}
+		}
+		@media screen and (width <= 480px) {
+			h1 {
+				font-size: 45px;
+			}
+			#middle input{
+				width : 100px;
+			}
+			h5 {
+				font-size: 18px;
+			}
+		}
+
+
+		#contact_us {
+			font-size: 12px;
+			color: black;
+			top: 58%;
+		}
+
+		/* 검색창 */
+		#sh {
+			width: 90%;
+
+		}
+		@media screen and (width <= 480px) {
+			#sh {
+			width: 70%;
+		}
+		}
+
+		#middle {
+			display: flex;
+		}
+
+		/* 유저 로고 */
+		#userInfo {
+			position: absolute;
+			top: 20px;
+			right: 80px;
+			z-index: 1;
+			display: flex;
+		}
+
+		#userInfo>p {
+			margin-left: 20px;
+		}
+		@media screen and (width <= 700px) {
+			#userInfo {
+			color: black;
+		}
+		}
+
+		/* 로그인 모달 css */
+		.modal {
+			position: fixed;
+			top: 10vh;
+		}
+
+		.login-window {
+			background: url(https://cdn.pixabay.com/photo/2022/09/04/20/11/plane-7432680_1280.jpg) no-repeat center;
+			max-width: 500px;
+			min-height: 590px;
+			position: relative;
+			box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .8), 0 17px 50px 0 rgba(0, 0, 0, .6);
+		}
+
+		.login-html {
+			background-color: rgba(134, 142, 164, 0.65);
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			padding: 10px 75px 50px 75px;
+			box-sizing: border-box;
+		}
+
+		@media screen and (width >=420px) {
+			.login-html {
+				padding: 10px 100px 50px 100px;
+			}
+		}
+
+		@media screen and (480px > width >=420px) {
+			.login-html {
+				padding: 10px 80px 50px 90px;
+			}
+		}
+
+		.logIn,
+		.signUp {
+			display: none;
+		}
+
+		.login-html .signUpBox,
+		.login-html .loginBox {
+			backface-visibility: hidden;
+			position: absolute;
+			transform: rotateY(180deg);
+			transition: all .5s linear;
+		}
+
+		.login-html>label {
+			font-size: 22px;
+			color: rgb(54, 52, 52);
+			margin: 0 15px 10px 0;
+		}
+
+		@media screen and (width <=480px) {
+			.login-html>label {
+				font-size: 18px;
+			}
+		}
+
+		.logIn:checked+.tab,
+		.signUp:checked+.tab {
+			border-bottom: 2px solid transparent;
+			border-color: #1161ee;
+			color: white;
+		}
+
+		.loginBox,
+		.signUpBox {
+			margin-top: 12px;
+			width: 58%;
+		}
+
+		.group {
+			margin: 10px 0 5px 0;
+
+			width: 100%;
+			color: #fff;
+			display: block;
+		}
+
+		.group .label,
+		.group .input,
+		.group .button {
+			width: 100%;
+			color: #fff;
+			display: block;
+		}
+
+		.group .label {
+			color: #fff;
+			font-size: 12px;
+			margin-bottom: 2px;
+		}
+
+		.group .input,
+		.group .button {
+			border: none;
+			padding: 15px;
+			border-radius: 25px;
+			background: rgba(255, 255, 255, .1);
+		}
+
+		.group .button {
+			margin-top: 50px;
+			background: #1161ee;
+			width: 100%;
+			margin: auto;
+		}
+
+		input::placeholder {
+			color: #555555;
+		}
+
+		.login-html .logIn:checked~.loginBox {
+			transform: rotate(0);
+		}
+
+		.login-html .signUp:checked~.signUpBox {
+			transform: rotate(0);
+		}
+
+		.hr {
+			height: 2px;
+			margin: 20px 0 20px 0;
+			background: rgba(255, 255, 255, .2);
+		}
+
+		@media screen and (width <=480px) {
+			#userInfo {
+				position: absolute;
+				top: 18px;
+				right: 80px;
+				z-index: 1;
+				display: flex;
+				font-size: 12px;
+				color : black;
+			}
+		}
+
+		@media screen and (width >=991px) {
+			#userInfo {
+				right: 20px;
+			}
+		}
+	</style>
+	<script></script>
+	<title>Pocket Travel</title>
+</head>
+
+<body>
+	<!-- 상단 바 -->
+	<header>
+		<div id="userInfo"></div>
+		<nav class="navbar navbar-expand-lg">
+
+			<div class="container-fluid">
+				<a class="navbar-brand" href="./index.html" style="color: black;"><i class="bi bi-airplane-engines"></i>
+					Pocket Travel</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link active home-underline" style="color: black;" aria-current="page"
+								href="./index.html">Home</a>
+						</li>
+						<li class="nav-item" id="pointNode">
+							<a class="nav-link" style="color: black;" href="front_Proj/prac.html">여행지추천</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" style="color: black;" data-toggle="modal" data-target="#exampleModal"
+								id="loginOut">로그인</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<!-- 버튼을 클릭하면 모달이 나타나도록 하는 버튼 -->
+
+	<!-- 모달 창 -->
+	<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="background-color: transparent; border: transparent;">
+				<div class="modal-body">
+					<div class="login-window">
+						<div class="login-html">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+								style="padding-left: 125%; background-color: transparent; border: 0px;">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<!-- 로그인 or 회원가입 선택 라벨 -->
+							<input type="radio" name="tab" id="logIn" class="logIn" checked><label for="logIn"
+								class="tab">LOG IN</label>
+							<input type="radio" name="tab" id="signUp" class="signUp"><label for="signUp"
+								class="tab">SIGN UP</label>
+							<!-- 로그인 선택시 -->
+							<div class="loginBox">
+								<div class="group">
+									<label for="user" class="label">Username</label>
+									<input id="loginId" type="text" class="input">
+								</div>
+								<div class="group">
+									<label for="pass" class="label">Password</label>
+									<input id="loginPw" type="password" class="input" data-type="password">
+								</div>
+								<br>
+								<div class="group">
+									<input type="submit" class="button" value="Login" onclick="logIn()">
+								</div>
+								<div class="hr"></div>
+								<div class="group" style="display: flex; justify-content: space-evenly;">
+									<img src="src/kakao_login_medium_narrow (1).png" alt="" width="45%"
+										style="border: black 0.5px solid; border-radius: 17px;">
+									<img src="src/web_light_rd_SI@4x.png" alt="" width="45%" height="35px">
+								</div>
+							</div>
+							<!-- 회원가입 선택시 -->
+							<div class="signUpBox">
+								<div class="group">
+									<label for="user" class="label">Username</label>
+									<input id="signUpId" type="text" class="input">
+								</div>
+								<div id="idAlert"></div>
+								<div class="group">
+									<label for="pass" class="label">Password</label>
+									<input id="signUpPw" type="password" class="input" data-type="password">
+								</div>
+								<div id="pwAlert"></div>
+								<div class="group">
+									<label for="user" class="label">Phone Number</label>
+									<input id="phoneNum" type="text" class="input" placeholder="000-0000-0000">
+								</div>
+								<div class="group">
+									<label for="user" class="label">e-mail</label>
+									<input id="email" type="text" class="input" placeholder="john@example.com">
+								</div>
+								<br>
+								<div class="group">
+									<input type="submit" class="button" value="Sign Up" onclick="signUp()">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ----------------------------------------------------------------------------- -->
+	<!-- 배경화면 -->
+	<!-- ——————————————————————————————————————- ————————————————————————————————————- -->
+	<div class="innerContent">
+		<h1>POCKET TRAVEL</h1>
+		<h5 style="text-shadow: -0.8px -0.8px 1px #000;">당신만의 여행 계획을 만들어 보세요!</h5>
+
+		<!-- ———————————————————————————————————— 검색 창 ———————————————————————————————————— -->
+		<div id="middle" class="d-flex align-items-center justify-content-center">
+			<form class="d-flex ml-2" role="search" id="sh">
+				<input class="form-control me-2" type="search" placeholder="여행지 검색" aria-label="Search"
+					style="width: 400px;">
+				<button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+			</form>
+		</div>
+		<h5 id="contact_us">Contact us <i class="bi bi-git"></i> https://github.com/kimjaehyeon0527/SemicolonPJ</h5>
+	</div>
+	<!--로그인 및 회원가입용 script  -->
+	<script>
+		let idValid = 0;
+		let pwValid = 0;
+		// id 입력시 로컬스토리지에서 중복 조회
+		let idDupCheck = (id) => {
+			for (let i = 0; i < localStorage.length; i++) {
+				if (id == localStorage.key(i))
+					return 1
+			}
+			return 0
+		}
+		// id 입력시 유효성 검사
+		let idCheck = (id) => {
+			let idAlert = document.querySelector("#idAlert");
+			//중복 여부, 문제시 안내창에 문구
+			if (idDupCheck(id.value)) {
+				id.setAttribute("style", "border: red solid 2px ; border-radius : 25px");
+				idAlert.setAttribute("style", "color: red; font-size: 11px; margin-top: 3px")
+				idAlert.textContent = '중복된 ID가 있습니다. 다른 ID를 입력해주세요'
+				return 0
+				//글자 길이 여부, 문제시 안내창에 문구
+			} else if (id.value.length < 4) {
+				id.setAttribute("style", "border: red solid 2px ; border-radius : 25px");
+				idAlert.setAttribute("style", "color: red; font-size: 11px; margin-top: 3px")
+				idAlert.textContent = '유효한 ID를 입력하세요(4글자이상)'
+				return 0
+				//유효시 안내
+			} else {
+				id.removeAttribute("style", "border: red solid 2px ; border-radius : 7px");
+				idAlert.setAttribute("style", "color: black; font-size: 11px")
+				idAlert.textContent = '사용 가능한 ID입니다'
+				return 1
+			}
+		}
+		// id text창에서 focus 해제시 유효성 검사
+		$('#signUpId').blur(function () {
+			const inputId = document.querySelector('#signUpId');
+			if (idCheck(inputId)) {
+				idValid = 1;
+			}
+		})
+		//pw text창에서 focus 해제시 pw 유효성 검사
+		$('#signUpPw').blur(function () {
+			let pwAlert = document.querySelector("#pwAlert")
+			const inputPw = document.querySelector('#signUpPw')
+			//4자리 이상
+			if (inputPw.value.length < 4) {
+				inputPw.setAttribute("style", "border: red solid 2px ; border-radius : 25px");
+				pwAlert.setAttribute("style", "color : red; font-size: 11px; margin-top: 3px")
+				pwAlert.textContent = "비밀번호는 4자리 이상이어야 합니다"
+			}
+			else {
+				inputPw.removeAttribute("style", "border: red solid 2px ; border-radius : 25px");
+				pwAlert.setAttribute("style", "color: black; font-size: 11px; margin-top: 3px");
+				pwAlert.textContent = "비밀번호 안전도 : [안전]"
+				pwValid = 1;
+			}
+		})
+		//기존 회원가입시 입력한 값들 초기화
+		const clearSignupInfo = () => {
+			document.querySelector("#signUpId").value = '';
+			document.querySelector("#signUpPw").value = '';
+			document.querySelector("#email").value = '';
+			document.querySelector("#phoneNum").value = '';
+			document.querySelector("#idAlert").textContent = '';
+			document.querySelector("#pwAlert").textContent = '';
+			idValid = 0;
+			pwValid = 0;
+		}
+		//회원가입 완료버튼 클릭시
+		const signUp = () => {
+			if (idValid == 0 || pwValid == 0)
+				return alert("아이디나 비밀번호를 확인하세요");
+			//아이디 비번 유효 확인 됐을시
+			var userInfo = {
+				pw: (document.querySelector('#signUpPw')).value,
+				email: (document.querySelector('#email')).value,
+				phoneNum: (document.querySelector('#phoneNum')).value,
+			};
+			alert(`가입이 완료되었습니다. 반갑습니다 ${document.querySelector('#signUpId').value}님`)
+			//key는 아이디, value는 정보담은 객체(localstorage의 특성상 문자열화 되어있는 상태)
+			const objString = JSON.stringify(userInfo);
+			localStorage.setItem(document.querySelector("#signUpId").value, objString);
+			clearSignupInfo();
+			// 다시 로그인 창으로 복귀
+			document.querySelector(".logIn").checked = true;
+		}
+		// ----------------------------------------여기부터 로그인
+		const idInput = document.querySelector('#loginId')
+		const pwInput = document.querySelector('#loginPw')
+		let userObj
+		// id pw 입력후 로컬스토리지에 조회 
+		const userCheck = () => {
+			for (let i = 0; i < localStorage.length; i++) {
+				if (idInput.value == localStorage.key(i)) {
+					{
+						//로컬 레포지토리 id리스트(key)에서 조회 시 문자열인 해당 value 다시 객체화 하여 pw값 조회 및 비교
+						userObj = JSON.parse(localStorage.getItem(idInput.value))
+						if (pwInput.value == userObj.pw) {
+							return 1
+						}
+					}
+				}
+			}
+			return 0
+		}
+		// 로그인 버튼 클릭후 성공시 index로, 아니면 alert
+		const logIn = () => {
+			if (userCheck()) {
+				alert('로그인을 성공했습니다.');
+				localStorage.setItem('loggedIn', idInput.value);
+				location.href = "index.html"
+			} else {
+				alert('아이디와 비밀번호를 확인해주세요');
+			}
+		}
+
+	</script>
+	<script>
+		// 상단바 로그인 성공시
+		const appendMypageButton = (mypageButton, node) => {
+			mypageButton = document.createElement('li');
+			mypageButton.setAttribute("class", 'nav-item');
+			mypageButton.innerHTML = `<a class="nav-link active" style="color: black;" href="mypage_card.html">Mypage</a>`
+			node.after(mypageButton);
+		}
+		const appendWriteButton = (writeButton, node) => {
+			writeButton = document.createElement('li');
+			writeButton.setAttribute("class", 'nav-item');
+			writeButton.innerHTML = `<a class="nav-link active" style="color: black;" href="planning.html">글작성하기</a>`
+			node.after(writeButton);
+		}
+
+		const appendUserNameDisplay = (userNameDisplay, name) => {
+			userNameDisplay = document.createElement('p')
+			userNameDisplay.innerHTML = `<p class="nav-link active" style="color: white;" >${name}님</p>`
+			document.querySelector("#userInfo").append(userNameDisplay);
+		}
+
+		const setLoginOutButton = (button) => {
+			button.textContent = '로그아웃';
+			button.removeAttribute("data-toggle");
+			button.removeAttribute("data-target");
+			button.setAttribute("onclick", "localStorage.removeItem('loggedIn'); location.href = 'index.html'");
+		}
+
+		let name = localStorage.getItem('loggedIn');
+		if (name) {
+			let node = document.querySelector("#pointNode");
+			let mypageButton;
+			let writeButton;
+			let userNameDisplay;
+			setLoginOutButton(document.querySelector("#loginOut"));
+			appendUserNameDisplay(userNameDisplay, name);
+			appendMypageButton(mypageButton, node);
+			appendWriteButton(writeButton, node);
+		}
+	</script>
+</body>
+
+</html>

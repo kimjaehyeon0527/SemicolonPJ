@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카드 작성</title>
+    <style>
+        /* 카드 전체 폼 */
+        .travelPhoto {
+            position: relative;
+            border-radius: 15px;
+            /* display: flex; */
+            /* flex-wrap: wrap; */
+            margin: 0;
+            padding: 0;
+            width: 230px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid rgb(0, 0, 0);
+        }
+
+        /* 이미지 구간 */
+        .travelImage {
+            position: relative;
+            border-radius: 15px 15px 0px 0px;
+            display: inline-block;
+            width: 100%;
+            height: 50%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid black;
+
+            /* border: 4px solid blue; */
+        }
+        /* 이미지 */
+        img {
+            position: absolute;
+            /* 왜 top / left가 기본값이 들어가 있지? 0 을 해줘야지 딱 붙는다. */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* 이미지 업로드 */
+        .fileLabel {
+            position: absolute; /* 절대적인 위치 설정 */
+            background-color: #5b975b;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            width: 65%;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 50;
+            bottom: 0; /* 하단에 배치 */
+            left: 50%; /* 가운데 정렬 */
+            transform: translateX(-50%);
+            margin-bottom: 25px;
+        }
+        .imgFile {
+            display: none;
+        }
+
+        /* 글 구간 */
+        .travelText {
+            position: absolute;
+            display: inline-block;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 50%;
+            top: 50%;
+            border-radius: 0 0 15px 15px;
+            border: 1px solid black;
+        }
+        /* 제목 칸 */
+        .travelTitle {
+            /* text-align : center; */
+            position: absolute;
+            width: 100%;
+            height: 20%;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0; 
+            /* align-items: center; */
+        }
+        #input_text {
+            padding: 0;
+            border: none;
+            font-size: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        /* 내용 칸 */
+        .travelContent {
+            position: absolute;
+            width: 100%;
+            height: 80%;
+            top: 20%;
+            border-radius: 0 0 15px 15px;
+            border: 1px solid black;
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0;     
+        }
+        #textarea_content {
+            box-sizing: border-box;
+            padding: 3px;
+            border: 0;
+            border-radius: 0 0 15px 15px;
+            width: 100%;
+            height: 100%;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 전체 카드 모양 -->
+    <div class="travelPhoto">
+        <!-- 이미지 칸 -->
+        <div class="travelImage" id="imageContainer">
+            <label for="imgFile" class="fileLabel">파일 업로드</label>
+            <input type="file" class="imgFile" id="imgFile" onchange="handleFiles(this.files)"/>
+            <img alt="" id="uploadedImage">
+        </div>
+
+        <!-- 글 칸 -->
+        <div class="travelText">
+            <!-- 제목 -->
+            <div class="travelTitle">
+                <input type="text" id="input_text" placeholder="Place">
+            </div>
+            <!-- 글 내용 -->
+            <div class="travelContent">
+                <textarea name="" id="textarea_content" cols="30" rows="10" placeholder="Memo"></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        //  파일 업로드 미리보기
+        function handleFiles(files) {
+            const file = files[0];
+            console.log(file)
+
+            if (file) {
+                const reader = new FileReader();
+                // 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 읽을 파일을 가리키는 File혹은 Blob객체를 이용해 
+                // 파일의 내용을(혹은 raw data버퍼로) 읽고 사용자의 컴퓨터에 저장하는 것을 가능
+
+                reader.onload = function (e) {
+                    // 파일 선택 시 이미지를 미리보기하는 부분
+                    const imageContainer = document.getElementById("imageContainer");
+                    const uploadedImage = document.getElementById("uploadedImage");
+
+                    console.log(e.target);
+                    // 이미지 컨테이너의 배경 이미지 설정
+                    imageContainer.style.backgroundImage = `url(${e.target.result})`;
+                    uploadedImage.src = e.target.result;
+
+                    // 파일 업로드 라벨 숨기기
+                    const fileLabel = document.querySelector('.fileLabel');
+                    if (fileLabel) {
+                        fileLabel.style.display = 'none';
+                    }
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

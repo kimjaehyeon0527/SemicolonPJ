@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>여행지 추천</title>
+    <!-- swipe js CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <!-- bootstrap CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <!-- CSS link -->
+    <link rel="stylesheet" href="/front_Proj/prac.css" />
+    <!-- Chart js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- slick css -->
+    <link rel="stylesheet" href="/front_Proj/slick-1.8.1/slick/slick.css" />
+    <link
+      rel="stylesheet"
+      href="/front_Proj/slick-1.8.1/slick/slick-theme.css"
+    />
+    <!-- slick js -->
+    <script src="/front_Proj/slick-1.8.1/slick/slick.min.js"></script>
+
+    <!-- sweeet alert CDN -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </head>
+
+  <body>
+    <!-- 상단 바 -->
+    <header>
+      <div id="userInfo"></div>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html" style="color: black"
+            ><i class="bi bi-airplane-engines"></i> Pocket Travel</a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a
+                  class="nav-link active home-underline"
+                  style="color: black"
+                  aria-current="page"
+                  href="../index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item" id="pointNode">
+                <a
+                  class="nav-link list-underline"
+                  style="color: #ffeb3b"
+                  href="front_Proj/prac.html"
+                  >여행지추천</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  style="color: black"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  id="loginOut"
+                  >로그인</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- 뒷 배경을 위한 div태그 -->
+
+    <section class="layout">
+      <div
+        class="sidebar1"
+        onmouseover="openHoverModal(event)"
+        onmouseleave="closeHoverModal()"
+      >
+        <!-- 유저 카드 만들기 -->
+        <div class="userCard-container">
+          <div class="userPhoto">
+            <div class="photoCircle1">
+              <div class="photoCircle2 user1"></div>
+            </div>
+          </div>
+          <div class="userText">
+            <div class="mainText">라이언</div>
+            <div class="subText">developer 1</div>
+          </div>
+          <div class="socialIcon">
+            <a href="https://www.facebook.com/?locale=ko_KR" target="_blank"
+              ><img src="front_Proj_img/facebook_Icon.png" alt=""
+            /></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><img src="front_Proj_img/insta_Icon.jpg" alt=""
+            /></a>
+            <a
+              href="https://github.com/kimjaehyeon0527/SemicolonPJ"
+              target="_blank"
+              ><img src="front_Proj_img/github_Icon.png" alt=""
+            /></a>
+            <a href="https://velog.io/@dydgjs2016" target="_blank"
+              ><img src="front_Proj_img/velog_Icon.png" alt=""
+            /></a>
+          </div>
+          <div class="userCom">
+            <img src="front_Proj_img/heart_Icon.png" alt="" id="heart" />
+            <span>20k</span>
+            <img src="front_Proj_img/comment_Icon.png" alt="" id="comment" />
+            <span>10k</span>
+            <img src="front_Proj_img/share_Icon.png" alt="" id="share" />
+            <span>100k</span>
+          </div>
+        </div>
+      </div>
+      <div class="userContent1">
+        <!-- <div class="divide-line">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+        <div class="backboard">
+          <div class="layout-backboard"></div>
+          <div class="layout-backboard"></div>
+          <div class="layout-backboard"></div>
+        </div> -->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide sd1" onclick="openModal(event)">
+              <!-- 여행사진카드 -->
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city1.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">1 days</div>
+                  <div class="travelDestination">BanKok</div>
+                  <div class="travelContent">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Alias praesentium earum totam minus consectetur laboriosam
+                    laudantium dicta itaque, inventore enim est facilis et harum
+                    voluptas voluptate voluptatum ab iste porro.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide sd2" onclick="openModal(event)">
+              <!-- 여행사진카드 -->
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city2.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">2 days</div>
+                  <div class="travelDestination">Seoul</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide sd3" onclick="openModal(event)">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city5.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">3 days</div>
+                  <div class="travelDestination">China</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide sd4" onclick="openModal(event)">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city6.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">4 days</div>
+                  <div class="travelDestination">Sweden</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide sd5" onclick="openModal(event)">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city7.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">5 days</div>
+                  <div class="travelDestination">Swiss</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide sd6" onclick="openModal(event)">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city8.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">6 days</div>
+                  <div class="travelDestination">Germany</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sidebar2"
+        onmouseover="openHoverModal(event)"
+        onmouseleave="closeHoverModal()"
+      >
+        <div class="userCard-container">
+          <div class="userPhoto">
+            <div class="photoCircle1">
+              <div class="photoCircle2 user2"></div>
+            </div>
+          </div>
+          <div class="userText">
+            <div class="mainText">죠르디</div>
+            <div class="subText">developer 2</div>
+          </div>
+          <div class="socialIcon">
+            <a href="https://www.facebook.com/?locale=ko_KR" target="_blank"
+              ><img src="front_Proj_img/facebook_Icon.png" alt=""
+            /></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><img src="front_Proj_img/insta_Icon.jpg" alt=""
+            /></a>
+            <a
+              href="https://github.com/kimjaehyeon0527/SemicolonPJ"
+              target="_blank"
+              ><img src="front_Proj_img/github_Icon.png" alt=""
+            /></a>
+            <a href="https://velog.io/@dydgjs2016" target="_blank"
+              ><img src="front_Proj_img/velog_Icon.png" alt=""
+            /></a>
+          </div>
+          <div class="userCom">
+            <img src="front_Proj_img/heart_Icon.png" alt="" id="heart" />
+            <span>20k</span>
+            <img src="front_Proj_img/comment_Icon.png" alt="" id="comment" />
+            <span>10k</span>
+            <img src="front_Proj_img/share_Icon.png" alt="" id="share" />
+            <span>100k</span>
+          </div>
+        </div>
+      </div>
+      <div class="userContent2">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" onclick="openModal(event)">
+              <!-- 여행사진카드 -->
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city3.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">1 days</div>
+                  <div class="travelDestination">Japan</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+                <div class="travelStats"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img
+                    src="front_Proj_img/city9.jpg"
+                    alt=""
+                    onclick="openModal(event)"
+                  />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">2 days</div>
+                  <div class="travelDestination">Fukuoka</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img
+                    src="front_Proj_img/city10.jpg"
+                    alt=""
+                    onclick="openModal(event)"
+                  />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">3 days</div>
+                  <div class="travelDestination">Hokkaido</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis doloremque eius corrupti nisi molestias eum
+                    quidem, hic, fugiat ratione quasi, itaque ut. Maiores ea
+                    temporibus id? Assumenda laudantium corporis veritatis!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sidebar3"
+        onmouseover="openHoverModal(event)"
+        onmouseleave="closeHoverModal()"
+      >
+        <div class="userCard-container">
+          <div class="userPhoto">
+            <div class="photoCircle1">
+              <div class="photoCircle2 user3"></div>
+            </div>
+          </div>
+          <div class="userText">
+            <div class="mainText">어피치</div>
+            <div class="subText">developer 3</div>
+          </div>
+          <div class="socialIcon">
+            <a href="https://www.facebook.com/?locale=ko_KR" target="_blank"
+              ><img src="front_Proj_img/facebook_Icon.png" alt=""
+            /></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><img src="front_Proj_img/insta_Icon.jpg" alt=""
+            /></a>
+            <a
+              href="https://github.com/kimjaehyeon0527/SemicolonPJ"
+              target="_blank"
+              ><img src="front_Proj_img/github_Icon.png" alt=""
+            /></a>
+            <a href="https://velog.io/@dydgjs2016" target="_blank"
+              ><img src="front_Proj_img/velog_Icon.png" alt=""
+            /></a>
+          </div>
+          <div class="userCom">
+            <img src="front_Proj_img/heart_Icon.png" alt="" id="heart" />
+            <span>20k</span>
+            <img src="front_Proj_img/comment_Icon.png" alt="" id="comment" />
+            <span>1k</span>
+            <img src="front_Proj_img/share_Icon.png" alt="" id="share" />
+            <span>120k</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="userContent3">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" onclick="openModal(event)">
+              <!-- 여행사진카드 -->
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city4.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">1 days</div>
+                  <div class="travelDestination">USA</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis dolorei nisi molestias eum quidem, hic, fugiat
+                    ratione quasi, itaque ut. Maiores ea temporibus id?
+                    Assumenda ldantium corporis veritatis!
+                  </div>
+                </div>
+                <div class="travelStats"></div>
+              </div>
+            </div>
+            <div class="swiper-slide" onclick="openModal(event)">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city11.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">2 days</div>
+                  <div class="travelDestination">Canada</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis dolorei nisi molestias eum quidem, hic, fugiat
+                    ratione quasi, itaque ut. Maiores ea temporibus id?
+                    Assumenda ldantium corporis veritatis!
+                  </div>
+                </div>
+                <div class="travelStats"></div>
+              </div>
+            </div>
+            <div class="swiper-slide" onclick="openModal(event)">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city12.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">3 days</div>
+                  <div class="travelDestination">Mexico</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis dolorei nisi molestias eum quidem, hic, fugiat
+                    ratione quasi, itaque ut. Maiores ea temporibus id?
+                    Assumenda ldantium corporis veritatis!
+                  </div>
+                </div>
+                <div class="travelStats"></div>
+              </div>
+            </div>
+            <div class="swiper-slide" onclick="openModal(event)">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city13.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">4 days</div>
+                  <div class="travelDestination">Brazil</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis dolorei nisi molestias eum quidem, hic, fugiat
+                    ratione quasi, itaque ut. Maiores ea temporibus id?
+                    Assumenda ldantium corporis veritatis!
+                  </div>
+                </div>
+                <div class="travelStats"></div>
+              </div>
+            </div>
+            <div class="swiper-slide" onclick="openModal(event)">
+              <div class="travelPhoto">
+                <div class="travelImage">
+                  <img src="front_Proj_img/city14.jpg" alt="" />
+                </div>
+                <div class="travelText">
+                  <div class="travelDays">5 days</div>
+                  <div class="travelDestination">Czech</div>
+                  <div class="travelContent">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Perferendis dolorei nisi molestias eum quidem, hic, fugiat
+                    ratione quasi, itaque ut. Maiores ea temporibus id?
+                    Assumenda ldantium corporis veritatis!
+                  </div>
+                </div>
+                <div class="travelStats"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 모달창 -->
+    <!-- sidebar보다 z-index가 커야 안가려짐 -->
+    <div id="myModal" class="modal" style="z-index: 100">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-profile">
+            <div class="modal-profile-circle1"></div>
+            <div class="modal-profile-circle2"></div>
+            <div class="modal-profile-name">name</div>
+          </div>
+          <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="slick-container">
+          <div class="slick-content">
+            <div class="slick-img1">
+              <img src="/front_Proj/front_Proj_img/Bankok/Bankok1.png" alt="" />
+            </div>
+            <div class="slick-img2">
+              <img src="/front_Proj/front_Proj_img/Bankok/Bankok2.png" alt="" />
+            </div>
+            <div class="slick-img3">
+              <img src="/front_Proj/front_Proj_img/Bankok/Bankok3.png" alt="" />
+            </div>
+          </div>
+          <div class="Photo_text">
+            <div class="slickText">
+              <p>tx1</p>
+            </div>
+          </div>
+        </div>
+        <button class="modal-followBtn" onclick="changefollowBtn()">
+          Follow
+        </button>
+      </div>
+    </div>
+
+    <!-- 프로필 호버 시 디자인 -->
+    <!-- 프로필 호버 시 모달창 -->
+    <div
+      id="Hover-myModal"
+      class="Hover-modal"
+      onmouseover="openHoverModal(event)"
+    >
+      <div id="modalContent">
+        <canvas id="line-chart" width="300" height="250"></canvas>
+      </div>
+    </div>
+
+    <!-- 장바구니 버튼 (fixed로 하단 고정) -->
+    <button class="basketButton" onclick="clickBasket()">
+      <div class="baksetItemNumber">
+        <span>0</span>
+      </div>
+      <img src="/front_Proj/front_Proj_img/basketIcon.png" alt="" />
+    </button>
+
+    <!-- js connection -->
+    <script src="/front_Proj/prac.js"></script>
+
+    <!-- 모달창 slick 슬라이더 스크립트 -->
+    <script>
+      $(document).ready(function () {
+        // 모달이 열릴 때 슬라이더 초기화
+        $("#myModal").on("shown.bs.modal", function () {
+          $(".slick-container").slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true, // 화살표 표시 여부
+            prevArrow:
+              '<button type="button" class="slick-prev">Previous</button>',
+            nextArrow: '<button type="button" class="slick-next">Next</button>',
+            dots: true, // 페이지 표시 여부
+            appendDots: $(".slick-dots-container"), // 페이지를 추가할 위치 지정
+          });
+        });
+
+        // 모달이 닫힐 때 슬라이더 해제
+        $("#myModal").on("hidden.bs.modal", function () {
+          $(".slick-container").slick("unslick");
+        });
+      });
+    </script>
+
+    <!-- 로그인 스크립트 -->
+    <script>
+      // 상단바 로그인 성공시시
+      const appendMypageButton = (mypageButton) => {
+        mypageButton = document.createElement("p");
+        mypageButton.innerHTML = `<a class="nav-link active" style="color: black;" href="../mypage_card.html">Mypage</a>`;
+        document.querySelector("#userInfo").append(mypageButton);
+      };
+
+      const appendUserNameDisplay = (userNameDisplay, name) => {
+        userNameDisplay = document.createElement("p");
+        userNameDisplay.innerHTML = `<a class="nav-link active" style="color: black;">${name}님</a>`;
+        document.querySelector("#userInfo").append(userNameDisplay);
+      };
+
+      const setLoginOutButton = (button) => {
+        button.textContent = "로그아웃";
+        button.setAttribute("href", "../index.html");
+        button.setAttribute("onclick", "localStorage.removeItem('loggedIn')");
+      };
+
+      let name = localStorage.getItem("loggedIn");
+      if (name) {
+        let mypageButton;
+        let userNameDisplay;
+        setLoginOutButton(document.querySelector("#loginOut"));
+        appendUserNameDisplay(userNameDisplay, name);
+        appendMypageButton(mypageButton);
+      }
+    </script>
+  </body>
+</html>

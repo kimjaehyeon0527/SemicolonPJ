@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>로그인</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+	<style>
+		.login-window{
+			background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+			max-width: 500px;
+			min-height: 650px;
+			position: relative;
+			margin: auto;
+			box-shadow : 0 12px 15px 0 rgba(0,0,0,.8),0 17px 50px 0 rgba(0,0,0,.6);
+		}
+
+		.login-html{
+			background-color: rgba(134, 142, 164, 0.9);
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			padding: 90px 70px 50px 70px;
+			box-sizing: border-box;
+		}
+
+		.logIn,
+		.signUp{
+			display: none;
+		}
+
+		.login-html .signUpBox,
+		.login-html .loginBox{
+		backface-visibility: hidden;
+		position: absolute;
+		transform: rotateY(180deg);
+		transition: all .5s linear;
+		}
+
+		.login-html > label{
+			font-size: 22px;
+			color: grey;
+			margin:0 15px 10px 0;
+		}
+
+		.logIn:checked + .tab,
+		.signUp:checked + .tab{
+			border-bottom: 2px solid transparent;
+			border-color: #1161ee;
+			color: white;
+		}
+		.loginBox, .signUpBox{
+			margin-top: 20px;
+			width:60%;
+		}
+		.group{
+			margin-bottom: 15px;
+			width:100%;
+			color:#fff;
+			display:block;
+		}
+
+		.group .label,
+		.group .input,
+		.group .button{
+		width : 100%;
+		color : #fff;
+		display : block;
+		}
+
+		.group .label{
+		color: #fff;
+		font-size : 12px;
+		margin-bottom : 2px;
+		}
+
+		.group .input,
+		.group .button{
+		border:none;
+		padding: 15px;
+		border-radius:25px;
+		background:rgba(255,255,255,.1);
+		}
+		
+		.group .button{
+		margin-top: 50px;
+		background:#1161ee;
+		width: 110%;
+		margin: auto;
+		}
+
+		.login-html .logIn:checked ~ .loginBox{
+		transform:rotate(0);
+		}
+		.login-html .signUp:checked ~ .signUpBox{
+		transform:rotate(0);
+		}
+		.hr{
+		height:2px;
+		margin:60px 0 50px 0;
+		background:rgba(255,255,255,.2);
+		}
+		</style>
+</head>
+<body>
+	<!-- 전체 -->
+	<div class="login-window">
+		<div class="login-html">
+			<!-- 로그인 or 회원가입 선택 라벨 -->
+			<input type="radio" name="tab" id="logIn" class="logIn" checked><label for="logIn" class="tab">LOG IN</label>
+			<input type="radio" name="tab" id="signUp" class="signUp"><label for="signUp" class="tab">SIGN UP</label>
+			<!-- 로그인 선택시 -->
+			<div class="loginBox" >
+				<div class="group">
+					<label for="user" class="label">Username</label>
+					<input id="loginId" type="text" class="input">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="loginPw" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<input type="submit" class="button" value="Login" onclick="logIn()">
+				</div>
+				<div class="hr"></div>
+				<div class="group">
+					<button>
+						소셜 버튼들
+					</button>
+				</div>
+			</div>
+			<!-- 회원가입 선택시 -->
+			<div class="signUpBox" >
+				<div class="group">
+					<label for="user" class="label">Username</label>
+					<input id="signUpId" type="text" class="input" >
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="signUpPw" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<label for="user" class="label">Phone Number</label>
+					<input id="phoneNum" type="text" class="input" placeholder="000-0000-0000">
+				</div>
+				<div class="group">
+					<label for="user" class="label">e-mail</label>
+					<input id="email" type="text" class="input" placeholder="john@example.com">
+				</div>
+				<div id="idAlert"></div>
+				<div id="pwAlert"></div>
+				<div class="group">
+					<input type="submit" class="button" value="Sign In" onclick="signUp()">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+//------------------------회원가입-------------------------a
+	let idValid = 0;
+	let pwValid = 0;
+	// id 입력시 로컬스토리지에서 중복 조회
+	let idDupCheck = (id) => {
+		for(let i = 0; i < localStorage.length; i++){
+			if(id == localStorage.key(i))
+				return 1
+		}
+		return 0
+	}
+	// id 입력시 유효성 검사
+	let	idCheck = (id) => {
+		let idAlert = document.querySelector("#idAlert");
+		//중복 여부, 문제시 안내창에 문구
+		if (idDupCheck(id.value)){
+			id.setAttribute("style", "border: red solid 2px ; border-radius : 25px");
+			idAlert.setAttribute("style", "color: red; font-size: 12px")
+			idAlert.textContent = '중복된 ID가 있습니다. 다른 ID를 입력해주세요'
+			return 0
+		//글자 길이 여부, 문제시 안내창에 문구
+		}else if(id.value.length < 4){
+			id.setAttribute("style", "border: red solid 2px ; border-radius : 25px");
+			idAlert.setAttribute("style", "color: red; font-size: 12px")
+			idAlert.textContent = '유효한 ID를 입력하세요(4글자이상)'
+			return 0
+		//유효시 안내
+		}else{
+			id.removeAttribute("style", "border: red solid 2px ; border-radius : 7px");
+			idAlert.setAttribute("style", "color: white; font-size: 12px")
+			idAlert.textContent = '사용 가능한 ID입니다'
+			return 1
+		}
+	}
+	// id text창에서 focus 해제시 유효성 검사
+	$('#signUpId').blur(function(){
+		const inputId = document.querySelector('#signUpId');
+		if (idCheck(inputId)){
+			idValid = 1;
+		}
+	})
+	//pw text창에서 focus 해제시 pw 유효성 검사
+	$('#signUpPw').blur(function(){
+		let pwAlert = document.querySelector("#pwAlert")
+		const inputPw = document.querySelector('#signUpPw')
+		//4자리 이상
+		if (inputPw.value.length < 4){
+			inputPw.setAttribute("style", "border: red solid 2px ; border-radius : 25px");
+			pwAlert.setAttribute("style", "color : red; font-size: 12px; margin-top: 6px")
+			pwAlert.textContent = "비밀번호는 4자리 이상이어야 합니다"
+		}
+		else{
+			inputPw.removeAttribute("style", "border: red solid 2px ; border-radius : 25px");
+			pwAlert.setAttribute("style", "color: white; font-size: 12px; margin-top: 6px");
+			pwAlert.textContent = "비밀번호 안전도 : [안전]"
+			pwValid = 1;
+		}
+	})
+	//기존 회원가입시 입력한 값들 초기화
+	const clearSignupInfo = () =>{
+		document.querySelector("#signUpId").value = '';
+		document.querySelector("#signUpPw").value = '';
+		document.querySelector("#email").value = '';
+		document.querySelector("#phoneNum").value = '';
+		document.querySelector("#idAlert").textContent = '';
+		document.querySelector("#pwAlert").textContent = '';
+		idValid = 0;
+		pwValid = 0;
+	}
+	//회원가입 완료버튼 클릭시
+	const signUp = () =>{
+		if(idValid == 0 || pwValid == 0)
+			return alert("아이디나 비밀번호를 확인하세요");
+		//아이디 비번 유효 확인 됐을시
+		var userInfo = {
+			pw: (document.querySelector('#signUpPw')).value,
+			email: (document.querySelector('#email')).value,
+			phoneNum: (document.querySelector('#phoneNum')).value,
+		};
+		alert(`가입이 완료되었습니다. 반갑습니다 ${document.querySelector('#signUpId').value}님`)
+		//key는 아이디, value는 정보담은 객체(localstorage의 특성상 문자열화 되어있는 상태)
+		const objString = JSON.stringify(userInfo);
+		localStorage.setItem(document.querySelector("#signUpId").value, objString);
+		clearSignupInfo();
+		// 다시 로그인 창으로 복귀
+		document.querySelector(".logIn").checked = true;
+	}
+// ----------------------------------------여기부터 로그인
+const idInput = document.querySelector('#loginId')
+	const pwInput = document.querySelector('#loginPw')
+	let userObj 
+	// id pw 입력후 로컬스토리지에 조회 
+	const userCheck = () =>{
+		for(let i = 0; i < localStorage.length; i++){
+			if (idInput.value == localStorage.key(i)){
+				{
+					//로컬 레포지토리 id리스트(key)에서 조회 시 문자열인 해당 value 다시 객체화 하여 pw값 조회 및 비교
+					userObj = JSON.parse(localStorage.getItem(idInput.value))
+					if(pwInput.value == userObj.pw){
+						return 1
+					}
+				}
+			}
+		}
+		return 0
+	}
+	// 로그인 버튼 클릭후 성공시 index로, 아니면 alert
+	const logIn = () =>{
+		if (userCheck()){
+			alert('로그인을 성공했습니다.');
+			localStorage.setItem('loggedIn', idInput.value);
+			location.href="index.html"
+		}else{
+			alert('아이디와 비밀번호를 확인해주세요');
+		}
+	}
+
+	</script>
+</body>
+</html>

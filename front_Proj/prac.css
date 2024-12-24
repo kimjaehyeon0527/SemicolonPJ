@@ -1,0 +1,741 @@
+/* @font-face {
+  font-family: "TmonMonsori";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/* @font-face {
+  font-family: "KIMM_Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+} */
+
+@font-face {
+  font-family: "MICEGothic Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  font-family: "MICEGothic Bold";
+}
+
+/* 여행지 순서 구분선 */
+.line:nth-child(1) {
+  position: absolute;
+  border: 6px solid grey;
+  width: 100%;
+  top: 30%;
+  left: 10%;
+  z-index: 1;
+}
+.line:nth-child(2) {
+  position: absolute;
+  border: 6px solid gray;
+  width: 60%;
+  top: 70%;
+  left: 10%;
+  z-index: 1;
+}
+.line:nth-child(3) {
+  position: absolute;
+  border: 6px solid grey;
+  width: 100%;
+  top: 113%;
+  left: 10%;
+  z-index: 1;
+}
+.backboard {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 5%;
+  left: 0;
+  background-color: rgba(246, 244, 244, 0.5);
+  border-radius: 13px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100vh;
+  margin: 0;
+  background: url("front_Proj_img/background_sky2.jpg") no-repeat center center
+    fixed;
+  background-size: cover;
+}
+
+.layout {
+  width: 100%;
+  height: 100vh;
+
+  display: grid;
+  grid:
+    "sidebar1 userContent1" 1fr
+    "sidebar2 userContent2" 1fr
+    "sidebar3 userContent3" 1fr
+    / 20% 80%;
+  gap: 8px;
+}
+
+.sidebar1,
+.sidebar2,
+.sidebar3 {
+  /* 스와이프 목록을 안보이게 하기 위함 */
+  z-index: 100;
+
+  /* 유저 카드 가운데 정렬 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar1,
+.sidebar2,
+.sidebar3 {
+  content: "";
+  border-radius: 1em;
+  padding: 2em, 2em;
+  margin-left: 10px;
+  border: 1px solid #c2c2c273;
+  background-color: rgba(246, 244, 244, 0.8);
+  width: 90%;
+}
+
+/* 각 swipe 간의 위,아래 간격 */
+.userContent1,
+.userContent2,
+.userContent3 {
+  margin-top: 10px;
+}
+
+.sidebar1 {
+  grid-area: sidebar1;
+}
+.userContent1 {
+  grid-area: userContent1;
+}
+.sidebar2 {
+  grid-area: sidebar2;
+}
+.userContent2 {
+  grid-area: userContent2;
+}
+.sidebar3 {
+  grid-area: sidebar3;
+}
+.userContent3 {
+  grid-area: userContent3;
+}
+
+/* swiper js 슬라이더 */
+/* slider, container 둘 다 크기를 늘려줘야함 */
+.swiper-container {
+  overflow: visible;
+  height: 100%;
+}
+/* 박스 꾸미기  */
+.swiper-slide {
+  opacity: 0.4;
+  transition: opacity 0.3s;
+  height: 95%;
+  box-shadow: -3px -3px 7px #5c5c5c, 3px 3px 5px #5c5c5c;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 5px solid #ffffff;
+}
+.swiper-slide-active,
+.swiper-slide-active + .swiper-slide,
+.swiper-slide-active + .swiper-slide + .swiper-slide,
+.swiper-slide-active + .swiper-slide + .swiper-slide + .swiper-slide {
+  opacity: 1;
+}
+
+/* Swiper 슬라이드에 hover 효과 추가 */
+.swiper-slide:hover {
+  transform: scale(1.05); /* 원하는 크기로 조절하세요. */
+  transition: transform 0.3s ease; /* 효과가 부드럽게 나타나도록 설정 */
+}
+
+/* 모달창을 위한 스타일 */
+.modal {
+  display: none; /* 초기에는 숨김 */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.modal-header {
+  width: 100%;
+  height: 5vh;
+  position: relative;
+}
+.modal-header > .modal-profile > .modal-profile-circle1 {
+  width: 30px;
+  height: 30px;
+  border: 2px solid;
+  position: absolute;
+  border-radius: 100%;
+  top: 3px;
+  left: 3px;
+}
+.modal-header > .modal-profile > .modal-profile-circle2 {
+  width: 26px;
+  height: 26px;
+  border: 2px solid;
+  position: absolute;
+  border-radius: 100%;
+  top: 5px;
+  left: 5px;
+  background: url(front_Proj_img/profile1.jpg) center/cover;
+}
+.modal-header > .modal-profile > .modal-profile-name {
+  position: absolute;
+  top: 5px;
+  left: 45px;
+}
+
+.close {
+  position: absolute;
+  right: 3px;
+  color: black;
+  font-size: 28px;
+  font-weight: bold;
+  z-index: 101;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 400px;
+  position: relative;
+  width: 30%;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+.slick-container > .Photo_text {
+  margin-top: 5px;
+  width: 100%;
+  height: 25vh;
+  background-color: #f4fafb;
+  border: 10px #bdbdbd solid;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: 600;
+}
+/* 텍스트 창 overflow 시 스크롤 생성 -> 반응형에도 대응 */
+.modal > .modal-content > .slick-container > .Photo_text > .slickText {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+
+/* follow 버튼 스타일링 및 클릭 */
+.modal-followBtn {
+  background-color: #f8f8f8;
+  color: #888;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  font-size: 1.125em;
+  letter-spacing: 0px;
+  padding: 10px 60px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 3px 10px;
+  position: absolute;
+  bottom: 10px; /* 하단 여백 조절 */
+  left: 50%; /* 가운데 정렬을 위해 왼쪽 50%로 설정 */
+  transform: translateX(-55%); /* 왼쪽 여백의 반만큼 왼쪽으로 이동 */
+  margin: 3px 10px;
+}
+.modal-followBtn {
+  background-color: #f8f8f8;
+  color: #2bb8ff;
+  border: 1px solid #e8e8e8;
+  font-size: 1.125em;
+  letter-spacing: 0px;
+  padding: 10px 60px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 3px 10px;
+  transition: all 0.5s;
+}
+.modal-followBtn:hover {
+  background: #00a9ff;
+  color: white;
+  transition: all 0.5s;
+}
+
+/* 호버 시 모달 스타일 */
+.Hover-modal {
+  display: none;
+  position: fixed;
+  z-index: 101;
+  border: 1px solid #888;
+  background-color: #fefefe;
+  text-align: center;
+  padding: 20px;
+}
+
+.Hover-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  text-align: center;
+}
+
+/* ------------------- */
+/* user 카드 스타일 */
+.userCard-container {
+  /* 유져 카드 넓이 조절하기 */
+  width: 75%;
+  height: 90%;
+  /* border: 2px solid; */
+  border-radius: 10%;
+  background-color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -3px -3px 7px #5c5c5c, 3px 3px 5px #5c5c5c;
+}
+
+/* 아래는 480px 이하일 때 적용되는 스타일 */
+
+@media screen and (max-width: 480px) {
+  .layout {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  .sidebar1,
+  .sidebar2,
+  .sidebar3 {
+    /* 다른 스타일들을 유지하며 여기서 추가적인 조정 */
+    order: 1;
+  }
+
+  .userContent1,
+  .userContent2,
+  .userContent3 {
+    /* 다른 스타일들을 유지하며 여기서 추가적인 조정 */
+    order: 2;
+  }
+  .line {
+    display: none;
+  }
+
+  /* 모바일 배치 */
+  .sidebar1,
+  .userContent1 {
+    order: 1;
+  }
+  .sidebar2,
+  .userContent2 {
+    order: 2;
+  }
+  .sidebar3,
+  .userContent3 {
+    order: 3;
+  }
+
+  .sidebar1,
+  .sidebar2,
+  .sidebar3 {
+    display: inline-block;
+  }
+
+  .userCard-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: -1px -1px 3px #5c5c5c, 1px 1px 3px #5c5c5c;
+  }
+  /* 소셜아이콘, 하단 아이콘 제거 */
+  .userCard-container > .socialIcon {
+    display: none;
+  }
+  .userCard-container .userCom > * {
+    display: none;
+  }
+  .userCard-container .userCom > #heart {
+    display: flex;
+  }
+
+  .userCard-container > .userText {
+    align-items: center;
+  }
+  .userCard-container > .userPhoto {
+    width: 20%;
+    height: 100%;
+  }
+  .userCard-container > .userCom {
+    width: 10%;
+    /* 하트 이미지 중앙으로 오게끔 */
+    height: 55%;
+  }
+  /* userCom 요소 글씨 모두 제거 */
+  .userCard-container > .userCom > span {
+    display: none;
+  }
+
+  /* 모달 content 줄이기 */
+  .modal-content {
+    min-width: 200px;
+    height: 500px;
+  }
+  .modal-content > .modal-followBtn {
+    bottom: 40px;
+    padding: 6px 30px;
+  }
+  /* 뒷 배경 지우기 */
+  .backboard {
+    display: none;
+  }
+}
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  .userCard-container > .socialIcon {
+    display: none;
+  }
+  .userCard-container > .userCom {
+    display: none;
+  }
+  .userPhoto > .photoCircle1 {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+/* 768 이상 1024 미만 해상도 -> 소셜, 하트 아이콘 제외 삭제 */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .layout {
+    overflow-x: hidden;
+  }
+  .backboard {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(246, 244, 244, 0.5);
+    border-radius: 13px;
+  }
+  .line:nth-child(1) {
+    width: 667px;
+  }
+  .line:nth-child(2) {
+    position: absolute;
+    border: 6px solid gray;
+    width: 667px;
+    top: 600px;
+    left: 100px;
+    z-index: 1;
+  }
+  .line:nth-child(3) {
+    position: absolute;
+    border: 6px solid grey;
+    width: 667px;
+    top: 990px;
+    left: 100px;
+    z-index: 1;
+  }
+  .swiper-slide {
+    margin-top: 30px;
+    height: 300px;
+  }
+  .userCard-container > .socialIcon {
+    display: none;
+  }
+  .userCard-container > .userPhoto {
+    /* width: 100px; */
+    height: 10vh;
+  }
+  .userCard-container > .userCom > #comment,
+  #share {
+    display: none;
+  }
+  .userCard-container > .userCom span {
+    display: none;
+  }
+  .modal-content {
+    height: 500px;
+    width: 300px;
+  }
+  .modal-content > .modal-followBtn {
+    bottom: 30px;
+    padding: 10px 30px;
+  }
+}
+
+/* 데스크톱 미디어 쿼리  -> 화면 4k laptop 깨짐 방지용*/
+@media only screen and (min-width: 1024px) {
+  .swiper-slide > .travelPhoto {
+    height: 100%;
+  }
+}
+
+/* 240픽셀 이하 시, 하트 이미지도 삭제 */
+@media screen and (max-width: 240px) {
+  .userCard-container {
+    display: flex;
+    justify-content: space-around;
+    box-shadow: -1px -1px 3px #5c5c5c, 1px 1px 3px #5c5c5c;
+  }
+  .userCard-container > .userPhoto {
+    width: 50px;
+    height: 40px;
+  }
+
+  /* 하트 제거 */
+  .userCard-container > .userCom {
+    display: none;
+  }
+}
+
+.userPhoto {
+  width: 100%;
+  height: 50%;
+  /* border: 2px solid; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.photoCircle1,
+.photoCircle2 {
+  width: 70%;
+  height: 100%;
+  border-radius: 100%;
+  /* border: 2px solid; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photoCircle1 {
+  box-shadow: -2px -2px 3px #5c5c5c, 2px 2px 3px #5c5c5c;
+}
+.photoCircle2 {
+  width: 80%;
+  height: 80%;
+}
+
+/* 유져 프로필사진 지정 */
+.photoCircle2.user1 {
+  background: url(front_Proj_img/profile1.jpg) center/cover;
+}
+.photoCircle2.user2 {
+  background: url(front_Proj_img/profile2.jpg) center/cover;
+}
+.photoCircle2.user3 {
+  background: url(front_Proj_img/profile3.jpg) center/cover;
+}
+
+.userText {
+  text-align: center;
+  margin-top: 5px;
+}
+.mainText {
+  font-size: 16px;
+  font-weight: 600;
+}
+.subText {
+  font-size: 12px;
+  color: #9e9e9e;
+}
+
+.socialIcon {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3px;
+}
+
+.socialIcon > a > img {
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  background: none;
+  margin-left: 5px;
+  box-shadow: -1px -1px 3px #5c5c5c, 1px 1px 2px #5c5c5c;
+}
+
+.userCom {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 10%;
+  margin-top: 10px;
+}
+
+.userCom > img {
+  width: 18px;
+  height: 18px;
+  font-size: 3px;
+}
+
+/* 여행 카드 스타일 */
+.swiper-slide.sd1 > .travelPhoto {
+  width: 100%;
+}
+.travelPhoto {
+  /* 카드 색깔 */
+  background-color: #fefefe;
+}
+
+.travelImage > img {
+  width: 100%;
+  height: 150px;
+}
+
+.travelPhoto > .travelText {
+  width: 100%;
+  height: 150px;
+  text-align: center;
+}
+
+.travelPhoto > .travelText > .travelDays {
+  color: #00a9ff;
+  font-weight: 500;
+}
+.travelPhoto > .travelText > .travelDestination {
+  font-weight: 800;
+  font-size: 25px;
+}
+.travelPhoto > .travelText > .travelContent {
+  height: 70%;
+  overflow-y: auto;
+}
+/* 스크롤 바 숨기기 */
+.travelPhoto > .travelText > .travelContent::-webkit-scrollbar {
+  display: none;
+}
+
+.swiper-slide {
+  position: relative;
+}
+
+.Photo_text > p {
+  height: 20px;
+  width: 100%;
+}
+
+/* 모달 스타일 */
+#myModal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-content {
+  max-width: 80%; /* 모달 창 최대 너비 조정 */
+  max-height: 80vh; /* 모달 창 최대 높이 조정 */
+  overflow: hidden;
+}
+
+.slick-container {
+  width: 100%;
+}
+
+.slick-content img {
+  width: 100%; /* 이미지 너비 100%로 설정 */
+  height: auto; /* 이미지 높이 자동 조정 */
+  max-width: 100%; /* 이미지 최대 너비 설정 */
+  max-height: 100%; /* 이미지 최대 높이 설정 */
+}
+/* 유저 로고 */
+#userInfo {
+  position: absolute;
+  top: 20px;
+  right: 80px;
+  z-index: 1;
+  display: flex;
+}
+#userInfo > p {
+  margin-left: 20px;
+}
+
+/* Custom navbar */
+.navbar {
+  border: none; /* 테두리 제거 */
+}
+.navbar-nav .nav-link {
+  /* color: white !important;  글자 색깔 변경 */
+}
+
+.navbar-nav .nav-item.dropdown:hover .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+  color: #ffeb3b !important; /* 마우스 호버 드롭다운 색깔 변경 */
+}
+
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+  background-color: #ffffff; /* 드롭다운 배경색 변경 */
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-item {
+  /* color: #ffffff; 드롭다운 텍스트 색 */
+}
+.navbar-nav .nav-link.list-underline {
+  border-bottom: 2px solid #ffeb3b; /* Underline style */
+}
+
+/* 장바구니 버튼 */
+.basketButton {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  background-color: #00a9ff;
+  z-index: 1000;
+}
+.basketButton > img {
+  width: 100%;
+  height: 100%;
+}
+.basketButton > .baksetItemNumber {
+  position: absolute;
+  top: -10px;
+  left: 55px;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #3c4856;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+/* swal.js를 이용한 alert 꾸미기 */
+.swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  background-color: #00a9ff;
+  font-size: 12px;
+  border: 1px solid #00a9ff;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}

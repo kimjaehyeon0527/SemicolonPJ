@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- j쿼리 -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- 부트스트랩 cdn 불러오기 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- icon용 Cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <!-- in HEAD -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <style>
+      /* 태블릿 (해상도 768px ~ 1199px) */
+      @media screen and (min-width: 481px) and (max-width: 1024px) {
+
+        .map{
+          left: 2vw;
+          position: absolute;
+          top: 10px;
+        }
+        .timeline{
+          display: none;
+        }
+        .wrapper{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+        }
+        .swiper{
+          display: none;
+        }
+        .left{
+          min-width: 600px;
+          position: absolute;
+        }
+
+        .right{
+          min-width: 100vw;
+          max-width: 100vw;
+          min-height: fit-content;
+          position: absolute;
+          top: 60vh;
+        }
+
+        .map{
+          min-width: 600px;
+        }
+
+        .map-image{
+          min-width: 600px;
+        }
+
+        
+        
+      }
+      /* 모바일 (해상도 360px ~ 767px) */
+      @media screen and (max-width: 480px) {
+        .wrapper{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+        }
+
+        .right{
+          min-width: 53vw;
+          max-width: 53vw;
+          min-height: fit-content;
+          position: absolute;
+          top: 55vh;
+        }
+        
+        .timeline{
+          position: absolute;
+          left: 20vw;
+          display: none;
+        }
+
+        .swiper{
+          display: none;
+        }
+
+        .wrapper{
+          min-width: 100vw;
+        }
+
+        .map{
+          min-width: 100vw;
+        }
+
+        .left{
+          min-width: 100vw;
+        }
+
+        .map-image{
+          min-width: 100vw;
+        }
+
+        iframe{
+          min-width: 100vw;
+        }
+        
+      }
+      /* Custom navbar */
+      .navbar {
+        border: none; /* 테두리 제거 */
+        }
+        .navbar-nav .nav-item.dropdown:hover .nav-link,
+        .navbar-nav .nav-item:hover .nav-link {
+            color: #ffeb3b !important; /* 마우스 호버 드롭다운 색깔 변경 */
+        }
+
+        .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+            background-color: #ffffff; /* 드롭다운 배경색 변경 */
+        }
+        .navbar-nav .nav-link.mypage-underline {
+            border-bottom: 2px solid #ffeb3b; /* Underline style */
+        }
+      #userInfo{
+          position: absolute;
+          top: 20px;
+          right: 80px;
+          z-index: 1;
+          display: flex;
+      }
+      #userInfo > p{
+          margin-left: 20px;
+      }
+      @media screen and (width <= 480px) {
+        #userInfo{
+            position: absolute;
+            top: 18px;
+            right: 80px;
+            z-index: 1;
+            display: flex;
+            font-size: 12px;
+        }
+    }
+        @media screen and (width >= 991px) {
+        #userInfo{
+            right: 20px;
+        }
+		}
+    </style>
+
+    <title>My page</title>
+
+    <style>
+      
+
+      @font-face {
+  font-family: "MICEGothic Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+      /* normalize */
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      body {
+            font-family: 'MICEGothic Bold';
+            margin: 0;
+            background: url('/구름사진.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+      body::-webkit-scrollbar {
+        display: none;
+      }
+      header {
+        width: 100vw;
+        font-family: 'MICEGothic Bold';
+      }
+      /* 큰 화면 좌우 분할 */
+      .wrapper {
+        margin: 0px;
+        padding: 0px;
+        display: flex;
+      }
+      .left {
+        margin: 20px;
+        width: 50vw;
+        height: 100vh;
+      }
+      .right {
+        margin: 20px;
+        width: 50vw;
+        height: 100vh;
+        padding: 0px;
+        overflow: scroll;
+      }
+
+      .right::-webkit-scrollbar {
+        display: none;
+      }
+      .swiper-button-prev,
+      .swiper-button-next {
+       background-color: grey;
+       opacity: 0.5;
+       padding: 15px 5px;
+       border-radius: 20px;
+       color: white !important;
+      }
+
+     .swiper-button-prev:after,
+     .swiper-button-next:after {
+     font-size: 1.1rem !important;
+     font-weight: 600 !important;
+     }
+
+      /* 좌측 화면 위 아래 분할 */
+      .map {
+        width: 50vw;
+        height: 50vh;
+        overflow: scroll;
+      }
+      .map::-webkit-scrollbar {
+        display: none;
+      }
+
+      .swiper {
+        width: 50vw;
+        height: 50vh;
+      }
+      
+      .day {
+        min-width: 50vw;
+        margin-top: -50px;
+        display: flex;
+        justify-content: space-evenly;
+        min-height: 50vh;
+        align-items: center;
+      }
+      .am {
+        border-radius: 20px 0px;
+        margin: 0 3px 0 0;
+        min-width: 230px;
+        height: 35vh;
+        background-color: white;
+      }
+      .pm {
+        border-radius: 20px 0px;
+        margin: 0 3px 0 0;
+        min-width: 230px;
+        height: 35vh;
+        background-color: white;
+      }
+      .evening {
+        border-radius: 20px 0px;
+        margin: 0 3px 0 0;
+        min-width: 230px;
+        height: 35vh;
+        background-color: white;
+      }
+      input[type="text"]{
+        width: 150px;
+        background-color: transparent;
+        border: transparent;
+      }
+
+      /* 우측 화면 분할 */
+      .day-text {
+        font-weight: bold;
+        font-size: 20px;
+        margin: 20px 0;
+      }
+      .cards {
+        justify-content: first baseline;
+        margin: 0px;
+        padding: 10px;
+        border: 1px solid white;
+        border-radius: 20px 20px 20px 20px;
+        background-color: #ffffff;
+        /* width: calc(50vw-10px); */
+        width: auto;
+        height: fit-content;
+        margin-bottom: 30px;
+        overflow: scroll;
+        display: flex;
+        /* flex-wrap: wrap; */
+      }
+
+
+      .card {
+        display: inline-block;
+        min-width: 250px;
+        max-width: 250px; 
+        margin: 10px;
+        cursor: pointer;
+      }
+
+      .day-text button {
+        font-size: 16px;
+        border-radius: 20px;
+        border: 2px solid grey;
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 상단바 -->
+    <header>
+      <div id="userInfo"></div>
+      <nav  class="navbar navbar-expand-lg">
+
+          <div class="container-fluid">
+              <a class="navbar-brand" href="./index.html" style="color: black;"><i class="bi bi-airplane-engines"></i> Pocket Travel</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"    aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                  <a class="nav-link active" style="color: black;" aria-current="page" href="/index.html">Home</a>
+                  </li>
+                  <li class="nav-item" id = "pointNode">
+                  <a class="nav-link" style="color: black;" href="front_Proj/prac.html" >여행지추천</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" style="color: black;" data-toggle="modal" data-target="#exampleModal" id = "loginOut">로그인</a>
+                  </li>
+              </ul>
+              </div>
+          </div>
+      </nav>
+  </header>
+    <!-- 화면 분할 컨테이너 -->
+    <div class="wrapper">
+      <div class="left">
+        <div class="map">
+          <!-- 지도 가져오기 -->
+          <iframe class="map-image"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3297.9826539466535!2d126.94966659598393!3d37.537926010218584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98a894098ead%3A0xadb47392e74c7178!2z7ISc7Jq47Yq567OE7IucIOuniO2PrOq1rCDrj4TtmZQy6ri4IDUz!5e0!3m2!1sko!2skr!4v1699928788563!5m2!1sko!2skr"
+            style="border: 0; width: 50vw; height: 50vh"
+            allowfullscreen="true"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <hr style="border: 2px dashed lightgrey" />
+        <span class="timeline"
+          style="font-weight: bold; font-size: 30px; margin-left: 20vw; color: white; "
+          >TIMELINE</span
+        >
+        <!-- Slider container -->
+        <div class="swiper" style="position: relative;">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide" ></br>
+              <div class="first day">
+                <div class="am">
+                  <ul style="margin-top: 20px; list-style: none">
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오전</p>
+                    <li>
+                      <input type="checkbox" checked />
+                      <input type="text" value="호텔 체크인">
+                    </li>
+                    <li>
+                      <input type="checkbox" checked />
+                      <input type="text" value="아침 식사">
+                    </li>
+                    <li>
+                      <input type="checkbox" checked />
+                      <input type="text" value="경복궁 예매하기">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                  </ul>
+                </div> 
+                <div class="pm">
+                  <ul style="margin-top: 20px; list-style: none">
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오후</p>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text" value="인사동 둘러보기">
+                    </li>
+                    <li>
+                      <input type="checkbox" checked/>
+                      <input type="text" value="삼청동 둘러보기">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text" value="점심 식사">
+                    </li>
+                    <li>
+                      <input type="checkbox" checked/>
+                      <input type="text" value="기념품 사기">
+                    </li>
+                  </ul>
+                </div>
+                <div class="evening">
+                  <ul style="margin-top: 20px; list-style: none">
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">저녁</p>
+                    <li>
+                      <input type="checkbox" checked />
+                      <input type="text" value="시장 저녁식사">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text" value="호텔 돌아가기">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+            </br>
+              <div class="second day">
+                <div class="am">
+                  <ul style="margin-top: 20px; list-style: none">
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오전</p>
+                    <li>
+                      <input type="checkbox" checked />
+                      <input type="text" value="호텔에서 조식">
+                    </li>
+                    <li>
+                      <input type="checkbox" checked />
+                      <input type="text" value="ddp 전시 관람하기">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                  </ul>
+                </div>
+                <div class="pm">
+                  <ul style="margin-top: 20px; list-style: none">
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오후</p>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text" value="케이블카 예매">
+                    </li>
+                    <li>
+                      <input type="checkbox" checked />
+                      <input type="text" value="서울타워 가기">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text" value="남산 근처 점심">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                  </ul>
+                </div>
+                <div class="evening">
+                  <ul style="margin-top: 20px; list-style: none">
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">저녁</p>
+                    <li>
+                      <input type="checkbox" checked/>
+                      <input type="text" value="한강공원 피크닉">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text" value="호텔 돌아가기">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide"></br>
+              <div class="third day">
+                <div class="am">
+                  <ul style="margin-top: 20px; list-style: none">
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오전</p>
+                    <li>
+                      <input type="checkbox" checked />
+                      <input type="text" value="호텔에서 조식">
+                    </li>
+                    <li>
+                      <input type="checkbox" checked/>
+                      <input type="text" value="코엑스몰 탐방">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                  </ul>
+                </div>
+                <div class="pm">
+                  <ul style="margin-top: 20px; list-style: none">
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">오후</p>
+                    <li>
+                      <input type="checkbox" checked/>
+                      <input type="text" value="강남역 근처 점심" >
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text" value="강남에서 쇼핑하기">
+                    </li>
+                    <li>
+                      <input type="checkbox" checked/>
+                      <input type="text" value="홍대에서 쇼핑하기">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                  </ul>
+                </div>
+                <div class="evening">
+                  <ul style="margin-top: 20px; list-style: none">
+                    <p style="font-weight: bold; margin-left: 64px; color: grey;">저녁</p>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text" value="명동에서 저녁식사"/>
+                    </li>
+                    <li>
+                      <input type="checkbox" checked/>
+                      <input type="text" value="명동 둘러보기">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text" value="호텔 돌아가기">
+                    </li>
+                    <li>
+                      <input type="checkbox" />
+                      <input type="text">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            ...
+          </div>
+          <!-- 페이징 필요시 추가 -->
+          <div class="swiper-pagination"></div>
+          <!-- 이전, 다음 버튼 필요시 추가 -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+      <div class="right">
+        <!-- 스크롤 없이 구현하기 -->
+        <div class="day-text">1일차
+          <button class="first-route">상세 루트 확인</button>
+        </div>
+        <div class="cards">
+          <div class="card one">
+            <img
+              src="https://i1.wp.com/www.agoda.com/wp-content/uploads/2019/05/Gyeongbokgung-palace-Seoul-Gwanghwamun-Gate.jpg"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">경복궁</h5>
+              <p class="card-text">
+                야간개장 요금 3000원, 1인당 4장까지 예매 가능, 한복착용자는 무료 입장, 현장 발권시 신분증 필요함
+              </p>
+            </div>
+          </div>
+          <div class="card two">
+            <img
+              src="https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjNfMTY0/MDAxNjY2NDk3NzczNzg0.SKEmOEDbDpEWvYVPujNYowAyuGiesoI5SliYdS8uo60g.RzhgCh_tJzuybopOsMUGGb5eJOS0TWmb4ul6eZ4hwjEg.JPEG.wella5442/SE-270ec754-3303-4aed-a58f-9d0cb925724a.jpg?type=w800"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">인사동</h5>
+              <p class="card-text">
+                주변 관광 명소 : 쌈지길, 낙원악기상가, 청계천 / 가까운 지하철역: 안국역, 종로3가역, 종각역
+              </p>
+            </div>
+          </div>
+          <div class="card three">
+            <img
+              src="https://cdn.imweb.me/thumbnail/20230414/02f7eb5a9661e.jpg"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">삼청동</h5>
+              <p class="card-text">
+                북촌 한옥마을, 국립현대미술관 서울관(입장료 5000원)
+              </p>
+            </div>
+          </div>
+          <div class="card four">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/4/41/Gwangjangmarket_mainentrance.jpg"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">광장시장</h5>
+              <p class="card-text">
+                영업시간: 오전 9시부터 오후 6시까지 / 또간집 광장시장편 - 모녀김밥, 원조누드김밥, 순희네빈대떡, 찹쌀꽈배기 , 3시 50분 순대 등등..
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="day-text">2일차
+          <button class="second-route">상세 루트 확인</button>
+        </div>
+        <div class="cards">
+          <div class="card five">
+            <img
+              src="https://previews.123rf.com/images/kikujungboy/kikujungboy1712/kikujungboy171200121/91927198-%EC%84%9C%EC%9A%B8-%ED%95%9C%EA%B5%AD-2011-%EB%85%84-11-%EC%9B%94-13-%EC%9D%BC-%EB%8F%99%EB%8C%80%EB%AC%B8-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%94%8C%EB%9D%BC%EC%9E%90-ddp-%EB%8A%94-%EC%84%9C%EC%9A%B8%EC%9D%98-%EC%A3%BC%EC%9A%94-%EB%8F%84%EC%8B%9C-%EA%B0%9C%EB%B0%9C-%EB%9E%9C%EB%93%9C.jpg"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">DDP</h5>
+              <p class="card-text">
+                11월 17일 (금) 16:00 DDP 디자인랩 3층 디자인홀 "Beautiful Numbers"
+              </p>
+            </div>
+          </div>
+          <div class="card six">
+            <img
+              src="https://parks.seoul.go.kr/images/egovframework/com/template/nam02.jpg"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">남산 케이블카</h5>
+              <p class="card-text">
+                연중무휴 1년 365일 정상운행, 대인왕복 15000원, 대인편도 12000원, 소인왕복 11500원, 소인편도 9000원
+              </p>
+            </div>
+          </div>
+          <div class="card seven">
+            <img
+              src="https://i.namu.wiki/i/DK-BcaE6wDCM-N9UJbeQTn0SD9eWgsX9YKWK827rqjbrzDz0-CxW-JFOCiAsUL3CBZ4zE0UDR-p4sLaYPiUjww.webp"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">N 서울 타워</h5>
+              <p class="card-text">
+                전망대 입장료 만 13세 이상의 대인은 16000원, 소인 11000원, 와그에서 할인받으면 대인 12500원에 구매 가능 
+              </p>
+            </div>
+          </div>
+          <div class="card eight">
+            <img
+              src="https://img.hankyung.com/photo/202104/AA.26160636.1.jpg"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">한강공원</h5>
+              <p class="card-text">
+                배달존1 원효자전거대여소 부근, 배달존2 미니스톱, 배달존3 빛의카페
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="day-text">3일차
+          <button class="third-route">상세 루트 확인</button>
+        </div>
+        <div class="cards">
+          <div class="card nine">
+            <img
+              src="https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=10761600-62d8-46c9-a6d3-7cccf82e37f5"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">코엑스몰</h5>
+              <p class="card-text">
+                코엑스 아쿠아리움 365일 연중무휴, 관람소요시간 보통 1시간 30분에서 2시간 정도 소요, 마지막 입장 가능 시간은 오후 7시, 재입장 불가능
+              </p>
+            </div>
+          </div>
+          <div class="card ten">
+            <img
+              src="https://mediahub.seoul.go.kr/wp-content/uploads/2017/08/9095ab62e55719fd96547abd6f6545d3.jpg"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">강남</h5>
+              <p class="card-text">
+                신사동 가로수길, 압구정 로데오거리
+              </p>
+            </div>
+          </div>
+          <div class="card eleven">
+            <img
+              src="https://i.namu.wiki/i/yZeKOQ6x8chba-r0OwsmZtUZEsGFGm-WGPAZyDd2b4mrdYypGDuIsavmRomoEo9XRsv0B3NuG8oP_GalDsfmpw.webp"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">홍대 거리</h5>
+              <p class="card-text">
+                홍대앞 예술시장 플리마켓, KT&G 상상마당 아트갤러리, 경의선 숲길 공원, 홍대입구역 9번 출구 -> 진입 가능
+              </p>
+            </div>
+          </div>
+          <div class="card twelve">
+            <img
+              src="https://www.agoda.com/wp-content/uploads/2019/01/Myeongdong-Seoul-shopping-district.jpg"
+              class="card-img-top"
+              alt="..."
+              style="height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">명동</h5>
+              <p class="card-text">
+                지하철 4호선 명동역 6분 출구 도보 3분 거리, 2호선 을지로입구역 6번 출구 도보 7분 거리 -> 안으로 진입 가능
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- swiper 클래스 정의 -->
+    <script>
+      new Swiper(".swiper", {
+        // 다양한 옵션 설정,
+        // 아래에서 설명하는 옵션들은 해당 위치에 들어갑니다!!
+        slidesPerView: 1,
+        spaceBetween: 10,
+        navigation: {
+          prevEl: ".swiper-button-prev",
+          nextEl: ".swiper-button-next",
+        },
+      });
+    </script>
+
+    <!-- 클릭하면 지도 보이게끔 -->
+    <script>
+      let map = document.querySelector('.map');
+
+      let one = document.querySelector('.one');
+      let two = document.querySelector('.two');
+      let three = document.querySelector('.three');
+      let four = document.querySelector('.four');
+      let five = document.querySelector('.five');
+      let six = document.querySelector('.six');
+      let seven = document.querySelector('.seven');
+      let eight = document.querySelector('.eight');
+      let nine = document.querySelector('.nine');
+      let ten = document.querySelector('.ten');
+      let eleven = document.querySelector('.eleven');
+      let twelve = document.querySelector('.twelve')
+      
+      one.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute('src', "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50591.32098707118!2d126.9070031582031!3d37.57961700000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2c74aeddea1%3A0x8b3046532cc715f6!2z6rK967O16raB!5e0!3m2!1sko!2skr!4v1700094363017!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+        });
+
+      two.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.278460460883!2d126.98336137558297!3d37.5720601238119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2e80ef04ca1%3A0x4dbdf00ad06265a4!2z7ISc7Jq47Yq567OE7IucIOyiheuhnOq1rCDsnbjsgqzrj5k!5e0!3m2!1sko!2skr!4v1700094761803!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+        });
+
+      three.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12646.0846369824!2d126.9710609571967!3d37.5898918056171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2ce9abb5437%3A0x8b17708d66a8059a!2z7ISc7Jq47Yq567OE7IucIOyiheuhnOq1rCDsgrzssq3rj5k!5e0!3m2!1sko!2skr!4v1700095061999!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+        });
+
+      four.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.3640637855765!2d126.99702867558294!3d37.570044023927316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2ed7e74759b%3A0xd656a34831089f44!2z6rSR7J6l7Iuc7J6l!5e0!3m2!1sko!2skr!4v1700095150259!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+       });
+
+      five.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1581.2567231019555!2d127.00703491744383!3d37.56652560000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b456faf5814f3%3A0x5c22a91dab450bdc!2zRERQIOuPmeuMgOusuOuUlOyekOyduO2UjOudvOyekA!5e0!3m2!1sko!2skr!4v1700097023959!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+       });
+
+      six.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.023779825101!2d126.9804757255823!3d37.55450352481844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca25796d1f83f%3A0x7b481b602ca1fe6!2z64Ko7IKwIOy8gOydtOu4lOy5tA!5e0!3m2!1sko!2skr!4v1700097157107!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+      });
+        
+      seven.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.165108484123!2d126.98565167558205!3d37.55117362500934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca257a88e6aa9%3A0x5cf8577c2e7982a5!2zTuyEnOyauO2DgOybjA!5e0!3m2!1sko!2skr!4v1700097253486!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+      });
+
+      eight.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50626.081566526234!2d126.86304025820309!3d37.5284304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9f3b03c4b7ef%3A0xa4d8869ebf8d452c!2z7Jes7J2Y64-E7ZWc6rCV6rO17JuQ!5e0!3m2!1sko!2skr!4v1700097417060!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+      });
+
+      nine.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.8535193352236!2d127.05701817558021!3d37.51137282728982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b45aa0b5d1521%3A0xb0e7e28ed89a66d3!2z7Iqk7YOA7ZWE65OcIOy9lOyXkeyKpOuqsA!5e0!3m2!1sko!2skr!4v1700097597897!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+      });
+
+      ten.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50648.051813273494!2d127.02519855572694!3d37.49604744552635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca4235fb589fb%3A0xb331971bc570bb6a!2z7ISc7Jq47Yq567OE7IucIOqwleuCqOq1rA!5e0!3m2!1sko!2skr!4v1700097670262!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+      });
+
+      eleven.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50606.327156522646!2d126.85442905820312!3d37.55752700000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98e9d953dfe1%3A0x4a37de44aed1af18!2z7ZmN64yA7J6F6rWs7Jet!5e0!3m2!1sko!2skr!4v1700097749102!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+      });
+
+      twelve.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12650.895628003158!2d126.97177990717604!3d37.56156811220297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f11b3f14ab%3A0x3b436be085e38e0c!2z7ISc7Jq47Yq567OE7IucIOykkeq1rCDrqoXrj5k!5e0!3m2!1sko!2skr!4v1700097805159!5m2!1sko!2skr");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+      });
+
+      // 상세 루트 확인하기 
+      let firstRoute = document.querySelector('.first-route');
+      let secondRoute = document.querySelector('.second-route');
+      let thirdRoute = document.querySelector('.third-route');
+
+      firstRoute.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute('src', "https://www.google.com/maps/d/embed?mid=1NHiBma5-VwlxWhVh6XcJ0jj3BvKWL14&hl=ko&ehbc=2E312F");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+      });
+
+      secondRoute.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute('src', "https://www.google.com/maps/d/embed?mid=1fyC9f83cFFhY9jQpIh_cCXoPXfpME9Y&ehbc=2E312F");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+      })
+
+      thirdRoute.addEventListener('click', function(){
+        map.innerHTML='';
+        let mapDiv = document.createElement('iframe');
+        mapDiv.setAttribute('src', "https://www.google.com/maps/d/embed?mid=1XvSObNXrT8NCg9WUMhvsy9y9AmIYm9k&ehbc=2E312F");
+        mapDiv.setAttribute('style', "border: 0; min-width: 50vw; height: 50vh");
+        map.appendChild(mapDiv);
+      })
+    </script>
+    <script>
+        // 상단바 로그인 성공시
+        const appendMypageButton = (mypageButton, node) => {
+            mypageButton = document.createElement('li');
+            mypageButton.setAttribute("class", 'nav-item');
+            mypageButton.innerHTML = `<a class="nav-link active mypage-underline" style="color: #ffeb3b;" href="mypage_card.html">Mypage</a>`
+            node.after(mypageButton);
+        }
+        const appendWriteButton = (writeButton, node) => {
+            writeButton = document.createElement('li');
+            writeButton.setAttribute("class", 'nav-item');
+            writeButton.innerHTML = `<a class="nav-link active" style="color: black;" href="planning.html">글작성하기</a>`
+            node.after(writeButton);
+        }
+
+        const appendUserNameDisplay = (userNameDisplay, name) => {
+            userNameDisplay = document.createElement('p')
+            userNameDisplay.innerHTML = `<p class="nav-link active" style="color: black;" >${name}님</p>`
+            document.querySelector("#userInfo").append(userNameDisplay);
+        }
+
+        const setLoginOutButton = (button) => {
+            button.textContent = '로그아웃';
+            button.removeAttribute("data-toggle");
+            button.removeAttribute("data-target");
+            button.setAttribute("onclick", "localStorage.removeItem('loggedIn'); location.href = 'index.html'");
+        }
+
+        let name = localStorage.getItem('loggedIn');
+        if (name){
+			let node = document.querySelector("#pointNode");
+            let mypageButton;
+            let writeButton;
+            let userNameDisplay;
+            setLoginOutButton(document.querySelector("#loginOut"));
+            appendUserNameDisplay(userNameDisplay, name);
+            appendMypageButton(mypageButton, node);
+            appendWriteButton(writeButton, node);
+        }
+  </script>
+  </body>
+</html> 
+  

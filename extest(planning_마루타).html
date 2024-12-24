@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS 불러오기 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <!-- JS 불러오기 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <!-- icon용 Cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <title>파일 업로드 수정전</title>
+    <style>
+        /* 글꼴 */
+		@font-face {
+			font-family: "MICEGothic Bold";
+			src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2")
+			format("woff2");
+			font-weight: 700;
+			font-style: normal;
+		}
+
+        body {
+            font-family: "MICEGothic Bold";
+            margin: 0;
+            /* background-color: rgba(0, 0, 0, 0.1);   배경 투명도 인데 변화가 없음;; */
+            background-image: url("/메인화면 사진/구름2.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            margin-bottom: 40px;
+        }
+
+        /* 하단 바 css */
+        .fixed-bottom {
+            height: 40px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            /* 다른 요소 위에 표시되도록 z-index 설정 */
+            background-color: rgb(20, 20, 20, 0.1);
+        }
+
+        /* Flexbox 속성을 적용할 컨테이너 스타일 */
+        #big_container {
+            border-width: 5px 0 5px 0;
+            border-style: solid;
+            border-color: rgb(255, 255, 255, 0.6);
+            display: flex;
+            overflow-x: auto;
+            /* 넘칠 경우 스크롤바 추가 */
+        }
+
+        /* 내부 container 스타일 */
+        #container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 생성된 div 스타일 */
+        .generated-div {
+            width: 235px;
+            height: 250px;
+            border-radius: 15px;
+            background-color: white;
+            border: 1px solid black;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* 작성하기 / 가져오기 버튼 2개 */
+        .custom-button {
+            position: absolute;
+            width: 85px;
+        }
+
+        /* 작성하기 버튼 위치 */
+        .custom-button:nth-child(1) {
+            transform: translateY(-30px);
+        }
+
+        /* 가져오기 버튼 위치 */
+        .custom-button:nth-child(2) {
+            transform: translateY(30px);
+        }
+
+        /* 버튼 스타일 */
+        /* 내부 "+" 버튼 */
+        .button1 {
+            margin: 10px;
+            flex-shrink: 0;
+            /* Flex 요소가 줄어들지 않도록 설정 */
+            width: 50px;
+            height: 250px;
+            font-size: 25px;
+            background-color: rgb(203, 230, 253);
+        }
+
+        /* n일 차 */
+        .days {
+            display: flex;
+            align-items: center;
+            border-color: black;
+            border-width: 0px 1px 0px 0px;
+            border-style: solid;
+            flex-shrink: 0;
+            padding: 0px 5px;
+        }
+
+        /* ------------------------------------ 구 분 선 ----------------------------------- */
+        /* 가져오기 카드 양식 */
+        /* 카드 전체 폼 */
+        .travelPhoto {
+            position: relative;
+            border-radius: 15px;
+            /* display: flex; */
+            /* flex-wrap: wrap; */
+            margin: 5px;
+            padding: 0;
+            width: 235px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgb(0, 0, 0);
+        }
+
+        /* 이미지 구간 */
+        .travelImage, .travelImage_side{
+            position: relative;
+            border-radius: 15px 15px 0px 0px;
+            display: inline-block;
+            width: 100%;
+            height: 50%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* 이미지 */
+        img {
+            position: absolute;
+            /* 왜 top / left가 기본값이 들어가 있지? 0 을 해줘야지 딱 붙는다. */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 이미지 업로드 */
+        .fileLabel {
+            position: absolute;
+            /* background-color: #5ab25a; */
+            /* color: black; */
+            text-align: center;
+            padding: 10px 0;
+            width: 50%;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 50;
+            bottom: 30%;
+            /* 하단에 배치 */
+            left: 50%;
+            /* 가운데 정렬 */
+            transform: translateX(-50%);
+        }
+
+        .imgFile {
+            display: none;
+        }
+
+        /* 글 구간 */
+        .travelText {
+            position: absolute;
+            display: inline-block;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 50%;
+            top: 50%;
+            border-radius: 0 0 15px 15px;
+            border-color: black;
+            border-style: solid;
+            border-width: 1px 0 0 0;
+        }
+
+        /* 제목 칸 */
+        .travelTitle {
+            /* text-align : center; */
+            position: absolute;
+            width: 100%;
+            height: 20%;
+            display: flex;
+            justify-content: center;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /* align-items: center; */
+        }
+
+        #input_text {
+            padding: 0;
+            border: none;
+            font-size: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        /* 내용 칸 */
+        .travelContent {
+            position: absolute;
+            width: 100%;
+            height: 80%;
+            top: 20%;
+            border-radius: 0 0 15px 15px;
+            border-color: black;
+            border-style: solid;
+            border-width: 1px 0 0 0;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* textarea 부분 */
+        #textarea_content {
+            box-sizing: border-box;
+            padding: 3px;
+            border: none;
+            /* 테두리 없애기 */
+            resize: none;
+            /* 크기 조절 없애기 */
+            border-radius: 0 0 15px 15px;
+            width: 100%;
+            height: 100%;
+            font-size: 18px;
+        }
+
+        /* ------------------------------------ 구 분 선 ----------------------------------- */
+         /* Custom navbar */
+        .navbar {
+            border: none; /* 테두리 제거 */
+        }
+        
+        .navbar-nav .nav-item.dropdown:hover .nav-link,
+        .navbar-nav .nav-item:hover .nav-link {
+            color: #ffeb3b !important; /* 마우스 호버 드롭다운 색깔 변경 */
+        }
+
+        .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+            background-color: #ffffff; /* 드롭다운 배경색 변경 */
+        }
+        .navbar-nav .nav-link.write-underline {
+            border-bottom: 2px solid #ffeb3b; /* Underline style */
+        }
+        /* ------------------------------------ 구 분 선 ----------------------------------- */
+        /* 사이드바 */
+        #sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #ffffff;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+            #sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            left: 25px;
+            font-size: 36px;
+            margin-right: 50px;
+        }
+        /* #main {
+            transition: margin-right 0.5s;
+            padding: 16px;
+        } */
+        /* ------------------------------------ 구 분 선 ----------------------------------- */
+        /* 유저 로고 */
+		#userInfo{
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            z-index: 1;
+            display: flex;
+        }
+        #userInfo > p{
+            margin-left: 20px;
+        }
+        @media screen and (width <= 480px) {
+        #userInfo{
+            position: absolute;
+            top: 18px;
+            right: 80px;
+            z-index: 1;
+            display: flex;
+            font-size: 12px;
+        }
+    }
+        @media screen and (width >= 991px) {
+        #userInfo{
+            right: 20px;
+        }
+		}
+    </style>
+</head>
+<!-- [가로 줄] 자동 1회 생성 로드 -->
+
+<body onload="createBigContainer()" id="main">
+    <!-- 상단 바 -->
+    <header>
+		<div id="userInfo"></div>
+        <nav  class="navbar navbar-expand-lg">
+
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/index.html" style="color: black;"><i class="bi bi-airplane-engines"></i> Pocket Travel</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                    <a class="nav-link active" style="color: black;" aria-current="page" href="/index.html">Home</a>
+                    </li>
+                    <li class="nav-item" id = "pointNode">
+                    <a class="nav-link" style="color: black;" href="front_Proj/prac.html" >여행지추천</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: black;" data-toggle="modal" data-target="#exampleModal" id = "loginOut">로그인</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- 사이드 바 -->
+    <div id="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()"><i class="bi bi-x-square"></i></a>
+
+        <!-- 전체 카드 모양 -->
+        <div class="travelPhoto" id="checked_Photo" onclick="moveImageToNewDiv()">
+            <!-- 이미지 칸 -->
+            <div class="travelImage_side">
+                <img src="/front_Proj/front_Proj_img/Bankok/Bankok2.png" alt="">
+            </div>
+
+            <!-- 글 칸 -->
+            <div class="travelText">
+                <!-- 제목 -->
+                <div class="travelTitle">
+                    <label for="">아유타야</label>
+                </div>
+                <!-- 글 내용 -->
+                <div class="travelContent">
+                    <label for="">"본 이미지는 참고 예시 사진입니다."</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- 하단 바 -->
+    <footer>
+        <nav class="navbar bg-body-tertiary fixed-bottom">
+            <form class="container-fluid justify-content-start">
+                <!-- 새로운 n일 차 생성 버튼 -->
+                <button class="btn btn-outline-primary me-2 button2" type="button" onclick="createBigContainer()">
+                    1일 추가
+                </button>
+                <button class="btn btn-outline-dark me-2 ms-auto" type="button">
+                    작성 완료
+                </button>
+            </form>
+        </nav>
+    </footer>
+    <!-- -------------------------------------- 구 분 선 ------------------------------------- -->
+    <script>
+        // 전역 변수
+        let dayCount = 1;
+
+        // [가로 줄] n 일차 생성 하기 함수
+        function createBigContainer() {
+            let newDay = document.createElement("div");
+            let newBigContainer = document.createElement("div");
+            newBigContainer.id = "big_container";
+
+            newBigContainer.innerHTML = `
+                <div class="days">${dayCount}일차</div>
+                <button onclick="createDiv(event)" class="button1" > + </button>
+                <div id="container">
+                </div>
+            `;
+
+            document.body.appendChild(newBigContainer);
+            dayCount++;
+        }
+
+        // [내부 div] 루트 추가 함수
+        function createDiv(event) {
+            let button = event.target; // 클릭된 버튼 요소
+            let newDiv = document.createElement("div");
+            newDiv.className = "generated-div";
+
+            // [내부 div의 내부] 새로운 버튼 2개 생성
+            // 작성하기 버튼 생성
+            let newWriteButton = document.createElement("button");
+            newWriteButton.type = "button";
+            newWriteButton.className = "btn btn-outline-success custom-button";
+            newWriteButton.innerText = "작성하기";
+
+            newDiv.appendChild(newWriteButton); // 생성된 버튼을 .generated-div에 추가
+
+            // 가져오기 버튼 생성
+            let newFetchButton = document.createElement("button");
+            newFetchButton.type = "button";
+            newFetchButton.className = "btn btn-outline-info custom-button";
+            newFetchButton.innerText = "가져오기";
+
+            newDiv.appendChild(newFetchButton);
+
+            // newDiv 생성
+            let container = button.parentNode.querySelector("#container");
+            container.appendChild(newDiv);
+
+            // ------------------------------------ 구 분 선 -------------------------------------- //
+            // 작성하기 버튼 클릭 시 이벤트!
+            newWriteButton.addEventListener("click", function () {
+                // travelPhoto div 생성
+                let travelPhotoDiv = document.createElement("div");
+                travelPhotoDiv.className = "travelPhoto";
+
+                // travelImage div 생성
+                let travelImageDiv = document.createElement("div");
+                travelImageDiv.id = "imageContainer";
+                travelImageDiv.className = "travelImage";
+                travelPhotoDiv.appendChild(travelImageDiv);
+
+                // 이미지 업로드 label 생성
+                let label = document.createElement("label");
+                label.htmlFor = "imgFile";
+                label.className = "btn btn-outline-primary fileLabel";
+                label.innerText = "이미지 업로드";
+                travelImageDiv.appendChild(label);
+
+                // 이미지 업로드 input 생성
+                let input = document.createElement("input");
+                input.type = "file";
+                input.className = "imgFile";
+                input.id = "imgFile";
+                input.addEventListener("change", function () {
+                    handleFiles(this.files);
+                });
+                travelImageDiv.appendChild(input);
+
+                // 이미지 생성
+                let img = document.createElement("img");
+                img.alt = "";
+                img.id = "uploadedImage";
+                travelImageDiv.appendChild(img);
+
+                // travelText div 생성
+                let travelTextDiv = document.createElement("div");
+                travelTextDiv.className = "travelText";
+                travelPhotoDiv.appendChild(travelTextDiv);
+
+                // travelTitle div 생성
+                let travelTitleDiv = document.createElement("div");
+                travelTitleDiv.className = "travelTitle";
+                travelTextDiv.appendChild(travelTitleDiv);
+
+                // title input 생성
+                let titleInput = document.createElement("input");
+                titleInput.type = "text";
+                titleInput.id = "input_text";
+                titleInput.placeholder = "Place";
+                travelTitleDiv.appendChild(titleInput);
+
+                // travelContent div 생성
+                let travelContentDiv = document.createElement("div");
+                travelContentDiv.className = "travelContent";
+                travelTextDiv.appendChild(travelContentDiv);
+
+                // 내용 textarea 생성
+                let contentTextarea = document.createElement("textarea");
+                contentTextarea.name = "";
+                contentTextarea.id = "textarea_content";
+                contentTextarea.cols = "30";
+                contentTextarea.rows = "10";
+                contentTextarea.placeholder = "Memo";
+                travelContentDiv.appendChild(contentTextarea);
+
+                // container안에 자식으로 travelPhoto div 추가
+                container.appendChild(travelPhotoDiv);
+
+                // newDiv 제거
+                newDiv.parentNode.removeChild(newDiv);
+            });
+            // ------------------------------------ 구 분 선 -------------------------------------- //
+            // 가져오기 버튼 클릭 시 이벤트!
+            newFetchButton.addEventListener("click", function () {
+            // 사이드바를 열기
+                openSidebar();
+
+                // newDiv 제거
+                newDiv.parentNode.removeChild(newDiv);
+            });
+            }
+            // 사이드바를 나타내는 함수
+            function openSidebar() {
+                // 여기에 사이드바를 나타내는 코드 추가
+                document.getElementById("sidebar").style.width = "250px";
+                document.getElementById("main").style.marginRight = "250px";
+            }
+
+            // 사이드바를 닫는 함수
+            function closeSidebar() {
+                // 여기에 사이드바를 닫는 코드 추가
+                document.getElementById("sidebar").style.width = "0";
+                document.getElementById("main").style.marginRight = "0";
+            }
+        
+    
+        // ------------------------------------ 구 분 선 -------------------------------------- //
+    </script>
+    <!-- ------------------------------------ 구 분 선 -------------------------------------- -->
+    <script>
+        //  파일 업로드 미리보기
+        function handleFiles(files) {
+            const file = files[0];
+            console.log(file);
+
+            if (file) {
+                const reader = new FileReader();
+                // 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 읽을 파일을 가리키는 File혹은 Blob객체를 이용해
+                // 파일의 내용을(혹은 raw data버퍼로) 읽고 사용자의 컴퓨터에 저장하는 것을 가능
+
+                reader.onload = function (e) {
+                    // 파일 선택 시 이미지를 미리보기하는 부분
+                    const newImageContainer = document.querySelector(
+                        ".travelPhoto:last-child .travelImage"
+                    );
+                    const uploadedImage = document.createElement("img");
+
+                    // 이미지 컨테이너에 새로운 이미지 추가
+                    uploadedImage.src = e.target.result;
+                    newImageContainer.innerHTML = ""; // 이미지 컨테이너 초기화
+                    newImageContainer.appendChild(uploadedImage);
+
+                    // 파일 업로드 라벨 숨기기
+                    const fileLabel = document.querySelector(
+                        ".travelPhoto:last-child .fileLabel"
+                    );
+                    if (fileLabel) {
+                        fileLabel.style.display = "none";
+                    }
+                };
+
+                // 선택된 파일을 Data URL로 읽어옵니다.
+                reader.readAsDataURL(file);
+            }
+        }
+        // ------------------------------------ 구 분 선 --------------------------------------
+        // 사이드바 내용 복제하기.
+        function moveImageToNewDiv() {
+            // checked_Photo div 가져오기
+            const sourceTravelPhoto = document.querySelector("#checked_Photo");
+            if (!sourceTravelPhoto) return;
+
+            // 새로운 travelPhoto div 생성
+            const newTravelPhotoDiv = sourceTravelPhoto.cloneNode(true);
+            newTravelPhotoDiv.id = ""; // 새로운 ID 부여 (선택 사항)
+
+            // 이미지 업로드 라벨 초기화
+            const fileLabel = newTravelPhotoDiv.querySelector(".fileLabel");
+            if (fileLabel) {
+                fileLabel.style.display = "block";
+            }
+             // 이미지 업로드 input 초기화
+            const imgFileInput = newTravelPhotoDiv.querySelector(".imgFile");
+            if (imgFileInput) {
+                imgFileInput.value = "";
+            }
+            // 새로운 travelPhoto div를 container 또는 원하는 곳에 추가
+            const container = document.querySelector("#container");
+            container.appendChild(newTravelPhotoDiv);
+
+            // 사이드바를 닫기
+            closeSidebar();
+        }
+        // ------------------------------------ 구 분 선 --------------------------------------
+        // 상단바 로그인 성공시
+        const appendMypageButton = (mypageButton, node) => {
+            mypageButton = document.createElement('li');
+            mypageButton.setAttribute("class", 'nav-item');
+            mypageButton.innerHTML = `<a class="nav-link active" style="color: black;" href="mypage_card.html">Mypage</a>`
+            node.after(mypageButton);
+        }
+        const appendWriteButton = (writeButton, node) => {
+            writeButton = document.createElement('li');
+            writeButton.setAttribute("class", 'nav-item');
+            writeButton.innerHTML = `<a class="nav-link active write-underline" style="color: #ffeb3b;" href="planning.html">글작성하기</a>`
+            node.after(writeButton);
+        }
+
+        const appendUserNameDisplay = (userNameDisplay, name) => {
+            userNameDisplay = document.createElement('p')
+            userNameDisplay.innerHTML = `<p class="nav-link active" style="color: black;" >${name}님</p>`
+            document.querySelector("#userInfo").append(userNameDisplay);
+        }
+
+        const setLoginOutButton = (button) => {
+            button.textContent = '로그아웃';
+            button.removeAttribute("data-toggle");
+            button.removeAttribute("data-target");
+            button.setAttribute("onclick", "localStorage.removeItem('loggedIn'); location.href = 'index.html'");
+        }
+
+        let name = localStorage.getItem('loggedIn');
+        if (name){
+			let node = document.querySelector("#pointNode");
+            let mypageButton;
+            let writeButton;
+            let userNameDisplay;
+            setLoginOutButton(document.querySelector("#loginOut"));
+            appendUserNameDisplay(userNameDisplay, name);
+            appendMypageButton(mypageButton, node);
+            appendWriteButton(writeButton, node);
+        }
+    </script>
+</body>
+
+</html>

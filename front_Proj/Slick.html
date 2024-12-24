@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slick</title>
+    <!-- jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- slick css -->
+    <link rel="stylesheet" href="/front_Proj/slick-1.8.1/slick/slick.css" />
+    <link
+      rel="stylesheet"
+      href="/front_Proj/slick-1.8.1/slick/slick-theme.css"
+    />
+    <!-- slick js -->
+    <script src="/front_Proj/slick-1.8.1/slick/slick.min.js"></script>
+
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        background-color: skyblue;
+      }
+      /* 아래 스타일을 추가해서 시도해보세요 */
+      .slick-slide {
+        text-align: center;
+        padding: 20px 0; /* 원하는 패딩값 설정 */
+        background: #fff; /* 슬라이드 배경색 설정 */
+      }
+
+      .center {
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+    </div>
+
+    <script>
+      $(".center").slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        adaptiveHeight: true,
+      });
+    </script>
+  </body>
+</html>
